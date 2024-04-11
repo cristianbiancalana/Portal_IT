@@ -26,6 +26,12 @@ class RoleSeeder extends Seeder
         Permission::create(['name' => 'portal.comodatos']);
         Permission::create(['name' => 'portal.intentario']);
         //
+        Permission::create(['name' => 'usuarios.edit']);
+        Permission::create(['name' => 'usuarios.update']);
+        Permission::create(['name' => 'usuarios.create']);
+        Permission::create(['name' => 'usuarios.store']);
+        Permission::create(['name' => 'usuarios.index']);
+        //
         Permission::create(['name' => 'tickets.edit']);
         Permission::create(['name' => 'tickets.update']);
         Permission::create(['name' => 'tickets.create']);
@@ -40,54 +46,65 @@ class RoleSeeder extends Seeder
         Permission::create(['name' => 'puestos.create']);
         Permission::create(['name' => 'puestos.store']);
         Permission::create(['name' => 'puestos.index']);
+        Permission::create(['name' => 'puestos.delete']);
         //
         Permission::create(['name' => 'gerencias.edit']);
         Permission::create(['name' => 'gerencias.update']);
         Permission::create(['name' => 'gerencias.create']);
         Permission::create(['name' => 'gerencias.store']);
         Permission::create(['name' => 'gerencias.index']);
+        Permission::create(['name' => 'gerencias.show']);       
+	    Permission::create(['name' => 'gerencias.delete']);
         //
         Permission::create(['name' => 'segmentos.edit']);
         Permission::create(['name' => 'segmentos.update']);
         Permission::create(['name' => 'segmentos.create']);
         Permission::create(['name' => 'segmentos.store']);
         Permission::create(['name' => 'segmentos.index']);
+        Permission::create(['name' => 'segmentos.delete']);
         //
         Permission::create(['name' => 'sistemas.edit']);
         Permission::create(['name' => 'sistemas.update']);
         Permission::create(['name' => 'sistemas.create']);
         Permission::create(['name' => 'sistemas.store']);
         Permission::create(['name' => 'sistemas.index']);
+        Permission::create(['name' => 'sistemas.delete']);
         //
         Permission::create(['name' => 'problemas.edit']);
         Permission::create(['name' => 'problemas.update']);
         Permission::create(['name' => 'problemas.create']);
         Permission::create(['name' => 'problemas.store']);
         Permission::create(['name' => 'problemas.index']);
+        Permission::create(['name' => 'problemas.delete']);
         //
         Permission::create(['name' => 'estados.edit']);
         Permission::create(['name' => 'estados.update']);
         Permission::create(['name' => 'estados.create']);
         Permission::create(['name' => 'estados.store']);
         Permission::create(['name' => 'estados.index']);
+        Permission::create(['name' => 'estados.delete']);
         //
         Permission::create(['name' => 'proveedores.edit']);
         Permission::create(['name' => 'proveedores.update']);
         Permission::create(['name' => 'proveedores.create']);
         Permission::create(['name' => 'proveedores.store']);
         Permission::create(['name' => 'proveedores.index']);
+        Permission::create(['name' => 'proveedores.show']);
+	    Permission::create(['name' => 'proveedores.delete']);
         //
         Permission::create(['name' => 'prioridades.edit']);
         Permission::create(['name' => 'prioridades.update']);
         Permission::create(['name' => 'prioridades.create']);
         Permission::create(['name' => 'prioridades.store']);
         Permission::create(['name' => 'prioridades.index']);
+        Permission::create(['name' => 'prioridades.delete']);
         //
         Permission::create(['name' => 'tecnicos.edit']);
         Permission::create(['name' => 'tecnicos.update']);
         Permission::create(['name' => 'tecnicos.create']);
         Permission::create(['name' => 'tecnicos.store']);
         Permission::create(['name' => 'tecnicos.index']);
+        Permission::create(['name' => 'tecnicos.delete']);
         //
         Permission::create(['name' => 'roles.edit']);
         Permission::create(['name' => 'roles.update']);
@@ -168,6 +185,12 @@ class RoleSeeder extends Seeder
         $role1->givePermissionTo('roles.create');
         $role1->givePermissionTo('roles.store');
         $role1->givePermissionTo('roles.index');
+        //
+        $role1->givePermissionTo('usuarios.edit');
+        $role1->givePermissionTo('usuarios.update');
+        $role1->givePermissionTo('usuarios.create');
+        $role1->givePermissionTo('usuarios.store');
+        $role1->givePermissionTo('usuarios.index');
 
     }
 }

@@ -43,19 +43,24 @@ class RoleController extends Controller
         if (!Auth::user()->hasPermissionTo('roles.store')) {
             return redirect()->route('homeportal')->with('error', 'No tienes permisos para acceder a este sitio');
         }
+
+        dd($request);
         $request->validate([
             'name'=>['required','min:3'],
+            'guard_name'=>['nullable']
         ]);
+
+        
          // Creación de una nueva instancia de Gerencia con los datos del formulario
         $role = new Role();
-        $role->name_role=$request->input('name_role');
-     
+        $role->name=$request->input('name');
+        $role->guard_name=$request->input('guard_name');
         
         // Guardar la nueva instancia en la base de datos
         $role->save();
         
         // Redireccionar con un mensaje de éxito
-        return redirect()->route('rolesview')->with('status', 'Rol creado exitosamente');
+        return redirect()->route('roles')->with('status', 'Rol creado exitosamente');
     }
     /**
      * Display the specified resource.

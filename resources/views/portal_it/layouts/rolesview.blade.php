@@ -70,6 +70,12 @@
         <h3 class="text-white">Crear Rol</h3>
         <div style="display:flex; margin-left:15px;">
             <form action="{{route('store.roles')}}" method="post">
+                @csrf
+                <div class="col-4 mt-4">
+                    <strong>Nombre del nuevo Rol</strong>
+                    <input type="text" name="name" id="name"  class="form-control" style="height:25px; max-width:150px;">
+                    <input type="hidden" name="name" id="name" value="web">
+                </div>
                 <div class=" mt-2" style="display:flex;">
                 <ul id="lista">
                     <li>
@@ -77,21 +83,15 @@
                         <p >Configuración del Portal</p>
                         <label class="expandir">+</label>
                         <div class="detalles">
-                            <input type="checkbox" name="permisos[]" value="portal.usuarios"> Parametos
-                            <br>
-                            <input type="checkbox" name="permisos[]" value="portal.usuarios"> Parametos - Crear
-                            <br>
-                            <input type="checkbox" name="permisos[]" value="portal.usuarios"> Parametos - Editar
-                            <br>
-                            <input type="checkbox" name="permisos[]" value="portal.usuarios"> Parametos - Eliminar
-                            <br>
-                            <input type="checkbox" name="permisos[]" value="portal.usuarios"> Usuarios
-                            <br>
-                            <input type="checkbox" name="permisos[]" value="portal.usuarios"> Usuarios - Crear
-                            <br>
-                            <input type="checkbox" name="permisos[]" value="portal.usuarios"> Usuarios - Editar
-                            <br>
-                            <input type="checkbox" name="permisos[]" value="portal.usuarios"> Usuarios - Desactivar
+                            <input type="checkbox" name="permisos[]" value="usuarios.index"> Usuarios
+                            <hr>
+                            <input type="checkbox" name="permisos[]" value="usuarios.create"> Usuarios - Crear
+                            <hr>
+                            <input type="checkbox" name="permisos[]" value="usuarios.store"> Usuarios - Guardar
+                            <hr>
+                            <input type="checkbox" name="permisos[]" value="usuarios.edit"> Usuarios - Editar
+                            <hr>
+                            <input type="checkbox" name="permisos[]" value="usuarios.update"> Usuarios - Actualizar
                         </div>
                         </div>
                     </li>
