@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\User;
 use Spatie\Permission\Models\Role;
+use Spatie\Permission\Models\Permission;
 use Illuminate\Support\Facades\Auth;
 
 class RoleController extends Controller
@@ -44,13 +45,13 @@ class RoleController extends Controller
             return redirect()->route('homeportal')->with('error', 'No tienes permisos para acceder a este sitio');
         }
 
-        dd($request);
+        
         $request->validate([
             'name'=>['required','min:3'],
             'guard_name'=>['nullable']
         ]);
 
-        
+       
          // Creación de una nueva instancia de Gerencia con los datos del formulario
         $role = new Role();
         $role->name=$request->input('name');
@@ -81,7 +82,16 @@ class RoleController extends Controller
         if (!Auth::user()->hasPermissionTo('roles.edit')) {
             return redirect()->route('homeportal')->with('error', 'No tienes permisos para acceder a este sitio');
         }
-        return view('portal_it.layouts.edit_role', ['role'=>$role]);
+
+        $assignedPermissions = $role->permissions;
+
+        // Obtén la lista de todos los permisos disponibles
+        $allPermissions = Permission::all();
+        return view('portal_it.layouts.edit_roles', [
+            'role' => $role,
+            'assignedPermissions' => $assignedPermissions,
+            'allPermissions' => $allPermissions,
+        ]);
         
     }
 
@@ -93,13 +103,17 @@ class RoleController extends Controller
         if (!Auth::user()->hasPermissionTo('roles.update')) {
             return redirect()->route('homeportal')->with('error', 'No tienes permisos para acceder a este sitio');
         }
+        
         $validated= $request->validate([
             'name'=>['required','min:3'],
         ]);
         
         
         $role->update($validated);
-        $role = Role::all();
+        
+        if ($request->has('permisos')) {
+            $role->syncPermissions($request->input('permisos'));
+        }
         return redirect()->route('rolesview')->with('status', 'Rol Actualizado');
         
     }

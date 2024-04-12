@@ -1,4 +1,3 @@
-
 @extends('portal_it.layouts.base')
 
 @section('content')
@@ -29,51 +28,16 @@
                 </ul>
             </div>
         @endif
-        <div class="col-6 mt-2">
-            <h3 class="text-white">Listado de Roles</h3>
-            <div style="max-width: 1500px; margin: 0 auto; text-align:center;">
-                <table class="table table-sm table-dark table-hover">
-                    <thead>
-                        <tr>
-                        <th>ID</th>
-                        <th>Nombre del Rol</th>
-                        <th>Acción</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                    @foreach ($roles as $role)
-                    <tr>
-                        <th scope="row">{{$role->id }}</th>
-                        <td>{{ $role->name}}</td>
-                        <td style="width:150px; height: 20px; ">
-                            <a href="{{route('role.edit',$role)}}" style="color:azure;">
-                                <svg style="width: 22px; height: 20px;" data-slot="icon" fill="none" stroke-width="1.5" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-                                    <path stroke-linecap="round" stroke-linejoin="round" d="m16.862 4.487 1.687-1.688a1.875 1.875 0 1 1 2.652 2.652L6.832 19.82a4.5 4.5 0 0 1-1.897 1.13l-2.685.8.8-2.685a4.5 4.5 0 0 1 1.13-1.897L16.863 4.487Zm0 0L19.5 7.125"></path>
-                                </svg>
-                            </a>
-                            <form action="#" method="post" style="display: inline;">
-                                @csrf
-                                @method('DELETE')
-                                <button type="submit" style="background-color: transparent; border: none; padding: 0; color:azure;">
-                                    <svg style="width: 22px; height: 20px;" data-slot="icon" fill="none" stroke-width="1.5" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-                                        <path stroke-linecap="round" stroke-linejoin="round" d="m14.74 9-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 0 1-2.244 2.077H8.084a2.25 2.25 0 0 1-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 0 0-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 0 1 3.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 0 0-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 0 0-7.5 0"></path>
-                                    </svg>
-                                </button>
-                            </form>
-                            </td>
-                        </tr>
-                        @endforeach
-                    </tbody>
-                </table>
-            </div>
-        </div>
-        <h3 class="text-white">Crear Rol</h3>
+
+    <div>
+    <h3 class="text-white">Editar Rol - {{ $role->name}}</h3>
         <div style="display:flex; margin-left:15px;">
-            <form action="{{route('store.roles')}}" method="post">
+            <form action="{{route('role.update',$role)}}" method="post">
+                @method('PUT')
                 @csrf
                 <div class="col-4 mt-4">
                     <strong>Nombre del nuevo Rol</strong>
-                    <input type="text" name="name" id="name"  class="form-control" style="height:25px; max-width:150px;">
+                    <input type="text" name="name" id="name"  value="{{ $role->name}}" class="form-control" style="height:25px; max-width:150px;">
                     <input type="hidden" name="guard_name" id="guard_name" value="web">
                 </div>
                 <div class=" mt-2" style="display:flex;">
@@ -83,15 +47,10 @@
                         <p >Configuración del Portal</p>
                         <label class="expandir">+</label>
                         <div class="detalles">
-                            <input type="checkbox" name="permisos[]" value="usuarios.index"> Usuarios
-                            <hr>
-                            <input type="checkbox" name="permisos[]" value="usuarios.create"> Usuarios - Crear
-                            <hr>
-                            <input type="checkbox" name="permisos[]" value="usuarios.store"> Usuarios - Guardar
-                            <hr>
-                            <input type="checkbox" name="permisos[]" value="usuarios.edit"> Usuarios - Editar
-                            <hr>
-                            <input type="checkbox" name="permisos[]" value="usuarios.update"> Usuarios - Actualizar
+                            @foreach($allPermissions as $permiso)
+                                <input type="checkbox" name="permisos[]" value="{{ $permiso->id }}" @if($assignedPermissions->contains($permiso)) checked @endif> {{ $permiso->name }}
+                                <hr>
+                            @endforeach
                         </div>
                         </div>
                     </li>
@@ -154,8 +113,8 @@
                 </div>
             </form>
         </div>
-    </div>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        </div>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script> 
     $(document).ready(function() {
     // Agregar evento de clic a todos los botones de expandir

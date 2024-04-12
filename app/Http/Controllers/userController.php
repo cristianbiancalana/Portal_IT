@@ -19,9 +19,11 @@ class userController extends Controller
 {
     public function index()
     {
+        
         if (!Auth::user()->hasPermissionTo('usuarios.index')) {
             return redirect()->route('homeportal')->with('error', 'No tienes permisos para acceder a este sitio');
         }
+        
         $users= User::paginate(5);
         $gerencias = Gerencia::all();
         $puestos = Puesto::all();
@@ -179,7 +181,9 @@ class userController extends Controller
 
     public function mostrarTablaUsuarios(Request $request)
     {
+        
         if (!Auth::user()->hasPermissionTo('usuarios.index')) {
+            
             return redirect()->route('homeportal')->with('error', 'No tienes permisos para acceder a este sitio');
         }
         $usuarios = User::all();
