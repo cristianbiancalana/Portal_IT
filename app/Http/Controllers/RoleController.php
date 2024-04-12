@@ -83,16 +83,34 @@ class RoleController extends Controller
             return redirect()->route('homeportal')->with('error', 'No tienes permisos para acceder a este sitio');
         }
 
-        $assignedPermissions = $role->permissions;
-
-        // Obtén la lista de todos los permisos disponibles
-        $allPermissions = Permission::all();
+         // Crear un array con los permisos que deseas verificar
+        $permisos_a_verificar = [
+            'usuarios.index',
+            'usuarios.create',
+            'usuarios.store',
+            'usuarios.edit',
+            'usuarios.update',
+            // Añade más permisos según lo necesites
+        ];
+        
+        // Crear un array para almacenar los permisos asignados al rol
+        $permisos_asignados = [];
+        
+        // Verificar cada permiso si está asignado al rol
+        foreach ($permisos_a_verificar as $permiso) {
+            if ($role->hasPermissionTo($permiso)) {
+                $permisos_asignados[$permiso] = true;
+            } else {
+                $permisos_asignados[$permiso] = false;
+            }
+        }
+        
+        // Pasar el rol y los permisos asignados a la vista
         return view('portal_it.layouts.edit_roles', [
             'role' => $role,
-            'assignedPermissions' => $assignedPermissions,
-            'allPermissions' => $allPermissions,
+            'permisos_asignados' => $permisos_asignados,
         ]);
-        
+            
     }
 
     /**

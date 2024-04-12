@@ -47,11 +47,32 @@
                         <p >Configuración del Portal</p>
                         <label class="expandir">+</label>
                         <div class="detalles">
-                            @foreach($allPermissions as $permiso)
-                                <input type="checkbox" name="permisos[]" value="{{ $permiso->id }}" @if($assignedPermissions->contains($permiso)) checked @endif> {{ $permiso->name }}
-                                <hr>
-                            @endforeach
-                        </div>
+                            <!-- <div>
+                                <input type="checkbox" name="permisos[]" value="usuarios_ver"
+                                    //@if($permisos_asignados['usuarios_ver']) checked @endif>
+                                Usuarios - Ver
+                            </div> -->
+                            <div>
+                                <input type="checkbox" name="permisos[]" value="usuarios.create"
+                                    @if($permisos_asignados['usuarios.create']) checked @endif>
+                                Usuarios - Crear
+                            </div>
+                            <div>
+                                <input type="checkbox" name="permisos[]" value="usuarios.store"
+                                    @if($permisos_asignados['usuarios.store']) checked @endif>
+                                Usuarios - Guardar
+                            </div>
+                            <div>
+                                <input type="checkbox" name="permisos[]" value="usuarios.edit"
+                                    @if($permisos_asignados['usuarios.edit']) checked @endif>
+                                Usuarios - Editar
+                            </div>
+                            <div>
+                                <input type="checkbox" name="permisos[]" value="usuarios.update"
+                                    @if($permisos_asignados['usuarios.update']) checked @endif>
+                                Usuarios - Actualizar
+                            </div>
+                            <!-- Añade más checkboxes según los permisos que desees verificar -->
                         </div>
                     </li>
                 </ul>
