@@ -83,7 +83,7 @@
                         <p >Configuración del Portal</p>
                         <label class="expandir">+</label>
                         <div class="detalles">
-                            <input type="checkbox" name="permisos[]" value="usuarios.index"> Usuarios
+                            <input type="checkbox" name="permisos[]" value="usuarios.show"> Usuarios
                             <hr>
                             <input type="checkbox" name="permisos[]" value="usuarios.create"> Usuarios - Crear
                             <hr>

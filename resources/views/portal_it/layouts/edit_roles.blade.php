@@ -47,11 +47,16 @@
                         <p >Configuración del Portal</p>
                         <label class="expandir">+</label>
                         <div class="detalles">
-                            <!-- <div>
-                                <input type="checkbox" name="permisos[]" value="usuarios_ver"
-                                    //@if($permisos_asignados['usuarios_ver']) checked @endif>
+                            <div>
+                                <input type="checkbox" name="permisos[]" value="usuarios.index"
+                                    @if($permisos_asignados['usuarios.index']) checked @endif>
+                                Usuarios
+                            </div>
+                            <div>
+                                <input type="checkbox" name="permisos[]" value="usuarios.show"
+                                    @if($permisos_asignados['usuarios.show']) checked @endif>
                                 Usuarios - Ver
-                            </div> -->
+                            </div>
                             <div>
                                 <input type="checkbox" name="permisos[]" value="usuarios.create"
                                     @if($permisos_asignados['usuarios.create']) checked @endif>
@@ -129,7 +134,7 @@
                 </ul>
                 </div>
                 <div class="text-center">
-                    <button type="submit" class="btn btn-primary" style="width:100px;">Crear Rol</button>
+                    <button type="submit" class="btn btn-primary" style="width:100px;">Actualizar</button>
                     <a href="{{ route('parametros') }}" class="btn btn-primary" style="width:100px; margin-left: 10px;">Volver</a>
                 </div>
             </form>

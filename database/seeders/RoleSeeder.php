@@ -31,6 +31,7 @@ class RoleSeeder extends Seeder
         Permission::create(['name' => 'usuarios.create']);
         Permission::create(['name' => 'usuarios.store']);
         Permission::create(['name' => 'usuarios.index']);
+        Permission::create(['name' => 'usuarios.show']);
         //
         Permission::create(['name' => 'tickets.edit']);
         Permission::create(['name' => 'tickets.update']);

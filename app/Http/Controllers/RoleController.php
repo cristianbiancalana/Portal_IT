@@ -13,26 +13,26 @@ class RoleController extends Controller
 
     public function index()
     {
-        if (!Auth::user()->hasPermissionTo('roles.index')) {
-            return redirect()->route('homeportal')->with('error', 'No tienes permisos para acceder a este sitio');
-        }
+    //     if (!Auth::user()->hasPermissionTo('roles.index')) {
+    //         return redirect()->route('homeportal')->with('error', 'No tienes permisos para acceder a este sitio');
+    //     }
         $roles = Role::all();
         return view('portal_it.layouts.rolesview', ['roles' => $roles]);
     }
     public function indextabla()
     {
-        if (!Auth::user()->hasPermissionTo('roles.index')) {
-            return redirect()->route('homeportal')->with('error', 'No tienes permisos para acceder a este sitio');
-        }
+        // if (!Auth::user()->hasPermissionTo('roles.index')) {
+        //     return redirect()->route('homeportal')->with('error', 'No tienes permisos para acceder a este sitio');
+        // }
         $roles= Role::all();
         return view('portal_it.layouts.rolesview', array('roles'=>$roles));
     }
 
     public function create()
     {     
-        if (!Auth::user()->hasPermissionTo('roles.create')) {
-            return redirect()->route('homeportal')->with('error', 'No tienes permisos para acceder a este sitio');
-        }
+        // if (!Auth::user()->hasPermissionTo('roles.create')) {
+        //     return redirect()->route('homeportal')->with('error', 'No tienes permisos para acceder a este sitio');
+        // }
         return view('portal_it.layouts.rolesview');
     }
 
@@ -41,9 +41,9 @@ class RoleController extends Controller
      */
     public function store(Request $request)
     {     
-        if (!Auth::user()->hasPermissionTo('roles.store')) {
-            return redirect()->route('homeportal')->with('error', 'No tienes permisos para acceder a este sitio');
-        }
+        // if (!Auth::user()->hasPermissionTo('roles.store')) {
+        //     return redirect()->route('homeportal')->with('error', 'No tienes permisos para acceder a este sitio');
+        // }
 
         
         $request->validate([
@@ -68,9 +68,9 @@ class RoleController extends Controller
      */
     public function show(Role $role)
     {
-        if (!Auth::user()->hasPermissionTo('roles.show')) {
-            return redirect()->route('homeportal')->with('error', 'No tienes permisos para acceder a este sitio');
-        }
+        // if (!Auth::user()->hasPermissionTo('roles.show')) {
+        //     return redirect()->route('homeportal')->with('error', 'No tienes permisos para acceder a este sitio');
+        // }
         return view('portal_it.layouts.visualizar',['role'=> $role]);
     }
 
@@ -79,9 +79,9 @@ class RoleController extends Controller
      */
     public function edit(Role $role)
     {
-        if (!Auth::user()->hasPermissionTo('roles.edit')) {
-            return redirect()->route('homeportal')->with('error', 'No tienes permisos para acceder a este sitio');
-        }
+        // if (!Auth::user()->hasPermissionTo('roles.edit')) {
+        //     return redirect()->route('homeportal')->with('error', 'No tienes permisos para acceder a este sitio');
+        // }
 
          // Crear un array con los permisos que deseas verificar
         $permisos_a_verificar = [
@@ -90,6 +90,91 @@ class RoleController extends Controller
             'usuarios.store',
             'usuarios.edit',
             'usuarios.update',
+            'usuarios.show',
+            'portal.usuarios',
+            'portal.parametros',
+            'portal.comodatos',
+            'portal.intentario',
+
+            'tickets.edit',
+            'tickets.update',
+            'tickets.create',
+            'tickets.store',
+            'tickets.index',
+            'tickets.index.pendiente',
+            'tickets.index.gerencia',
+            'tickets.index.gerencia.pendientes',
+
+            'puestos.edit',
+            'puestos.update',
+            'puestos.create',
+            'puestos.store',
+            'puestos.index',
+            'puestos.delete',
+
+            'gerencias.edit',
+            'gerencias.update',
+            'gerencias.create',
+            'gerencias.store',
+            'gerencias.index',
+            'gerencias.show',       
+            'gerencias.delete',
+
+            'segmentos.edit',
+            'segmentos.update',
+            'segmentos.create',
+            'segmentos.store',
+            'segmentos.index',
+            'segmentos.delete',
+
+            'sistemas.edit',
+            'sistemas.update',
+            'sistemas.create',
+            'sistemas.store',
+            'sistemas.index',
+            'sistemas.delete',
+
+            'problemas.edit',
+            'problemas.update',
+            'problemas.create',
+            'problemas.store',
+            'problemas.index',
+            'problemas.delete',
+
+            'estados.edit',
+            'estados.update',
+            'estados.create',
+            'estados.store',
+            'estados.index',
+            'estados.delete',
+
+            'proveedores.edit',
+            'proveedores.update',
+            'proveedores.create',
+            'proveedores.store',
+            'proveedores.index',
+            'proveedores.show',
+            'proveedores.delete',
+
+            'prioridades.edit',
+            'prioridades.update',
+            'prioridades.create',
+            'prioridades.store',
+            'prioridades.index',
+            'prioridades.delete',
+
+            'tecnicos.edit',
+            'tecnicos.update',
+            'tecnicos.create',
+            'tecnicos.store',
+            'tecnicos.index',
+            'tecnicos.delete',
+
+            'roles.edit',
+            'roles.update',
+            'roles.create',
+            'roles.store',
+            'roles.index',
             // Añade más permisos según lo necesites
         ];
         
@@ -118,9 +203,9 @@ class RoleController extends Controller
      */
     public function update(Request $request, Role $role)
     {   
-        if (!Auth::user()->hasPermissionTo('roles.update')) {
-            return redirect()->route('homeportal')->with('error', 'No tienes permisos para acceder a este sitio');
-        }
+        // if (!Auth::user()->hasPermissionTo('roles.update')) {
+        //     return redirect()->route('homeportal')->with('error', 'No tienes permisos para acceder a este sitio');
+        // }
         
         $validated= $request->validate([
             'name'=>['required','min:3'],
@@ -130,9 +215,32 @@ class RoleController extends Controller
         $role->update($validated);
         
         if ($request->has('permisos')) {
-            $role->syncPermissions($request->input('permisos'));
+            // Obtener los permisos seleccionados en el formulario
+            $selectedPermissions = $request->input('permisos');
+    
+            // Obtener los permisos actuales del rol
+            $currentPermissions = $role->permissions;
+    
+            // Convertir los permisos a sus nombres
+            $currentPermissionNames = $currentPermissions->pluck('name')->toArray();
+    
+            // Determinar los permisos que deben eliminarse
+            $permissionsToRemove = array_diff($currentPermissionNames, $selectedPermissions);
+    
+            // Determinar los permisos que deben asignarse
+            $permissionsToAdd = array_diff($selectedPermissions, $currentPermissionNames);
+    
+            // Eliminar solo los permisos que ya no están seleccionados
+            if (!empty($permissionsToRemove)) {
+                $role->revokePermissionTo($permissionsToRemove);
+            }
+    
+            // Asignar solo los nuevos permisos seleccionados
+            if (!empty($permissionsToAdd)) {
+                $role->givePermissionTo($permissionsToAdd);
+            }
         }
-        return redirect()->route('rolesview')->with('status', 'Rol Actualizado');
+        return redirect()->route('roles')->with('status', 'Rol Actualizado');
         
     }
 
@@ -141,9 +249,9 @@ class RoleController extends Controller
      */
     public function destroy(Role $role)
     {
-        if (!Auth::user()->hasPermissionTo('roles.delete')) {
-            return redirect()->route('homeportal')->with('error', 'No tienes permisos para acceder a este sitio');
-        }
+        // if (!Auth::user()->hasPermissionTo('roles.delete')) {
+        //     return redirect()->route('homeportal')->with('error', 'No tienes permisos para acceder a este sitio');
+        // }
         $role->delete();
         
         // Redireccionar con un mensaje de éxito
@@ -151,9 +259,9 @@ class RoleController extends Controller
     }
     public function mostrarTablaRoles(Request $request)
     {
-        if (!Auth::user()->hasPermissionTo('roles.index')) {
-            return redirect()->route('homeportal')->with('error', 'No tienes permisos para acceder a este sitio');
-        }
+        // if (!Auth::user()->hasPermissionTo('roles.index')) {
+        //     return redirect()->route('homeportal')->with('error', 'No tienes permisos para acceder a este sitio');
+        // }
         $roles = Role::all();
         return view('portal_it.layouts.rolesview',compact('roles'));
     }
