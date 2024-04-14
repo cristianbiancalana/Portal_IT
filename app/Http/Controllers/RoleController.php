@@ -48,7 +48,9 @@ class RoleController extends Controller
         
         $request->validate([
             'name'=>['required','min:3'],
-            'guard_name'=>['nullable']
+            'guard_name'=>['nullable'],
+            'permisos' => ['sometimes', 'array']
+
         ]);
 
        
@@ -59,6 +61,12 @@ class RoleController extends Controller
         
         // Guardar la nueva instancia en la base de datos
         $role->save();
+        
+        if ($request->has('permisos')) {
+            // Asignar permisos al rol
+            $permisos = $request->input('permisos');
+            $role->syncPermissions($permisos);
+        }
         
         // Redireccionar con un mensaje de éxito
         return redirect()->route('roles')->with('status', 'Rol creado exitosamente');
@@ -85,16 +93,13 @@ class RoleController extends Controller
 
          // Crear un array con los permisos que deseas verificar
         $permisos_a_verificar = [
+
             'usuarios.index',
             'usuarios.create',
             'usuarios.store',
             'usuarios.edit',
             'usuarios.update',
             'usuarios.show',
-            'portal.usuarios',
-            'portal.parametros',
-            'portal.comodatos',
-            'portal.intentario',
 
             'tickets.edit',
             'tickets.update',
@@ -189,11 +194,21 @@ class RoleController extends Controller
                 $permisos_asignados[$permiso] = false;
             }
         }
-        
+        $gerencias_all_checked = true;
+        $gerencias_permissions = ['gerencias.edit', 'gerencias.update', 'gerencias.create', 'gerencias.store', 'gerencias.index', 'gerencias.show', 'gerencias.delete'];
+
+        foreach ($gerencias_permissions as $permission) {
+            if (!isset($permisos_asignados[$permission]) || !$permisos_asignados[$permission]) {
+                $gerencias_all_checked = false;
+                break;
+            }
+        }
+
         // Pasar el rol y los permisos asignados a la vista
         return view('portal_it.layouts.edit_roles', [
             'role' => $role,
             'permisos_asignados' => $permisos_asignados,
+            'gerencias_all_checked' => $gerencias_all_checked,
         ]);
             
     }

@@ -44,7 +44,7 @@
                 <ul id="lista">
                     <li>
                         <div class="elemento">
-                        <p >Configuración del Portal</p>
+                        <p >Usuarios</p>
                         <label class="expandir">+</label>
                         <div class="detalles">
                             <div>
@@ -77,7 +77,61 @@
                                     @if($permisos_asignados['usuarios.update']) checked @endif>
                                 Usuarios - Actualizar
                             </div>
-                            <!-- Añade más checkboxes según los permisos que desees verificar -->
+                        </div>
+                    </li>
+                </ul>
+                <ul id="lista">
+                    <li>
+                        <div class="elemento">
+                            <p>Parametros del Portal</p>
+                            <input type="checkbox" class="general-checkbox" data-section="gerencias"  
+                                                            @if($gerencias_all_checked) checked @endif> Gerecnias
+                            <hr>
+                            <label class="expandir">+</label>
+                            <div class="detalles">
+                                <div>
+                                    <input type="checkbox" name="permisos[]" value="gerencias.index" class="specific-checkbox"
+                                        @if($permisos_asignados['gerencias.index']) checked @endif>
+                                    Gerencias
+                                </div>
+                                <hr>
+                                <div>
+                                    <input type="checkbox" name="permisos[]" value="gerencias.show" class="specific-checkbox"
+                                        @if($permisos_asignados['gerencias.show']) checked @endif>
+                                    Gerencias - Ver
+                                </div>
+                                <hr>
+                                <div>
+                                    <input type="checkbox" name="permisos[]" value="gerencias.create" class="specific-checkbox"
+                                        @if($permisos_asignados['gerencias.create']) checked @endif>
+                                    Gerencias - Crear
+                                </div>
+                                <hr>
+                                <div>
+                                    <input type="checkbox" name="permisos[]" value="gerencias.store" class="specific-checkbox"
+                                        @if($permisos_asignados['gerencias.store']) checked @endif>
+                                    Gerencias - Guardar
+                                </div>
+                                <hr>
+                                <div>
+                                    <input type="checkbox" name="permisos[]" value="gerencias.edit" class="specific-checkbox"
+                                        @if($permisos_asignados['gerencias.edit']) checked @endif>
+                                    Gerencias - Editar
+                                </div>
+                                <hr>
+                                <div>
+                                    <input type="checkbox" name="permisos[]" value="gerencias.update" class="specific-checkbox"
+                                        @if($permisos_asignados['gerencias.update']) checked @endif>
+                                    Gerencias - Actualizar
+                                </div>
+                                <hr>
+                                <div>
+                                    <input type="checkbox" name="permisos[]" value="gerencias.delete" class="specific-checkbox"
+                                        @if($permisos_asignados['gerencias.delete']) checked @endif>
+                                    Gerencias - Delete
+                                </div>
+                                <!-- Añade otros checkboxes específicos de "Gerencias" según sea necesario -->
+                            </div>
                         </div>
                     </li>
                 </ul>
@@ -143,13 +197,32 @@
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script> 
     $(document).ready(function() {
-    // Agregar evento de clic a todos los botones de expandir
+    // Manejo de los botones de expandir
     $('.expandir').click(function() {
-        // Buscar el elemento padre (div.elemento) del botón clicado
         var elemento = $(this).closest('.elemento');
-        // Alternar la visibilidad de los detalles dentro del elemento padre
         elemento.find('.detalles').slideToggle();
-        });
     });
+
+    // Manejo de los checkboxes específicos
+    $('input.specific-checkbox').change(function() {
+        // Obtener la sección a la que pertenece este checkbox
+        var section = $(this).closest('.elemento');
+        // Verificar si todos los checkboxes específicos de la sección están marcados
+        var allChecked = section.find('input.specific-checkbox').length === section.find('input.specific-checkbox:checked').length;
+        // Marcar o desmarcar el checkbox general en consecuencia
+        section.find('.general-checkbox').prop('checked', allChecked);
+    });
+
+    // Manejo de los checkboxes generales
+    $('.general-checkbox').change(function() {
+        // Obtener la sección que controla este checkbox
+        var section = $(this).closest('.elemento');
+        // Determinar si el checkbox está seleccionado o no
+        var isChecked = $(this).is(':checked');
+        // Seleccionar o deseleccionar todos los checkboxes específicos dentro de la sección
+        section.find('input.specific-checkbox').prop('checked', isChecked);
+    });
+});
+
 </script>
 @endsection

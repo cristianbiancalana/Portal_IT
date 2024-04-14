@@ -80,10 +80,12 @@
                 <ul id="lista">
                     <li>
                         <div class="elemento">
-                        <p >Configuración del Portal</p>
+                        <p >Usuarios</p>
                         <label class="expandir">+</label>
                         <div class="detalles">
-                            <input type="checkbox" name="permisos[]" value="usuarios.show"> Usuarios
+                            <input type="checkbox" name="permisos[]" value="usuarios.index"> Usuarios
+                            <hr>
+                            <input type="checkbox" name="permisos[]" value="usuarios.show"> Usuarios - Ver
                             <hr>
                             <input type="checkbox" name="permisos[]" value="usuarios.create"> Usuarios - Crear
                             <hr>
@@ -93,6 +95,33 @@
                             <hr>
                             <input type="checkbox" name="permisos[]" value="usuarios.update"> Usuarios - Actualizar
                         </div>
+                        </div>
+                    </li>
+                </ul>
+                <ul id="lista">
+                    <li>
+                        <div class="elemento">
+                            <p>Parámetros del Portal</p>
+                            <label class="expandir">+</label>
+                            <!-- Checkbox general para asignar todos los permisos de Gerencias -->
+                            <input type="checkbox" class="general-checkbox" name="gerencias_all" value="gerencias_all"> Gerencias
+                            <hr>
+                            <div class="detalles">
+                                <!-- Permisos específicos de Gerencias -->
+                                <input type="checkbox" class="specific-checkbox" name="permisos[]" value="gerencias.index"> Gerencias
+                                <hr>
+                                <input type="checkbox" class="specific-checkbox" name="permisos[]" value="gerencias.show"> Gerencias - Ver
+                                <hr>
+                                <input type="checkbox" class="specific-checkbox" name="permisos[]" value="gerencias.create"> Gerencias - Crear
+                                <hr>
+                                <input type="checkbox" class="specific-checkbox" name="permisos[]" value="gerencias.store"> Gerencias - Guardar
+                                <hr>
+                                <input type="checkbox" class="specific-checkbox" name="permisos[]" value="gerencias.edit"> Gerencias - Editar
+                                <hr>
+                                <input type="checkbox" class="specific-checkbox" name="permisos[]" value="gerencias.update"> Gerencias - Actualizar
+                                <hr>
+                                <input type="checkbox" class="specific-checkbox" name="permisos[]" value="gerencias.delete"> Gerencias - Delete
+                            </div>
                         </div>
                     </li>
                 </ul>
@@ -164,7 +193,26 @@
         var elemento = $(this).closest('.elemento');
         // Alternar la visibilidad de los detalles dentro del elemento padre
         elemento.find('.detalles').slideToggle();
-        });
     });
+    
+    // Evento change para los checkboxes generales
+    $('.general-checkbox').change(function() {
+        // Buscar el grupo de permisos correspondiente
+        var grupo = $(this).closest('.elemento');
+        
+        // Obtener todos los checkboxes específicos en el grupo
+        var specificCheckboxes = grupo.find('.specific-checkbox');
+        
+        // Si el checkbox general está seleccionado
+        if ($(this).is(':checked')) {
+            // Seleccionar todos los checkboxes específicos
+            specificCheckboxes.prop('checked', true);
+        } else {
+            // Des-seleccionar todos los checkboxes específicos
+            specificCheckboxes.prop('checked', false);
+        }
+    });
+});
+
 </script>
 @endsection

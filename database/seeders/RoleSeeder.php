@@ -21,10 +21,7 @@ class RoleSeeder extends Seeder
 
 
         //Declaración de Perimisos
-        Permission::create(['name' => 'portal.usuarios']);
-        Permission::create(['name' => 'portal.parametros']);
-        Permission::create(['name' => 'portal.comodatos']);
-        Permission::create(['name' => 'portal.intentario']);
+
         //
         Permission::create(['name' => 'usuarios.edit']);
         Permission::create(['name' => 'usuarios.update']);
@@ -112,11 +109,9 @@ class RoleSeeder extends Seeder
         Permission::create(['name' => 'roles.create']);
         Permission::create(['name' => 'roles.store']);
         Permission::create(['name' => 'roles.index']);
+        
+        //Asignación de permisos a roles básicos
 
-        $role1->givePermissionTo('portal.usuarios');
-        $role1->givePermissionTo('portal.parametros');
-        $role1->givePermissionTo('portal.comodatos');
-        $role1->givePermissionTo('portal.intentario');
         //
         $role1->givePermissionTo('tickets.edit');
         $role1->givePermissionTo('tickets.update');
