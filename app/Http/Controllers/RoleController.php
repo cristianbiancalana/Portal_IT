@@ -196,10 +196,20 @@ class RoleController extends Controller
         }
         $gerencias_all_checked = true;
         $gerencias_permissions = ['gerencias.edit', 'gerencias.update', 'gerencias.create', 'gerencias.store', 'gerencias.index', 'gerencias.show', 'gerencias.delete'];
+        //
+        $puestos_all_checked = true;
+        $puestos_permissions = ['puestos.edit', 'puestos.update', 'puestos.create', 'puestos.store', 'puestos.index', 'puestos.delete'];
+
 
         foreach ($gerencias_permissions as $permission) {
             if (!isset($permisos_asignados[$permission]) || !$permisos_asignados[$permission]) {
                 $gerencias_all_checked = false;
+                break;
+            }
+        }
+        foreach ($puestos_permissions as $permission) {
+            if (!isset($permisos_asignados[$permission]) || !$permisos_asignados[$permission]) {
+                $puestos_all_checked = false;
                 break;
             }
         }
@@ -209,6 +219,7 @@ class RoleController extends Controller
             'role' => $role,
             'permisos_asignados' => $permisos_asignados,
             'gerencias_all_checked' => $gerencias_all_checked,
+            'puestos_all_checked' => $puestos_all_checked,
         ]);
             
     }

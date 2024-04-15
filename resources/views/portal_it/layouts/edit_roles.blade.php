@@ -84,11 +84,12 @@
                     <li>
                         <div class="elemento">
                             <p>Parametros del Portal</p>
+                            <label class="expandir">+</label>
                             <input type="checkbox" class="general-checkbox" data-section="gerencias"  
                                                             @if($gerencias_all_checked) checked @endif> Gerecnias
-                            <hr>
-                            <label class="expandir">+</label>
+                            
                             <div class="detalles">
+                                <hr>
                                 <div>
                                     <input type="checkbox" name="permisos[]" value="gerencias.index" class="specific-checkbox"
                                         @if($permisos_asignados['gerencias.index']) checked @endif>
@@ -131,6 +132,51 @@
                                     Gerencias - Delete
                                 </div>
                                 <!-- Añade otros checkboxes específicos de "Gerencias" según sea necesario -->
+                            </div>
+                            <hr>
+                        </div>
+                            <div class="elemento">
+                            <label class="expandir">+</label>
+                                    <input type="checkbox" class="general-checkbox" data-section="puestos"  
+                                                                @if($puestos_all_checked) checked @endif> Puestos
+                                <hr>
+                                <div class="detalles">
+                                    <div>
+                                        <input type="checkbox" name="permisos[]" value="puestos.index" class="specific-checkbox"
+                                            @if($permisos_asignados['puestos.index']) checked @endif>
+                                        Puestos
+                                    </div>
+                                    <hr>
+                                    <div>
+                                        <input type="checkbox" name="permisos[]" value="puestos.create" class="specific-checkbox"
+                                            @if($permisos_asignados['puestos.create']) checked @endif>
+                                        Puestos - Crear
+                                    </div>
+                                    <hr>
+                                    <div>
+                                        <input type="checkbox" name="permisos[]" value="puestos.store" class="specific-checkbox"
+                                            @if($permisos_asignados['puestos.store']) checked @endif>
+                                        Puestos - Guardar
+                                    </div>
+                                    <hr>
+                                    <div>
+                                        <input type="checkbox" name="permisos[]" value="puestos.edit" class="specific-checkbox"
+                                            @if($permisos_asignados['puestos.edit']) checked @endif>
+                                        Puestos - Editar
+                                    </div>
+                                    <hr>
+                                    <div>
+                                        <input type="checkbox" name="permisos[]" value="puestos.update" class="specific-checkbox"
+                                            @if($permisos_asignados['puestos.update']) checked @endif>
+                                        Puestos - Actualizar
+                                    </div>
+                                    <hr>
+                                    <div>
+                                        <input type="checkbox" name="permisos[]" value="puestos.delete" class="specific-checkbox"
+                                            @if($permisos_asignados['puestos.delete']) checked @endif>
+                                        Puestos - Delete
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </li>
@@ -196,33 +242,38 @@
         </div>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script> 
-    $(document).ready(function() {
-    // Manejo de los botones de expandir
-    $('.expandir').click(function() {
-        var elemento = $(this).closest('.elemento');
-        elemento.find('.detalles').slideToggle();
-    });
+        $(document).ready(function() {
+        // Manejo de los botones de expandir
+        $('.expandir').click(function() {
+            var elemento = $(this).closest('.elemento');
+            elemento.find('.detalles').slideToggle();
+            console.log('Checkbox específico cambiado en sección:', section);
 
-    // Manejo de los checkboxes específicos
-    $('input.specific-checkbox').change(function() {
-        // Obtener la sección a la que pertenece este checkbox
-        var section = $(this).closest('.elemento');
-        // Verificar si todos los checkboxes específicos de la sección están marcados
-        var allChecked = section.find('input.specific-checkbox').length === section.find('input.specific-checkbox:checked').length;
-        // Marcar o desmarcar el checkbox general en consecuencia
-        section.find('.general-checkbox').prop('checked', allChecked);
-    });
+        });
 
-    // Manejo de los checkboxes generales
-    $('.general-checkbox').change(function() {
-        // Obtener la sección que controla este checkbox
-        var section = $(this).closest('.elemento');
-        // Determinar si el checkbox está seleccionado o no
-        var isChecked = $(this).is(':checked');
-        // Seleccionar o deseleccionar todos los checkboxes específicos dentro de la sección
-        section.find('input.specific-checkbox').prop('checked', isChecked);
-    });
-});
+        // Manejo de los checkboxes específicos
+        $('input.specific-checkbox').change(function() {
+            // Obtener la sección a la que pertenece este checkbox
+            var section = $(this).closest('.elemento');
+            
+            // Verificar si todos los checkboxes específicos de la sección están marcados
+            var allChecked = section.find('input.specific-checkbox').length === section.find('input.specific-checkbox:checked').length;
+            
+            // Marcar o desmarcar el checkbox general de la sección correspondiente
+            section.find('.general-checkbox').prop('checked', allChecked);
+        });
 
+        // Manejo de los checkboxes generales
+        $('.general-checkbox').change(function() {
+            // Obtener la sección que controla este checkbox
+            var section = $(this).closest('.elemento');
+            
+            // Determinar si el checkbox está seleccionado o no
+            var isChecked = $(this).is(':checked');
+            
+            // Seleccionar o deseleccionar todos los checkboxes específicos dentro de la sección correspondiente
+            section.find('input.specific-checkbox').prop('checked', isChecked);
+        });
+    });
 </script>
 @endsection
