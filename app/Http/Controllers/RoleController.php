@@ -183,45 +183,41 @@ class RoleController extends Controller
             // Añade más permisos según lo necesites
         ];
         
-        // Crear un array para almacenar los permisos asignados al rol
-        $permisos_asignados = [];
-        
-        // Verificar cada permiso si está asignado al rol
-        foreach ($permisos_a_verificar as $permiso) {
-            if ($role->hasPermissionTo($permiso)) {
-                $permisos_asignados[$permiso] = true;
-            } else {
-                $permisos_asignados[$permiso] = false;
-            }
-        }
-        $gerencias_all_checked = true;
-        $gerencias_permissions = ['gerencias.edit', 'gerencias.update', 'gerencias.create', 'gerencias.store', 'gerencias.index', 'gerencias.show', 'gerencias.delete'];
-        //
-        $puestos_all_checked = true;
-        $puestos_permissions = ['puestos.edit', 'puestos.update', 'puestos.create', 'puestos.store', 'puestos.index', 'puestos.delete'];
+        // Verifica los permisos asignados al rol
+        $permisos_asignados = $this->verificarPermisos($role, $permisos_a_verificar);
 
-
-        foreach ($gerencias_permissions as $permission) {
-            if (!isset($permisos_asignados[$permission]) || !$permisos_asignados[$permission]) {
-                $gerencias_all_checked = false;
-                break;
-            }
-        }
-        foreach ($puestos_permissions as $permission) {
-            if (!isset($permisos_asignados[$permission]) || !$permisos_asignados[$permission]) {
-                $puestos_all_checked = false;
-                break;
-            }
-        }
+        // Variables para manejar los permisos de usuarios, puestos y gerencias
+        $usuarios_all_checked = $this->verificarPermisosGrupales($permisos_asignados, ['usuarios.index', 'usuarios.create', 'usuarios.store', 'usuarios.edit', 'usuarios.update', 'usuarios.show']);
+        $puestos_all_checked = $this->verificarPermisosGrupales($permisos_asignados, ['puestos.index', 'puestos.create', 'puestos.edit', 'puestos.update', 'puestos.delete']);
+        $gerencias_all_checked = $this->verificarPermisosGrupales($permisos_asignados, ['gerencias.index', 'gerencias.create', 'gerencias.edit', 'gerencias.update', 'gerencias.delete']);
 
         // Pasar el rol y los permisos asignados a la vista
         return view('portal_it.layouts.edit_roles', [
             'role' => $role,
             'permisos_asignados' => $permisos_asignados,
-            'gerencias_all_checked' => $gerencias_all_checked,
+            'usuarios_all_checked' => $usuarios_all_checked,
             'puestos_all_checked' => $puestos_all_checked,
+            'gerencias_all_checked' => $gerencias_all_checked
         ]);
-            
+    }
+
+    private function verificarPermisos(Role $role, array $permisos_a_verificar)
+    {
+        $permisos_asignados = [];
+        foreach ($permisos_a_verificar as $permiso) {
+            $permisos_asignados[$permiso] = $role->hasPermissionTo($permiso);
+        }
+        return $permisos_asignados;
+    }
+
+    private function verificarPermisosGrupales($permisos_asignados, array $grupo_permisos)
+    {
+        foreach ($grupo_permisos as $permiso) {
+            if (!isset($permisos_asignados[$permiso]) || !$permisos_asignados[$permiso]) {
+                return false;
+            }
+        }
+        return true;
     }
 
     /**
@@ -234,37 +230,19 @@ class RoleController extends Controller
         // }
         
         $validated= $request->validate([
-            'name'=>['required','min:3'],
+            'name'=>['nullable','min:3'],
         ]);
         
         
-        $role->update($validated);
         
+        // Actualizar el nombre del rol
+        $role->update($validated);
+
         if ($request->has('permisos')) {
             // Obtener los permisos seleccionados en el formulario
             $selectedPermissions = $request->input('permisos');
-    
-            // Obtener los permisos actuales del rol
-            $currentPermissions = $role->permissions;
-    
-            // Convertir los permisos a sus nombres
-            $currentPermissionNames = $currentPermissions->pluck('name')->toArray();
-    
-            // Determinar los permisos que deben eliminarse
-            $permissionsToRemove = array_diff($currentPermissionNames, $selectedPermissions);
-    
-            // Determinar los permisos que deben asignarse
-            $permissionsToAdd = array_diff($selectedPermissions, $currentPermissionNames);
-    
-            // Eliminar solo los permisos que ya no están seleccionados
-            if (!empty($permissionsToRemove)) {
-                $role->revokePermissionTo($permissionsToRemove);
-            }
-    
-            // Asignar solo los nuevos permisos seleccionados
-            if (!empty($permissionsToAdd)) {
-                $role->givePermissionTo($permissionsToAdd);
-            }
+            // Actualizar permisos
+            $role->syncPermissions($selectedPermissions);
         }
         return redirect()->route('roles')->with('status', 'Rol Actualizado');
         
