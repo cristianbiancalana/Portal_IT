@@ -146,6 +146,37 @@
                             </div>
                         </div>
                     </li>
+                    <!-- Sección de Segmentos -->
+                    <li>
+                        <div class="elemento">
+                            <p>Segmentos</p>
+                            <label class="expandir">+</label>
+                            <input type="checkbox" class="general-checkbox" data-section="segmentos" @if($segmentos_all_checked) checked @endif> Segmentos
+                            <div class="detalles">
+                                <hr>
+                                <!-- Opciones de puestos -->
+                                <div>
+                                    <input type="checkbox" name="permisos[]" value="segmentos.index" class="specific-checkbox" @if($permisos_asignados['segmentos.index']) checked @endif> Segmentos
+                                </div>
+                                <div>
+                                    <input type="checkbox" name="permisos[]" value="segmentos.create" class="specific-checkbox" @if($permisos_asignados['segmentos.create']) checked @endif> Segmentos - Crear
+                                </div>
+                                <div>
+                                    <input type="checkbox" name="permisos[]" value="segmentos.store" class="specific-checkbox" @if($permisos_asignados['segmentos.store']) checked @endif> Segmentos - Guardar
+                                </div>
+                                <div>
+                                    <input type="checkbox" name="permisos[]" value="segmentos.edit" class="specific-checkbox" @if($permisos_asignados['segmentos.edit']) checked @endif> Segmentos - Editar
+                                </div>
+                                <div>
+                                    <input type="checkbox" name="permisos[]" value="segmentos.update" class="specific-checkbox" @if($permisos_asignados['segmentos.update']) checked @endif> Segmentos - Actualizar
+                                </div>
+                                <div>
+                                    <input type="checkbox" name="permisos[]" value="segmentos.delete" class="specific-checkbox" @if($permisos_asignados['segmentos.delete']) checked @endif> Segmentos - Delete
+                                </div>
+                                <!-- Continúa con otras opciones -->
+                            </div>
+                        </div>
+                    </li>
                 </ul>
             </div>
 

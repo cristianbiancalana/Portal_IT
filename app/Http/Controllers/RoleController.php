@@ -187,9 +187,10 @@ class RoleController extends Controller
         $permisos_asignados = $this->verificarPermisos($role, $permisos_a_verificar);
 
         // Variables para manejar los permisos de usuarios, puestos y gerencias
-        $usuarios_all_checked = $this->verificarPermisosGrupales($permisos_asignados, ['usuarios.index', 'usuarios.create', 'usuarios.store', 'usuarios.edit', 'usuarios.update', 'usuarios.show']);
-        $puestos_all_checked = $this->verificarPermisosGrupales($permisos_asignados, ['puestos.index', 'puestos.create', 'puestos.edit', 'puestos.update', 'puestos.delete']);
-        $gerencias_all_checked = $this->verificarPermisosGrupales($permisos_asignados, ['gerencias.index', 'gerencias.create', 'gerencias.edit', 'gerencias.update', 'gerencias.delete']);
+        $usuarios_all_checked = $this->verificarPermisosGrupales($permisos_asignados, ['usuarios.index', 'usuarios.show', 'usuarios.create', 'usuarios.store', 'usuarios.edit', 'usuarios.update']);
+        $puestos_all_checked = $this->verificarPermisosGrupales($permisos_asignados, ['puestos.index', 'puestos.create', 'puestos.store', 'puestos.edit', 'puestos.update', 'puestos.delete']);
+        $gerencias_all_checked = $this->verificarPermisosGrupales($permisos_asignados, ['gerencias.index', 'gerencias.show', 'gerencias.create','gerencias.store', 'gerencias.edit', 'gerencias.update', 'gerencias.delete']);
+        $segmentos_all_checked = $this->verificarPermisosGrupales($permisos_asignados, ['segmentos.index', 'segmentos.create', 'segmentos.store', 'segmentos.edit', 'segmentos.update', 'segmentos.delete']);
 
         // Pasar el rol y los permisos asignados a la vista
         return view('portal_it.layouts.edit_roles', [
@@ -197,7 +198,8 @@ class RoleController extends Controller
             'permisos_asignados' => $permisos_asignados,
             'usuarios_all_checked' => $usuarios_all_checked,
             'puestos_all_checked' => $puestos_all_checked,
-            'gerencias_all_checked' => $gerencias_all_checked
+            'gerencias_all_checked' => $gerencias_all_checked,
+            'segmentos_all_checked' => $segmentos_all_checked
         ]);
     }
 
@@ -272,34 +274,3 @@ class RoleController extends Controller
 
 
 }
-
-// public function assignRole(Request $request){
-    //     if (!Auth::user()->hasPermissionTo('tickets.index')) {
-    //         return redirect()->route('homeportal')->with('error', 'No tienes permisos para acceder a este sitio');
-    //     }
-    //         $userId = $request->input('user_id');
-    //         $roleId = $request->input('role_id');
-
-    //         $user = User::find($userId);
-    //         $role = Role::find($roleId);
-
-    //         if (!$user || !$role) {
-    //             return redirect()->route('asignar-rol')->with('error', 'No se pudo asignar el rol');
-    //         }
-
-    //         $roles = $user->getRoleNames(); // Obtener los nombres de los roles del usuario
-
-    //         foreach ($roles as $rol) {
-    //             $user->removeRole($rol); // Quitar cada rol que tenga el usuario
-    //         }
-
-    //         $user->assignRole($role); // Asignar el nuevo rol al usuario
-
-    //         return redirect()->route('asignar-rol')->with('success', 'Rol asignado exitosamente');
-    //     }
-
-    //     public function create(){     
-            
-    //     return view('portal_it.layouts.rolesview');
-    //     }
-
