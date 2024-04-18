@@ -180,6 +180,7 @@ class RoleController extends Controller
             'roles.create',
             'roles.store',
             'roles.index',
+            'roles.delete',
             // Añade más permisos según lo necesites
         ];
         
@@ -191,6 +192,13 @@ class RoleController extends Controller
         $puestos_all_checked = $this->verificarPermisosGrupales($permisos_asignados, ['puestos.index', 'puestos.create', 'puestos.store', 'puestos.edit', 'puestos.update', 'puestos.delete']);
         $gerencias_all_checked = $this->verificarPermisosGrupales($permisos_asignados, ['gerencias.index', 'gerencias.show', 'gerencias.create','gerencias.store', 'gerencias.edit', 'gerencias.update', 'gerencias.delete']);
         $segmentos_all_checked = $this->verificarPermisosGrupales($permisos_asignados, ['segmentos.index', 'segmentos.create', 'segmentos.store', 'segmentos.edit', 'segmentos.update', 'segmentos.delete']);
+        $sistemas_all_checked = $this->verificarPermisosGrupales($permisos_asignados, ['sistemas.index', 'sistemas.create', 'sistemas.store', 'sistemas.edit', 'sistemas.update', 'sistemas.delete']);
+        $problemas_all_checked = $this->verificarPermisosGrupales($permisos_asignados, ['problemas.index', 'problemas.create', 'problemas.store', 'problemas.edit', 'problemas.update', 'problemas.delete']);
+        $estados_all_checked = $this->verificarPermisosGrupales($permisos_asignados, ['estados.index', 'estados.create', 'estados.store', 'estados.edit', 'estados.update', 'estados.delete']);
+        $proveedores_all_checked = $this->verificarPermisosGrupales($permisos_asignados, ['proveedores.index', 'proveedores-show', 'proveedores.create', 'proveedores.store', 'proveedores.edit', 'proveedores.update', 'proveedores.delete']);
+        $prioridades_all_checked = $this->verificarPermisosGrupales($permisos_asignados, ['prioridades.index', 'prioridades.create', 'prioridades.store', 'prioridades.edit', 'prioridades.update', 'prioridades.delete']);
+        $tecnicos_all_checked = $this->verificarPermisosGrupales($permisos_asignados, ['tecnicos.index', 'tecnicos.create', 'tecnicos.store', 'tecnicos.edit', 'tecnicos.update', 'tecnicos.delete']);
+        $roles_all_checked = $this->verificarPermisosGrupales($permisos_asignados, ['roles.index', 'roles.create', 'roles.store', 'roles.edit', 'roles.update', 'roles.delete']);
 
         // Pasar el rol y los permisos asignados a la vista
         return view('portal_it.layouts.edit_roles', [
@@ -199,7 +207,14 @@ class RoleController extends Controller
             'usuarios_all_checked' => $usuarios_all_checked,
             'puestos_all_checked' => $puestos_all_checked,
             'gerencias_all_checked' => $gerencias_all_checked,
-            'segmentos_all_checked' => $segmentos_all_checked
+            'segmentos_all_checked' => $segmentos_all_checked,
+            'sistemas_all_checked' => $sistemas_all_checked,
+            'problemas_all_checked' => $problemas_all_checked,
+            'estados_all_checked' => $estados_all_checked,
+            'proveedores_all_checked' => $proveedores_all_checked,
+            'prioridades_all_checked' => $prioridades_all_checked,
+            'tecnicos_all_checked' => $tecnicos_all_checked,
+            'roles_all_checked' => $roles_all_checked,
         ]);
     }
 

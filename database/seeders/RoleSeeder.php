@@ -15,9 +15,9 @@ class RoleSeeder extends Seeder
      */
     public function run(): void
     {
-        $role1 = Role::create(['name'=> 'SAdmin']);
-        $role2 = Role::create(['name'=> 'Admin']);
-        $role3 = Role::create(['name'=> 'User']);
+        $role1 = Role::create(['name' => 'SAdmin']);
+        $role2 = Role::create(['name' => 'Admin']);
+        $role3 = Role::create(['name' => 'User']);
 
 
         //Declaración de Perimisos
@@ -51,8 +51,8 @@ class RoleSeeder extends Seeder
         Permission::create(['name' => 'gerencias.create']);
         Permission::create(['name' => 'gerencias.store']);
         Permission::create(['name' => 'gerencias.index']);
-        Permission::create(['name' => 'gerencias.show']);       
-	    Permission::create(['name' => 'gerencias.delete']);
+        Permission::create(['name' => 'gerencias.show']);
+        Permission::create(['name' => 'gerencias.delete']);
         //
         Permission::create(['name' => 'segmentos.edit']);
         Permission::create(['name' => 'segmentos.update']);
@@ -88,7 +88,7 @@ class RoleSeeder extends Seeder
         Permission::create(['name' => 'proveedores.store']);
         Permission::create(['name' => 'proveedores.index']);
         Permission::create(['name' => 'proveedores.show']);
-	    Permission::create(['name' => 'proveedores.delete']);
+        Permission::create(['name' => 'proveedores.delete']);
         //
         Permission::create(['name' => 'prioridades.edit']);
         Permission::create(['name' => 'prioridades.update']);
@@ -109,7 +109,8 @@ class RoleSeeder extends Seeder
         Permission::create(['name' => 'roles.create']);
         Permission::create(['name' => 'roles.store']);
         Permission::create(['name' => 'roles.index']);
-        
+        Permission::create(['name' => 'roles.delete']);
+
         //Asignación de permisos a roles básicos
 
         //
@@ -181,12 +182,12 @@ class RoleSeeder extends Seeder
         $role1->givePermissionTo('roles.create');
         $role1->givePermissionTo('roles.store');
         $role1->givePermissionTo('roles.index');
+        $role1->givePermissionTo('roles.delete');
         //
         $role1->givePermissionTo('usuarios.edit');
         $role1->givePermissionTo('usuarios.update');
         $role1->givePermissionTo('usuarios.create');
         $role1->givePermissionTo('usuarios.store');
         $role1->givePermissionTo('usuarios.index');
-
     }
 }

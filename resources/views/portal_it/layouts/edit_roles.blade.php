@@ -177,6 +177,226 @@
                             </div>
                         </div>
                     </li>
+                    <!-- Sección de Sistemas -->
+                    <li>
+                        <div class="elemento">
+                            <p>Sistemas</p>
+                            <label class="expandir">+</label>
+                            <input type="checkbox" class="general-checkbox" data-section="sistemas" @if($sistemas_all_checked) checked @endif> Sistemas
+                            <div class="detalles">
+                                <hr>
+                                <!-- Opciones de puestos -->
+                                <div>
+                                    <input type="checkbox" name="permisos[]" value="sistemas.index" class="specific-checkbox" @if($permisos_asignados['sistemas.index']) checked @endif> Sistemas
+                                </div>
+                                <div>
+                                    <input type="checkbox" name="permisos[]" value="sistemas.create" class="specific-checkbox" @if($permisos_asignados['sistemas.create']) checked @endif> Sistemas - Crear
+                                </div>
+                                <div>
+                                    <input type="checkbox" name="permisos[]" value="sistemas.store" class="specific-checkbox" @if($permisos_asignados['sistemas.store']) checked @endif> Sistemas - Guardar
+                                </div>
+                                <div>
+                                    <input type="checkbox" name="permisos[]" value="sistemas.edit" class="specific-checkbox" @if($permisos_asignados['sistemas.edit']) checked @endif> Sistemas - Editar
+                                </div>
+                                <div>
+                                    <input type="checkbox" name="permisos[]" value="sistemas.update" class="specific-checkbox" @if($permisos_asignados['sistemas.update']) checked @endif> Sistemas - Actualizar
+                                </div>
+                                <div>
+                                    <input type="checkbox" name="permisos[]" value="sistemas.delete" class="specific-checkbox" @if($permisos_asignados['sistemas.delete']) checked @endif> Sistemas - Delete
+                                </div>
+                                <!-- Continúa con otras opciones -->
+                            </div>
+                        </div>
+                    </li>
+                    <!-- Sección de Problemas -->
+                    <li>
+                        <div class="elemento">
+                            <p>Problemas</p>
+                            <label class="expandir">+</label>
+                            <input type="checkbox" class="general-checkbox" data-section="problemas" @if($problemas_all_checked) checked @endif> Problemas
+                            <div class="detalles">
+                                <hr>
+                                <!-- Opciones de puestos -->
+                                <div>
+                                    <input type="checkbox" name="permisos[]" value="problemas.index" class="specific-checkbox" @if($permisos_asignados['problemas.index']) checked @endif> Problemas
+                                </div>
+                                <div>
+                                    <input type="checkbox" name="permisos[]" value="problemas.create" class="specific-checkbox" @if($permisos_asignados['problemas.create']) checked @endif> Problemas - Crear
+                                </div>
+                                <div>
+                                    <input type="checkbox" name="permisos[]" value="problemas.store" class="specific-checkbox" @if($permisos_asignados['problemas.store']) checked @endif> Problemas - Guardar
+                                </div>
+                                <div>
+                                    <input type="checkbox" name="permisos[]" value="problemas.edit" class="specific-checkbox" @if($permisos_asignados['problemas.edit']) checked @endif> Problemas - Editar
+                                </div>
+                                <div>
+                                    <input type="checkbox" name="permisos[]" value="problemas.update" class="specific-checkbox" @if($permisos_asignados['problemas.update']) checked @endif> Problemas - Actualizar
+                                </div>
+                                <div>
+                                    <input type="checkbox" name="permisos[]" value="problemas.delete" class="specific-checkbox" @if($permisos_asignados['problemas.delete']) checked @endif> Problemas - Delete
+                                </div>
+                                <!-- Continúa con otras opciones -->
+                            </div>
+                        </div>
+                    </li>
+                    <!-- Sección de Estados -->
+                    <li>
+                        <div class="elemento">
+                            <p>Estados</p>
+                            <label class="expandir">+</label>
+                            <input type="checkbox" class="general-checkbox" data-section="estados" @if($estados_all_checked) checked @endif> Estados
+                            <div class="detalles">
+                                <hr>
+                                <!-- Opciones de puestos -->
+                                <div>
+                                    <input type="checkbox" name="permisos[]" value="estados.index" class="specific-checkbox" @if($permisos_asignados['estados.index']) checked @endif> Estados
+                                </div>
+                                <div>
+                                    <input type="checkbox" name="permisos[]" value="estados.create" class="specific-checkbox" @if($permisos_asignados['estados.create']) checked @endif> Estados - Crear
+                                </div>
+                                <div>
+                                    <input type="checkbox" name="permisos[]" value="estados.store" class="specific-checkbox" @if($permisos_asignados['estados.store']) checked @endif> Estados - Guardar
+                                </div>
+                                <div>
+                                    <input type="checkbox" name="permisos[]" value="estados.edit" class="specific-checkbox" @if($permisos_asignados['estados.edit']) checked @endif> Estados - Editar
+                                </div>
+                                <div>
+                                    <input type="checkbox" name="permisos[]" value="estados.update" class="specific-checkbox" @if($permisos_asignados['estados.update']) checked @endif> Estados - Actualizar
+                                </div>
+                                <div>
+                                    <input type="checkbox" name="permisos[]" value="estados.delete" class="specific-checkbox" @if($permisos_asignados['estados.delete']) checked @endif> Estados - Delete
+                                </div>
+                                <!-- Continúa con otras opciones -->
+                            </div>
+                        </div>
+                    </li>
+                    <!-- Sección de Prioridades -->
+                    <li>
+                        <div class="elemento">
+                            <p>Prioridades</p>
+                            <label class="expandir">+</label>
+                            <input type="checkbox" class="general-checkbox" data-section="prioridades" @if($prioridades_all_checked) checked @endif> Prioridades
+                            <div class="detalles">
+                                <hr>
+                                <!-- Opciones de puestos -->
+                                <div>
+                                    <input type="checkbox" name="permisos[]" value="prioridades.index" class="specific-checkbox" @if($permisos_asignados['prioridades.index']) checked @endif> Prioridades
+                                </div>
+                                <div>
+                                    <input type="checkbox" name="permisos[]" value="prioridades.create" class="specific-checkbox" @if($permisos_asignados['prioridades.create']) checked @endif> Prioridades - Crear
+                                </div>
+                                <div>
+                                    <input type="checkbox" name="permisos[]" value="prioridades.store" class="specific-checkbox" @if($permisos_asignados['prioridades.store']) checked @endif> Prioridades - Guardar
+                                </div>
+                                <div>
+                                    <input type="checkbox" name="permisos[]" value="prioridades.edit" class="specific-checkbox" @if($permisos_asignados['prioridades.edit']) checked @endif> Prioridades - Editar
+                                </div>
+                                <div>
+                                    <input type="checkbox" name="permisos[]" value="prioridades.update" class="specific-checkbox" @if($permisos_asignados['prioridades.update']) checked @endif> Prioridades - Actualizar
+                                </div>
+                                <div>
+                                    <input type="checkbox" name="permisos[]" value="prioridades.delete" class="specific-checkbox" @if($permisos_asignados['prioridades.delete']) checked @endif> Prioridades - Delete
+                                </div>
+                                <!-- Continúa con otras opciones -->
+                            </div>
+                        </div>
+                    </li>
+                    <!-- Sección de Proveedores -->
+                    <li>
+                        <div class="elemento">
+                            <p>Proveedores</p>
+                            <label class="expandir">+</label>
+                            <input type="checkbox" class="general-checkbox" data-section="proveedores" @if($proveedores_all_checked) checked @endif> Proveedores
+                            <div class="detalles">
+                                <hr>
+                                <!-- Opciones de puestos -->
+                                <div>
+                                    <input type="checkbox" name="permisos[]" value="proveedores.index" class="specific-checkbox" @if($permisos_asignados['proveedores.index']) checked @endif> Proveedores
+                                </div>
+                                <div>
+                                    <input type="checkbox" name="permisos[]" value="proveedores.show" class="specific-checkbox" @if($permisos_asignados['proveedores.show']) checked @endif> Proveedores - Ver
+                                </div>
+                                <div>
+                                    <input type="checkbox" name="permisos[]" value="proveedores.create" class="specific-checkbox" @if($permisos_asignados['proveedores.create']) checked @endif> Proveedores - Crear
+                                </div>
+                                <div>
+                                    <input type="checkbox" name="permisos[]" value="proveedores.store" class="specific-checkbox" @if($permisos_asignados['proveedores.store']) checked @endif> Proveedores - Guardar
+                                </div>
+                                <div>
+                                    <input type="checkbox" name="permisos[]" value="proveedores.edit" class="specific-checkbox" @if($permisos_asignados['proveedores.edit']) checked @endif> Proveedores - Editar
+                                </div>
+                                <div>
+                                    <input type="checkbox" name="permisos[]" value="proveedores.update" class="specific-checkbox" @if($permisos_asignados['proveedores.update']) checked @endif> Proveedores - Actualizar
+                                </div>
+                                <div>
+                                    <input type="checkbox" name="permisos[]" value="proveedores.delete" class="specific-checkbox" @if($permisos_asignados['proveedores.delete']) checked @endif> Proveedores - Delete
+                                </div>
+                                <!-- Continúa con otras opciones -->
+                            </div>
+                        </div>
+                    </li>
+                    <!-- Sección de Técnicos -->
+                    <li>
+                        <div class="elemento">
+                            <p>Técnicos</p>
+                            <label class="expandir">+</label>
+                            <input type="checkbox" class="general-checkbox" data-section="tecnicos" @if($tecnicos_all_checked) checked @endif> Técnicos
+                            <div class="detalles">
+                                <hr>
+                                <!-- Opciones de puestos -->
+                                <div>
+                                    <input type="checkbox" name="permisos[]" value="tecnicos.index" class="specific-checkbox" @if($permisos_asignados['tecnicos.index']) checked @endif> Técnicos
+                                </div>
+                                <div>
+                                    <input type="checkbox" name="permisos[]" value="tecnicos.create" class="specific-checkbox" @if($permisos_asignados['tecnicos.create']) checked @endif> Técnicos - Crear
+                                </div>
+                                <div>
+                                    <input type="checkbox" name="permisos[]" value="tecnicos.store" class="specific-checkbox" @if($permisos_asignados['tecnicos.store']) checked @endif> Técnicos - Guardar
+                                </div>
+                                <div>
+                                    <input type="checkbox" name="permisos[]" value="tecnicos.edit" class="specific-checkbox" @if($permisos_asignados['tecnicos.edit']) checked @endif> Técnicos - Editar
+                                </div>
+                                <div>
+                                    <input type="checkbox" name="permisos[]" value="tecnicos.update" class="specific-checkbox" @if($permisos_asignados['tecnicos.update']) checked @endif> Técnicos - Actualizar
+                                </div>
+                                <div>
+                                    <input type="checkbox" name="permisos[]" value="tecnicos.delete" class="specific-checkbox" @if($permisos_asignados['tecnicos.delete']) checked @endif> Técnicos - Delete
+                                </div>
+                                <!-- Continúa con otras opciones -->
+                            </div>
+                        </div>
+                    </li>
+                    <!-- Sección de Roles -->
+                    <li>
+                        <div class="elemento">
+                            <p>Roles</p>
+                            <label class="expandir">+</label>
+                            <input type="checkbox" class="general-checkbox" data-section="roles" @if($roles_all_checked) checked @endif> Roles
+                            <div class="detalles">
+                                <hr>
+                                <!-- Opciones de puestos -->
+                                <div>
+                                    <input type="checkbox" name="permisos[]" value="roles.index" class="specific-checkbox" @if($permisos_asignados['roles.index']) checked @endif> Roles
+                                </div>
+                                <div>
+                                    <input type="checkbox" name="permisos[]" value="roles.create" class="specific-checkbox" @if($permisos_asignados['roles.create']) checked @endif> Roles - Crear
+                                </div>
+                                <div>
+                                    <input type="checkbox" name="permisos[]" value="roles.store" class="specific-checkbox" @if($permisos_asignados['roles.store']) checked @endif> Roles - Guardar
+                                </div>
+                                <div>
+                                    <input type="checkbox" name="permisos[]" value="roles.edit" class="specific-checkbox" @if($permisos_asignados['roles.edit']) checked @endif> Roles - Editar
+                                </div>
+                                <div>
+                                    <input type="checkbox" name="permisos[]" value="roles.update" class="specific-checkbox" @if($permisos_asignados['roles.update']) checked @endif> Roles - Actualizar
+                                </div>
+                                <div>
+                                    <input type="checkbox" name="permisos[]" value="roles.delete" class="specific-checkbox" @if($permisos_asignados['roles.delete']) checked @endif> Roles - Delete
+                                </div>
+                                <!-- Continúa con otras opciones -->
+                            </div>
+                        </div>
+                    </li>
                 </ul>
             </div>
 
