@@ -154,7 +154,7 @@
                             <input type="checkbox" class="general-checkbox" data-section="segmentos" @if($segmentos_all_checked) checked @endif> Segmentos
                             <div class="detalles">
                                 <hr>
-                                <!-- Opciones de puestos -->
+                                <!-- Opciones de segmentos -->
                                 <div>
                                     <input type="checkbox" name="permisos[]" value="segmentos.index" class="specific-checkbox" @if($permisos_asignados['segmentos.index']) checked @endif> Segmentos
                                 </div>
@@ -185,7 +185,7 @@
                             <input type="checkbox" class="general-checkbox" data-section="sistemas" @if($sistemas_all_checked) checked @endif> Sistemas
                             <div class="detalles">
                                 <hr>
-                                <!-- Opciones de puestos -->
+                                <!-- Opciones de sistemas -->
                                 <div>
                                     <input type="checkbox" name="permisos[]" value="sistemas.index" class="specific-checkbox" @if($permisos_asignados['sistemas.index']) checked @endif> Sistemas
                                 </div>
@@ -216,7 +216,7 @@
                             <input type="checkbox" class="general-checkbox" data-section="problemas" @if($problemas_all_checked) checked @endif> Problemas
                             <div class="detalles">
                                 <hr>
-                                <!-- Opciones de puestos -->
+                                <!-- Opciones de problemas -->
                                 <div>
                                     <input type="checkbox" name="permisos[]" value="problemas.index" class="specific-checkbox" @if($permisos_asignados['problemas.index']) checked @endif> Problemas
                                 </div>
@@ -247,7 +247,7 @@
                             <input type="checkbox" class="general-checkbox" data-section="estados" @if($estados_all_checked) checked @endif> Estados
                             <div class="detalles">
                                 <hr>
-                                <!-- Opciones de puestos -->
+                                <!-- Opciones de prioridades -->
                                 <div>
                                     <input type="checkbox" name="permisos[]" value="estados.index" class="specific-checkbox" @if($permisos_asignados['estados.index']) checked @endif> Estados
                                 </div>
@@ -278,7 +278,7 @@
                             <input type="checkbox" class="general-checkbox" data-section="prioridades" @if($prioridades_all_checked) checked @endif> Prioridades
                             <div class="detalles">
                                 <hr>
-                                <!-- Opciones de puestos -->
+                                <!-- Opciones de prioridades -->
                                 <div>
                                     <input type="checkbox" name="permisos[]" value="prioridades.index" class="specific-checkbox" @if($permisos_asignados['prioridades.index']) checked @endif> Prioridades
                                 </div>
@@ -309,7 +309,7 @@
                             <input type="checkbox" class="general-checkbox" data-section="proveedores" @if($proveedores_all_checked) checked @endif> Proveedores
                             <div class="detalles">
                                 <hr>
-                                <!-- Opciones de puestos -->
+                                <!-- Opciones de proveedores -->
                                 <div>
                                     <input type="checkbox" name="permisos[]" value="proveedores.index" class="specific-checkbox" @if($permisos_asignados['proveedores.index']) checked @endif> Proveedores
                                 </div>
@@ -343,7 +343,7 @@
                             <input type="checkbox" class="general-checkbox" data-section="tecnicos" @if($tecnicos_all_checked) checked @endif> Técnicos
                             <div class="detalles">
                                 <hr>
-                                <!-- Opciones de puestos -->
+                                <!-- Opciones de tecnicos -->
                                 <div>
                                     <input type="checkbox" name="permisos[]" value="tecnicos.index" class="specific-checkbox" @if($permisos_asignados['tecnicos.index']) checked @endif> Técnicos
                                 </div>
@@ -374,7 +374,7 @@
                             <input type="checkbox" class="general-checkbox" data-section="roles" @if($roles_all_checked) checked @endif> Roles
                             <div class="detalles">
                                 <hr>
-                                <!-- Opciones de puestos -->
+                                <!-- Opciones de roles-->
                                 <div>
                                     <input type="checkbox" name="permisos[]" value="roles.index" class="specific-checkbox" @if($permisos_asignados['roles.index']) checked @endif> Roles
                                 </div>
