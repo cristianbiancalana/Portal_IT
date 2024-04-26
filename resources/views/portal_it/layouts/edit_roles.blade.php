@@ -1,52 +1,55 @@
 @extends('portal_it.layouts.base')
 
 @section('content')
-    <style>
-        .detalles {
-            display: none; /* Ocultar detalles por defecto */
-        }
-        .section-header {
-            display: flex;
-            justify-content: space-between; /* Espaciar las secciones uniformemente */
-        }
-    </style>
+<style>
+    .detalles {
+        display: none;
+        /* Ocultar detalles por defecto */
+    }
 
-    <div class="row">
-        <div class="col-12">
-            <div>
-                <h2>Roles</h2>
-            </div>
+    .section-header {
+        display: flex;
+        justify-content: space-between;
+        /* Espaciar las secciones uniformemente */
+    }
+</style>
+
+<div class="row">
+    <div class="col-12">
+        <div>
+            <h2>Roles</h2>
         </div>
+    </div>
 
-        @if ($errors->any())
-            <div class="alert alert-danger">
-                <strong>
-                    <svg style="width: 22px; height: 20px;" fill="none" stroke-width="1.5" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m9-.75a9 9 0 1 1-18 0 9 9 0 0 1 18 0Zm-9 3.75h.008v.008H12v-.008Z"></path>
-                    </svg>
-                </strong>
-                Error al editar el ticket, verificar: <br><br>
-                <ul>
-                    @foreach ($errors->all() as $error)
-                        <li>{{ $error }}</li>
-                    @endforeach
-                </ul>
-            </div>
-        @endif
+    @if ($errors->any())
+    <div class="alert alert-danger">
+        <strong>
+            <svg style="width: 22px; height: 20px;" fill="none" stroke-width="1.5" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m9-.75a9 9 0 1 1-18 0 9 9 0 0 1 18 0Zm-9 3.75h.008v.008H12v-.008Z"></path>
+            </svg>
+        </strong>
+        Error al editar el ticket, verificar: <br><br>
+        <ul>
+            @foreach ($errors->all() as $error)
+            <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
+    @endif
 
-        <h3 class="text-white">Editar Rol - {{ $role->name }}</h3>
-        <form action="{{route('role.update',$role)}}" method="post">
-            @method('PUT')
-            @csrf
+    <h3 class="text-white">Editar Rol - {{ $role->name }}</h3>
+    <form action="{{route('role.update',$role)}}" method="post">
+        @method('PUT')
+        @csrf
         <div class="section-header">
             <!-- Sección de Usuarios -->
-            <div class="col-4">
+            <div class="row-1">
                 <h4>Usuarios</h4>
                 <ul id="lista">
                     <li>
                         <div class="elemento">
                             <label class="expandir">+</label>
-                            <input type="checkbox" class="general-checkbox" data-section="usuarios" @if($usuarios_all_checked) checked @endif> Usuarios
+                             Usuarios
                             <div class="detalles">
                                 <hr>
                                 <!-- Opciones de usuarios -->
@@ -77,15 +80,15 @@
             </div>
 
             <!-- Sección de Parametros del Portal -->
-            <div class="col-4">
+            <div class="colum" style="display:flex; flex-direction:row;">
                 <h4>Parametros del Portal</h4>
-                <ul id="lista">
+                <ul id="lista" style=" margin: 0 ;">
                     <!-- Sección de Gerencias -->
                     <li>
                         <div class="elemento">
                             <p>Gerencias</p>
                             <label class="expandir">+</label>
-                            <input type="checkbox" class="general-checkbox" data-section="gerencias" @if($gerencias_all_checked) checked @endif> Gerencias
+                             Gerencias
                             <div class="detalles">
                                 <hr>
                                 <!-- Opciones de gerencias -->
@@ -120,7 +123,7 @@
                         <div class="elemento">
                             <p>Puestos</p>
                             <label class="expandir">+</label>
-                            <input type="checkbox" class="general-checkbox" data-section="puestos" @if($puestos_all_checked) checked @endif> Puestos
+                             Puestos
                             <div class="detalles">
                                 <hr>
                                 <!-- Opciones de puestos -->
@@ -151,7 +154,7 @@
                         <div class="elemento">
                             <p>Segmentos</p>
                             <label class="expandir">+</label>
-                            <input type="checkbox" class="general-checkbox" data-section="segmentos" @if($segmentos_all_checked) checked @endif> Segmentos
+                             Segmentos
                             <div class="detalles">
                                 <hr>
                                 <!-- Opciones de segmentos -->
@@ -182,7 +185,7 @@
                         <div class="elemento">
                             <p>Sistemas</p>
                             <label class="expandir">+</label>
-                            <input type="checkbox" class="general-checkbox" data-section="sistemas" @if($sistemas_all_checked) checked @endif> Sistemas
+                             Sistemas
                             <div class="detalles">
                                 <hr>
                                 <!-- Opciones de sistemas -->
@@ -213,7 +216,7 @@
                         <div class="elemento">
                             <p>Problemas</p>
                             <label class="expandir">+</label>
-                            <input type="checkbox" class="general-checkbox" data-section="problemas" @if($problemas_all_checked) checked @endif> Problemas
+                             Problemas
                             <div class="detalles">
                                 <hr>
                                 <!-- Opciones de problemas -->
@@ -244,7 +247,7 @@
                         <div class="elemento">
                             <p>Estados</p>
                             <label class="expandir">+</label>
-                            <input type="checkbox" class="general-checkbox" data-section="estados" @if($estados_all_checked) checked @endif> Estados
+                             Estados
                             <div class="detalles">
                                 <hr>
                                 <!-- Opciones de prioridades -->
@@ -275,7 +278,7 @@
                         <div class="elemento">
                             <p>Prioridades</p>
                             <label class="expandir">+</label>
-                            <input type="checkbox" class="general-checkbox" data-section="prioridades" @if($prioridades_all_checked) checked @endif> Prioridades
+                             Prioridades
                             <div class="detalles">
                                 <hr>
                                 <!-- Opciones de prioridades -->
@@ -306,7 +309,7 @@
                         <div class="elemento">
                             <p>Proveedores</p>
                             <label class="expandir">+</label>
-                            <input type="checkbox" class="general-checkbox" data-section="proveedores" @if($proveedores_all_checked) checked @endif> Proveedores
+                             Proveedores
                             <div class="detalles">
                                 <hr>
                                 <!-- Opciones de proveedores -->
@@ -340,7 +343,7 @@
                         <div class="elemento">
                             <p>Técnicos</p>
                             <label class="expandir">+</label>
-                            <input type="checkbox" class="general-checkbox" data-section="tecnicos" @if($tecnicos_all_checked) checked @endif> Técnicos
+                             Técnicos
                             <div class="detalles">
                                 <hr>
                                 <!-- Opciones de tecnicos -->
@@ -371,7 +374,7 @@
                         <div class="elemento">
                             <p>Roles</p>
                             <label class="expandir">+</label>
-                            <input type="checkbox" class="general-checkbox" data-section="roles" @if($roles_all_checked) checked @endif> Roles
+                             Roles
                             <div class="detalles">
                                 <hr>
                                 <!-- Opciones de roles-->
@@ -422,42 +425,116 @@
         </div>
 
         <div class="text-center">
-          <button type="submit" class="btn btn-primary" style="width:100px;">Actualizar</button>
-          <a href="{{ route('parametros') }}" class="btn btn-primary" style="width:100px; margin-left: 10px;">Volver</a>
+            <button type="submit" class="btn btn-primary" style="width:100px;">Actualizar</button>
+            <a href="{{ route('parametros') }}" class="btn btn-primary" style="width:100px; margin-left: 10px;">Volver</a>
         </div>
-        </form>
-    </div>
+    </form>
+</div>
 
-    <!-- Script de JavaScript para la funcionalidad de los checkbox -->
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            const sections = document.querySelectorAll('.elemento');
-            
-            sections.forEach(section => {
-                const generalCheckbox = section.querySelector('.general-checkbox');
-                const specificCheckboxes = section.querySelectorAll('.specific-checkbox');
-                const details = section.querySelector('.detalles');
+<!-- Script de JavaScript para la funcionalidad de los checkbox -->
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const sections = document.querySelectorAll('.elemento');
 
-                // Eventos para el checkbox general
-                generalCheckbox.addEventListener('change', function() {
-                    specificCheckboxes.forEach(specificCheckbox => {
-                        specificCheckbox.checked = generalCheckbox.checked;
-                    });
-                });
+        sections.forEach(section => {
+            const generalCheckbox = section.querySelector('.general-checkbox');
+            const specificCheckboxes = section.querySelectorAll('.specific-checkbox');
+            const details = section.querySelector('.detalles');
 
-                // Eventos para los checkbox específicos
+            // Eventos para el checkbox general
+            generalCheckbox.addEventListener('change', function() {
                 specificCheckboxes.forEach(specificCheckbox => {
-                    specificCheckbox.addEventListener('change', function() {
-                        // El checkbox general se actualizará según el estado de los checkbox específicos
-                        generalCheckbox.checked = Array.from(specificCheckboxes).every(specificCheckbox => specificCheckbox.checked);
-                    });
-                });
-
-                // Expandir o contraer la sección de detalles
-                section.querySelector('.expandir').addEventListener('click', function() {
-                    details.style.display = (details.style.display === 'none') ? 'block' : 'none';
+                    specificCheckbox.checked = generalCheckbox.checked;
                 });
             });
+
+            // Eventos para los checkbox específicos
+            specificCheckboxes.forEach(specificCheckbox => {
+                specificCheckbox.addEventListener('change', function() {
+                    // El checkbox general se actualizará según el estado de los checkbox específicos
+                    generalCheckbox.checked = Array.from(specificCheckboxes).every(specificCheckbox => specificCheckbox.checked);
+                });
+            });
+
+            // Expandir o contraer la sección de detalles
+            section.querySelector('.expandir').addEventListener('click', function() {
+                details.style.display = (details.style.display === 'none') ? 'block' : 'none';
+            });
         });
-    </script>
+    });
+</script>
+
+
+<!-- Sección de Parametros del Portal -->
+<div class="row">
+    <div class="col-md-12">
+        <h4>Permisos</h4>
+        <table class="table">
+            <thead>
+                <tr style="color:white;">
+                <th rowspan="2">Categoría | Sección</th>
+                </tr>
+                <tr style="color:white; ">
+                    <th>Usuarios</th>
+                    <th>Gerencias</th>
+                    <th>Puestos</th>
+                    <th>Segmentos</th>
+                    <th>Sistemas</th>
+                    <th>Problemas</th>
+                    <th>Estados</th>
+                    <th>Prioridades</th>
+                    <th>Proveedores</th>
+                    <th>Técnicos</th>
+                    <th>Roles</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr style="color:white; ">
+                    <td>All Permissions</td>
+                    <td><input type="checkbox" class="general-checkbox" data-section="usuarios" @if($usuarios_all_checked) checked @endif></td>
+                    <td><input type="checkbox" class="general-checkbox" data-section="gerencias" @if($gerencias_all_checked) checked @endif></td>
+                    <td><input type="checkbox" class="general-checkbox" data-section="puestos" @if($puestos_all_checked) checked @endif></td>
+                    <td><input type="checkbox" class="general-checkbox" data-section="segmentos" @if($segmentos_all_checked) checked @endif></td>
+                    <td><input type="checkbox" class="general-checkbox" data-section="sistemas" @if($sistemas_all_checked) checked @endif></td>
+                    <td><input type="checkbox" class="general-checkbox" data-section="problemas" @if($problemas_all_checked) checked @endif></td>
+                    <td><input type="checkbox" class="general-checkbox" data-section="estados" @if($estados_all_checked) checked @endif></td>
+                    <td><input type="checkbox" class="general-checkbox" data-section="prioridades" @if($prioridades_all_checked) checked @endif></td>
+                    <td><input type="checkbox" class="general-checkbox" data-section="proveedores" @if($proveedores_all_checked) checked @endif></td>
+                    <td><input type="checkbox" class="general-checkbox" data-section="tecnicos" @if($tecnicos_all_checked) checked @endif></td>
+                    <td><input type="checkbox" class="general-checkbox" data-section="roles" @if($roles_all_checked) checked @endif></td>
+                </tr>
+                <tr style="color:white; ">
+                    <td>Index</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td><input type="checkbox"></td>
+                    <td><input type="checkbox"></td>
+                    <td><input type="checkbox"></td>
+                    <td><input type="checkbox"></td>
+                    <td><input type="checkbox"></td>
+                    <td><input type="checkbox"></td>
+                </tr>
+                <tr style="color:white;">
+                    <td>Ver</td>
+                    <!-- Colocar aquí los checkboxes correspondientes -->
+                </tr>
+                <tr style="color:white;">
+                    <td>Crear</td>
+                    <!-- Colocar aquí los checkboxes correspondientes -->
+                </tr>
+                <tr style="color:white;">
+                    <td>Guardar</td>
+                    <!-- Colocar aquí los checkboxes correspondientes -->
+                </tr>
+                <!-- Continuar con las filas para las demás acciones -->
+            </tbody>
+        </table>
+    </div>
+</div>
+
+
+
+
 @endsection
