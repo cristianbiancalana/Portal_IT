@@ -7,6 +7,7 @@ use App\Models\User;
 use Spatie\Permission\Models\Role;
 use Spatie\Permission\Models\Permission;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Pagination\Paginator;
 
 class RoleController extends Controller
 {
@@ -16,7 +17,7 @@ class RoleController extends Controller
         //     if (!Auth::user()->hasPermissionTo('roles.index')) {
         //         return redirect()->route('homeportal')->with('error', 'No tienes permisos para acceder a este sitio');
         //     }
-        $roles = Role::all();
+        $roles = Role::paginate(3);
         return view('portal_it.layouts.rolesview', ['roles' => $roles]);
     }
     public function indextabla()
@@ -24,7 +25,7 @@ class RoleController extends Controller
         // if (!Auth::user()->hasPermissionTo('roles.index')) {
         //     return redirect()->route('homeportal')->with('error', 'No tienes permisos para acceder a este sitio');
         // }
-        $roles = Role::all();
+        $roles = Role::paginate(3);
         return view('portal_it.layouts.rolesview', array('roles' => $roles));
     }
 
@@ -282,7 +283,7 @@ class RoleController extends Controller
         // if (!Auth::user()->hasPermissionTo('roles.index')) {
         //     return redirect()->route('homeportal')->with('error', 'No tienes permisos para acceder a este sitio');
         // }
-        $roles = Role::all();
+        $roles = Role::paginate(3);
         return view('portal_it.layouts.rolesview', compact('roles'));
     }
 }

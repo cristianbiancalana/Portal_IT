@@ -65,122 +65,158 @@
                         @endforeach
                     </tbody>
                 </table>
+                {{$roles->links()}}
             </div>
         </div>
         <h3 class="text-white">Crear Rol</h3>
         <div style="display:flex; margin-left:15px;">
             <form action="{{route('store.roles')}}" method="post">
                 @csrf
-                <div class="col-4 mt-4">
-                    <strong>Nombre del nuevo Rol</strong>
-                    <input type="text" name="name" id="name"  class="form-control" style="height:25px; max-width:150px;">
-                    <input type="hidden" name="guard_name" id="guard_name" value="web">
-                </div>
-                <div class=" mt-2" style="display:flex;">
-                <ul id="lista">
-                    <li>
-                        <div class="elemento">
-                        <p >Usuarios</p>
-                        <label class="expandir">+</label>
-                        <div class="detalles">
-                            <input type="checkbox" name="permisos[]" value="usuarios.index"> Usuarios
-                            <hr>
-                            <input type="checkbox" name="permisos[]" value="usuarios.show"> Usuarios - Ver
-                            <hr>
-                            <input type="checkbox" name="permisos[]" value="usuarios.create"> Usuarios - Crear
-                            <hr>
-                            <input type="checkbox" name="permisos[]" value="usuarios.store"> Usuarios - Guardar
-                            <hr>
-                            <input type="checkbox" name="permisos[]" value="usuarios.edit"> Usuarios - Editar
-                            <hr>
-                            <input type="checkbox" name="permisos[]" value="usuarios.update"> Usuarios - Actualizar
-                        </div>
-                        </div>
-                    </li>
-                </ul>
-                <ul id="lista">
-                    <li>
-                        <div class="elemento">
-                            <p>Parámetros del Portal</p>
-                            <label class="expandir">+</label>
-                            <!-- Checkbox general para asignar todos los permisos de Gerencias -->
-                            <input type="checkbox" class="general-checkbox" name="gerencias_all" value="gerencias_all"> Gerencias
-                            <hr>
-                            <div class="detalles">
-                                <!-- Permisos específicos de Gerencias -->
-                                <input type="checkbox" class="specific-checkbox" name="permisos[]" value="gerencias.index"> Gerencias
-                                <hr>
-                                <input type="checkbox" class="specific-checkbox" name="permisos[]" value="gerencias.show"> Gerencias - Ver
-                                <hr>
-                                <input type="checkbox" class="specific-checkbox" name="permisos[]" value="gerencias.create"> Gerencias - Crear
-                                <hr>
-                                <input type="checkbox" class="specific-checkbox" name="permisos[]" value="gerencias.store"> Gerencias - Guardar
-                                <hr>
-                                <input type="checkbox" class="specific-checkbox" name="permisos[]" value="gerencias.edit"> Gerencias - Editar
-                                <hr>
-                                <input type="checkbox" class="specific-checkbox" name="permisos[]" value="gerencias.update"> Gerencias - Actualizar
-                                <hr>
-                                <input type="checkbox" class="specific-checkbox" name="permisos[]" value="gerencias.delete"> Gerencias - Delete
-                            </div>
-                        </div>
-                    </li>
-                </ul>
-                <ul id="lista">
-                    <li>
-                        <div class="elemento">
-                        <p >Tickets</p>
-                        <label class="expandir">+</label>
-                        <div class="detalles">
-                            <input type="checkbox" value=""> Ver total de tickets
-                            <br>
-                            <input type="checkbox" value=""> Ver Tickets pendientes
-                            <br>
-                            <input type="checkbox" value=""> Crear Tickets
-                            <br>
-                            <input type="checkbox" value=""> Editar Tickets
-                        </div>
-                        </div>
-                    </li>
-                </ul>
-                <ul id="lista" >
-                    <li>
-                        <div class="elemento">
-                        <p>Comodatos</p>
-                        <label class="expandir">+</label>
-                        <div class="detalles">
-                            <input type="checkbox" value=""> Ver total de comodatos
-                            <br>
-                            <input type="checkbox" value=""> Nuevo Comodato
-                            <br>
-                            <input type="checkbox" value=""> Editar Comodato
-                            <br>
-                            <input type="checkbox" value=""> Anular Comodato
-                        </div>
-                        </div>
-                    </li>
-                </ul>
-                <ul id="lista" >
-                    <li>
-                        <div class="elemento">
-                        <p>Inventario</p>
-                        <label class="expandir">+</label>
-                        <div class="detalles">
-                            <input type="checkbox" value=""> Ver total de insumos
-                            <br>
-                            <input type="checkbox" value=""> Nuevo Insumo
-                            <br>
-                            <input type="checkbox" value=""> Editar Insumo
-                            <br>
-                            <input type="checkbox" value=""> Baja de Insumo
-                        </div>
-                        </div>
-                    </li>
-                </ul>
-                </div>
-                <div class="text-center">
-                    <button type="submit" class="btn btn-primary" style="width:100px;">Crear Rol</button>
-                    <a href="{{ route('parametros') }}" class="btn btn-primary" style="width:100px; margin-left: 10px;">Volver</a>
-                </div>
+                <div class="row">
+            <div class="col-md-12 mt-2">
+                <h4 class="mt-3">Permisos</h4>
+                    <table class="table table table-sm table-dark mt-3 text-center">
+                        <thead>
+                            <tr style="color:white;">
+                            <th rowspan="2">Permiso | Sección</th>
+                            </tr>
+                            <tr style="color:white; ">
+                                <th>Usuarios</th>
+                                <th>Gerencias</th>
+                                <th>Puestos</th>
+                                <th>Segmentos</th>
+                                <th>Sistemas</th>
+                                <th>Problemas</th>
+                                <th>Estados</th>
+                                <th>Prioridades</th>
+                                <th>Proveedores</th>
+                                <th>Técnicos</th>
+                                <th>Roles</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr style="color:white; ">
+                                <td>All Permissions</td>
+                                <td><input type="checkbox" class="general-checkbox" name="usuarios_all" value="usuarios_all"></td>
+                                <td><input type="checkbox" class="general-checkbox" name="gerencias_all" value="gerencias_all"></td>
+                                <td><input type="checkbox" class="general-checkbox" name="puestos_all" value="puestos_all"></td>
+                                <td><input type="checkbox" class="general-checkbox" name="segmentos_all" value="segmentos_all"></td>
+                                <td><input type="checkbox" class="general-checkbox" name="sistemas_all" value="sistemas_all"></td>
+                                <td><input type="checkbox" class="general-checkbox" name="problemas_all" value="problemas_all"></td>
+                                <td><input type="checkbox" class="general-checkbox" name="estados_all" value="estados_all"></td>
+                                <td><input type="checkbox" class="general-checkbox" name="prioridades_all" value="prioridades_all"></td>
+                                <td><input type="checkbox" class="general-checkbox" name="proveedores_all" value="proveedores_all"></td>
+                                <td><input type="checkbox" class="general-checkbox" name="tecnicos_all" value="tecnicos_all"></td>
+                                <td><input type="checkbox" class="general-checkbox" name="roles_all" value="roles_all"></td>                                
+                            </tr>
+                            <tr style="color:white; ">
+                                <td>Index</td>
+                                <td><input type="checkbox" name="permisos[]" value="usuarios.index"></td>
+                                <td><input type="checkbox" name="permisos[]" value="gerencias.index"></td>
+                                <td><input type="checkbox" name="permisos[]" value="puestos.index"></td>
+                                <td><input type="checkbox" name="permisos[]" value="segmentos.index"></td>
+                                <td><input type="checkbox" name="permisos[]" value="sistemas.index"></td>
+                                <td><input type="checkbox" name="permisos[]" value="problemas.index"></td>
+                                <td><input type="checkbox" name="permisos[]" value="estados.index"></td>
+                                <td><input type="checkbox" name="permisos[]" value="prioridades.index"></td>
+                                <td><input type="checkbox" name="permisos[]" value="proveedores.index"></td>
+                                <td><input type="checkbox" name="permisos[]" value="tecnicos.index"></td>
+                                <td><input type="checkbox" name="permisos[]" value="roles.index"></td>
+                            </tr>
+                            <tr style="color:white;">
+                                <td>Ver</td>
+                                <td><input type="checkbox" name="permisos[]" value="usuarios.show"></td>
+                                <td><input type="checkbox" name="permisos[]" value="gerencias.show"></td>
+                                <td> - </td>
+                                <td> - </td>
+                                <td> - </td>
+                                <td> - </td>
+                                <td> - </td>
+                                <td> - </td>
+                                <td><input type="checkbox" name="permisos[]" value="proveedores.show"></td>
+                                <td> - </td>
+                                <td> - </td>
+                            </tr>
+                            <tr style="color:white;">
+                                <td>Crear</td>
+                                <td><input type="checkbox" name="permisos[]" value="usuarios.create"></td>
+                                <td><input type="checkbox" name="permisos[]" value="gerencias.create"></td>
+                                <td><input type="checkbox" name="permisos[]" value="puestos.create"></td>
+                                <td><input type="checkbox" name="permisos[]" value="segmentos.create"></td>
+                                <td><input type="checkbox" name="permisos[]" value="sistemas.create"></td>
+                                <td><input type="checkbox" name="permisos[]" value="problemas.create"></td>
+                                <td><input type="checkbox" name="permisos[]" value="estados.create"></td>
+                                <td><input type="checkbox" name="permisos[]" value="prioridades.create"></td>
+                                <td><input type="checkbox" name="permisos[]" value="proveedores.create"></td>
+                                <td><input type="checkbox" name="permisos[]" value="tecnicos.create"></td>
+                                <td><input type="checkbox" name="permisos[]" value="roles.create"></td>
+                            </tr>
+                            <tr style="color:white;">
+                                <td>Guardar</td>
+                                <td><input type="checkbox" name="permisos[]" value="usuarios.store"></td>
+                                <td><input type="checkbox" name="permisos[]" value="gerencias.store"></td>
+                                <td><input type="checkbox" name="permisos[]" value="puestos.store"></td>
+                                <td><input type="checkbox" name="permisos[]" value="segmentos.store"></td>
+                                <td><input type="checkbox" name="permisos[]" value="sistemas.store"></td>
+                                <td><input type="checkbox" name="permisos[]" value="problemas.store"></td>
+                                <td><input type="checkbox" name="permisos[]" value="estados.store"></td>
+                                <td><input type="checkbox" name="permisos[]" value="prioridades.store"></td>
+                                <td><input type="checkbox" name="permisos[]" value="proveedores.store"></td>
+                                <td><input type="checkbox" name="permisos[]" value="tecnicos.store"></td>
+                                <td><input type="checkbox" name="permisos[]" value="roles.store"></td>
+                            </tr>
+                            <tr style="color:white;">
+                                <td>Editar</td>
+                                <td><input type="checkbox" name="permisos[]" value="usuarios.edit"></td>
+                                <td><input type="checkbox" name="permisos[]" value="gerencias.edit"></td>
+                                <td><input type="checkbox" name="permisos[]" value="puestos.edit"></td>
+                                <td><input type="checkbox" name="permisos[]" value="segmentos.edit"></td>
+                                <td><input type="checkbox" name="permisos[]" value="sistemas.edit"></td>
+                                <td><input type="checkbox" name="permisos[]" value="problemas.edit"></td>
+                                <td><input type="checkbox" name="permisos[]" value="estados.edit"></td>
+                                <td><input type="checkbox" name="permisos[]" value="prioridades.edit"></td>
+                                <td><input type="checkbox" name="permisos[]" value="proveedores.edit"></td>
+                                <td><input type="checkbox" name="permisos[]" value="tecnicos.edit" adif></td>
+                                <td><input type="checkbox" name="permisos[]" value="roles.edit"></td>
+                            </tr>
+                            <tr style="color:white;">
+                                <td>Update</td>
+                                <td><input type="checkbox" name="permisos[]" value="usuarios.update"></td>
+                                <td><input type="checkbox" name="permisos[]" value="gerencias.update"></td>
+                                <td><input type="checkbox" name="permisos[]" value="puestos.update"></td>
+                                <td><input type="checkbox" name="permisos[]" value="segmentos.update"></td>
+                                <td><input type="checkbox" name="permisos[]" value="sistemas.update"></td>
+                                <td><input type="checkbox" name="permisos[]" value="problemas.update"></td>
+                                <td><input type="checkbox" name="permisos[]" value="estados.update"></td>
+                                <td><input type="checkbox" name="permisos[]" value="prioridades.update"></td>
+                                <td><input type="checkbox" name="permisos[]" value="proveedores.update"></td>
+                                <td><input type="checkbox" name="permisos[]" value="tecnicos.update"></td>
+                                <td><input type="checkbox" name="permisos[]" value="roles.update"></td>
+                            </tr>
+                            <tr style="color:white;">
+                                <td>Delete</td>
+                                <td> - </td>
+                                <td><input type="checkbox" name="permisos[]" value="gerencias.delete"></td>
+                                <td><input type="checkbox" name="permisos[]" value="puestos.delete"></td>
+                                <td><input type="checkbox" name="permisos[]" value="segmentos.delete"></td>
+                                <td><input type="checkbox" name="permisos[]" value="sistemas.delete"></td>
+                                <td><input type="checkbox" name="permisos[]" value="problemas.delete"></td>
+                                <td><input type="checkbox" name="permisos[]" value="estados.delete"></td>
+                                <td><input type="checkbox" name="permisos[]" value="prioridades.delete"></td>
+                                <td><input type="checkbox" name="permisos[]" value="proveedores.delete"></td>
+                                <td><input type="checkbox" name="permisos[]" value="tecnicos.delete"></td>
+                                <td><input type="checkbox" name="permisos[]" value="roles.delete"></td>
+                            </tr>
+                            <!-- Continuar con las filas para las demás acciones -->
+                        </tbody>
+                    </table>
+            </div>
+        </div>
+
+        <div class="text-center">
+            <button type="submit" class="btn btn-primary" style="width:100px;">Crear</button>
+            <a href="{{ route('parametros') }}" class="btn btn-primary" style="width:100px; margin-left: 10px;">Volver</a>
+        </div>
             </form>
         </div>
     </div>
