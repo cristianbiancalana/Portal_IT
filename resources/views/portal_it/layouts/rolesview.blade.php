@@ -1,46 +1,46 @@
-
 @extends('portal_it.layouts.base')
 
 @section('content')
-    <style> 
-        .detalles {
-            display: none; /* Ocultar detalles por defecto */
-            }
-    </style>
+<style>
+    .detalles {
+        display: none;
+        /* Ocultar detalles por defecto */
+    }
+</style>
 
-    <div class="row">
-        <div class="col-12">
-            <div>
-                <h2>Roles</h2>
-            </div>
-            
+<div class="row">
+    <div class="col-12">
+        <div>
+            <h2>Roles</h2>
         </div>
 
-        @if ($errors->any())
-        <div class="alert alert-danger">
-                <strong><svg style="width: 22px; height: 20px;" data-slot="icon" fill="none" stroke-width="1.5" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m9-.75a9 9 0 1 1-18 0 9 9 0 0 1 18 0Zm-9 3.75h.008v.008H12v-.008Z"></path>
-                    </svg>
-                </strong>Error al editar el ticket, verificar: <br><br>
-                <ul>
-                    @foreach ($errors->all() as $error)
-                        <li>{{ $error }}</li>
-                    @endforeach
-                </ul>
-            </div>
-        @endif
-        <div class="col-6 mt-2">
-            <h3 class="text-white">Listado de Roles</h3>
-            <div style="max-width: 1500px; margin: 0 auto; text-align:center;">
-                <table class="table table-sm table-dark table-hover">
-                    <thead>
-                        <tr>
+    </div>
+
+    @if ($errors->any())
+    <div class="alert alert-danger">
+        <strong><svg style="width: 22px; height: 20px;" data-slot="icon" fill="none" stroke-width="1.5" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m9-.75a9 9 0 1 1-18 0 9 9 0 0 1 18 0Zm-9 3.75h.008v.008H12v-.008Z"></path>
+            </svg>
+        </strong>Error al editar el ticket, verificar: <br><br>
+        <ul>
+            @foreach ($errors->all() as $error)
+            <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
+    @endif
+    <div class="col-6 mt-2">
+        <h3 class="text-white">Listado de Roles</h3>
+        <div style="max-width: 1500px; margin: 0 auto; text-align:center;">
+            <table class="table table-sm table-dark table-hover">
+                <thead>
+                    <tr>
                         <th>ID</th>
                         <th>Nombre del Rol</th>
                         <th>Acción</th>
-                        </tr>
-                    </thead>
-                    <tbody>
+                    </tr>
+                </thead>
+                <tbody>
                     @foreach ($roles as $role)
                     <tr>
                         <th scope="row">{{$role->id }}</th>
@@ -60,25 +60,30 @@
                                     </svg>
                                 </button>
                             </form>
-                            </td>
-                        </tr>
-                        @endforeach
-                    </tbody>
-                </table>
+                        </td>
+                    </tr>
+                    @endforeach
+                </tbody>
+            </table>
+            <div style="display: flex; justify-content: center; margin-top:5px; ">
                 {{$roles->links()}}
             </div>
         </div>
-        <h3 class="text-white">Crear Rol</h3>
-        <div style="display:flex; margin-left:15px;">
-            <form action="{{route('store.roles')}}" method="post">
-                @csrf
-                <div class="row">
-            <div class="col-md-12 mt-2">
-                <h4 class="mt-3">Permisos</h4>
+    </div>
+    <h3 class="text-white">Crear Rol</h3>
+    <div style="display:flex; margin-left:15px;">
+        <form action="{{route('store.roles')}}" method="post">
+            @csrf
+            <div class="row">
+                <div class="col-md-12 mt-2">
+                    <label for="name">Nombre del nuevo rol</label>
+                    <input type="text" name="name" id="name" class="form-control" style="height:25px; max-width:150px;">
+                    <input type="hidden" name="guard_name" id="guard_name" value="web">
+                    <h4 class="mt-3">Permisos</h4>
                     <table class="table table table-sm table-dark mt-3 text-center">
                         <thead>
                             <tr style="color:white;">
-                            <th rowspan="2">Permiso | Sección</th>
+                                <th rowspan="2">Permiso | Sección</th>
                             </tr>
                             <tr style="color:white; ">
                                 <th>Usuarios</th>
@@ -97,158 +102,154 @@
                         <tbody>
                             <tr style="color:white; ">
                                 <td>All Permissions</td>
-                                <td><input type="checkbox" class="general-checkbox" name="usuarios_all" value="usuarios_all"></td>
-                                <td><input type="checkbox" class="general-checkbox" name="gerencias_all" value="gerencias_all"></td>
-                                <td><input type="checkbox" class="general-checkbox" name="puestos_all" value="puestos_all"></td>
-                                <td><input type="checkbox" class="general-checkbox" name="segmentos_all" value="segmentos_all"></td>
-                                <td><input type="checkbox" class="general-checkbox" name="sistemas_all" value="sistemas_all"></td>
-                                <td><input type="checkbox" class="general-checkbox" name="problemas_all" value="problemas_all"></td>
-                                <td><input type="checkbox" class="general-checkbox" name="estados_all" value="estados_all"></td>
-                                <td><input type="checkbox" class="general-checkbox" name="prioridades_all" value="prioridades_all"></td>
-                                <td><input type="checkbox" class="general-checkbox" name="proveedores_all" value="proveedores_all"></td>
-                                <td><input type="checkbox" class="general-checkbox" name="tecnicos_all" value="tecnicos_all"></td>
-                                <td><input type="checkbox" class="general-checkbox" name="roles_all" value="roles_all"></td>                                
+                                <td><input type="checkbox" class="general-checkbox" name="usuarios_all" value="usuarios_all" data-group="usuarios"></td>
+                                <td><input type="checkbox" class="general-checkbox gerencias" name="gerencias_all" value="gerencias_all" data-group="gerencias"></td>
+                                <td><input type="checkbox" class="general-checkbox puestos" name="puestos_all" value="puestos_all" data-group="puestos"></td>
+                                <td><input type="checkbox" class="general-checkbox segmentos" name="segmentos_all" value="segmentos_all" data-group="segmentos"></td>
+                                <td><input type="checkbox" class="general-checkbox sistemas" name="sistemas_all" value="sistemas_all" data-group="sistemas"></td>
+                                <td><input type="checkbox" class="general-checkbox problemas" name="problemas_all" value="problemas_all" data-group="problemas"></td>
+                                <td><input type="checkbox" class="general-checkbox estados" name="estados_all" value="estados_all" data-group="estados"></td>
+                                <td><input type="checkbox" class="general-checkbox prioridades" name="prioridades_all" value="prioridades_all" data-group="prioridades"></td>
+                                <td><input type="checkbox" class="general-checkbox proveedores" name="proveedores_all" value="proveedores_all" data-group="proveedores"></td>
+                                <td><input type="checkbox" class="general-checkbox tecnicos" name="tecnicos_all" value="tecnicos_all" data-group="tecnicos"></td>
+                                <td><input type="checkbox" class="general-checkbox roles" name="roles_all" value="roles_all" data-group="roles"></td>
                             </tr>
                             <tr style="color:white; ">
                                 <td>Index</td>
-                                <td><input type="checkbox" name="permisos[]" value="usuarios.index"></td>
-                                <td><input type="checkbox" name="permisos[]" value="gerencias.index"></td>
-                                <td><input type="checkbox" name="permisos[]" value="puestos.index"></td>
-                                <td><input type="checkbox" name="permisos[]" value="segmentos.index"></td>
-                                <td><input type="checkbox" name="permisos[]" value="sistemas.index"></td>
-                                <td><input type="checkbox" name="permisos[]" value="problemas.index"></td>
-                                <td><input type="checkbox" name="permisos[]" value="estados.index"></td>
-                                <td><input type="checkbox" name="permisos[]" value="prioridades.index"></td>
-                                <td><input type="checkbox" name="permisos[]" value="proveedores.index"></td>
-                                <td><input type="checkbox" name="permisos[]" value="tecnicos.index"></td>
-                                <td><input type="checkbox" name="permisos[]" value="roles.index"></td>
+                                <td><input type="checkbox" name="permisos[]" class="specific-checkbox" value="usuarios.index" data-group="usuarios"></td>
+                                <td><input type="checkbox" name="permisos[]" class="specific-checkbox gerencias" value="gerencias.index" data-group="gerencias"></td>
+                                <td><input type="checkbox" name="permisos[]" class="specific-checkbox puestos" value="puestos.index" data-group="puestos"></td>
+                                <td><input type="checkbox" name="permisos[]" class="specific-checkbox segmentos" value="segmentos.index" data-group="segmentos"></td>
+                                <td><input type="checkbox" name="permisos[]" class="specific-checkbox sistemas" value="sistemas.index" data-group="sistemas"></td>
+                                <td><input type="checkbox" name="permisos[]" class="specific-checkbox problemas" value="problemas.index" data-group="problemas"></td>
+                                <td><input type="checkbox" name="permisos[]" class="specific-checkbox estados" value="estados.index" data-group="estados"></td>
+                                <td><input type="checkbox" name="permisos[]" class="specific-checkbox prioridades" value="prioridades.index" data-group="prioridades"></td>
+                                <td><input type="checkbox" name="permisos[]" class="specific-checkbox proveedores" value="proveedores.index" data-group="proveedores"></td>
+                                <td><input type="checkbox" name="permisos[]" class="specific-checkbox tecnicos" value="tecnicos.index" data-group="tecnicos"></td>
+                                <td><input type="checkbox" name="permisos[]" class="specific-checkbox roles" value="roles.index" data-group="roles"></td>
                             </tr>
                             <tr style="color:white;">
                                 <td>Ver</td>
-                                <td><input type="checkbox" name="permisos[]" value="usuarios.show"></td>
-                                <td><input type="checkbox" name="permisos[]" value="gerencias.show"></td>
+                                <td><input type="checkbox" name="permisos[]" class="specific-checkbox" value="usuarios.show" data-group="usuarios"></td>
+                                <td><input type="checkbox" name="permisos[]" class="specific-checkbox gerencias" value="gerencias.show" data-group="gerencias"></td>
                                 <td> - </td>
                                 <td> - </td>
                                 <td> - </td>
                                 <td> - </td>
                                 <td> - </td>
                                 <td> - </td>
-                                <td><input type="checkbox" name="permisos[]" value="proveedores.show"></td>
+                                <td><input type="checkbox" name="permisos[]" class="specific-checkbox proveedores" value="proveedores.show" data-group="proveedores"></td>
                                 <td> - </td>
                                 <td> - </td>
                             </tr>
                             <tr style="color:white;">
                                 <td>Crear</td>
-                                <td><input type="checkbox" name="permisos[]" value="usuarios.create"></td>
-                                <td><input type="checkbox" name="permisos[]" value="gerencias.create"></td>
-                                <td><input type="checkbox" name="permisos[]" value="puestos.create"></td>
-                                <td><input type="checkbox" name="permisos[]" value="segmentos.create"></td>
-                                <td><input type="checkbox" name="permisos[]" value="sistemas.create"></td>
-                                <td><input type="checkbox" name="permisos[]" value="problemas.create"></td>
-                                <td><input type="checkbox" name="permisos[]" value="estados.create"></td>
-                                <td><input type="checkbox" name="permisos[]" value="prioridades.create"></td>
-                                <td><input type="checkbox" name="permisos[]" value="proveedores.create"></td>
-                                <td><input type="checkbox" name="permisos[]" value="tecnicos.create"></td>
-                                <td><input type="checkbox" name="permisos[]" value="roles.create"></td>
+                                <td><input type="checkbox" name="permisos[]" class="specific-checkbox" value="usuarios.create" data-group="usuarios"></td>
+                                <td><input type="checkbox" name="permisos[]" class="specific-checkbox gerencias" value="gerencias.create" data-group="gerencias"></td>
+                                <td><input type="checkbox" name="permisos[]" class="specific-checkbox puestos" value="puestos.create" data-group="puestos"></td>
+                                <td><input type="checkbox" name="permisos[]" class="specific-checkbox segmentos" value="segmentos.create" data-group="segmentos"></td>
+                                <td><input type="checkbox" name="permisos[]" class="specific-checkbox sistemas" value="sistemas.create" data-group="sistemas"></td>
+                                <td><input type="checkbox" name="permisos[]" class="specific-checkbox problemas" value="problemas.create" data-group="problemas"></td>
+                                <td><input type="checkbox" name="permisos[]" class="specific-checkbox estados" value="estados.create" data-group="estados"></td>
+                                <td><input type="checkbox" name="permisos[]" class="specific-checkbox prioridades" value="prioridades.create" data-group="prioridades"></td>
+                                <td><input type="checkbox" name="permisos[]" class="specific-checkbox proveedores" value="proveedores.create" data-group="proveedores"></td>
+                                <td><input type="checkbox" name="permisos[]" class="specific-checkbox tecnicos" value="tecnicos.create" data-group="tecnicos"></td>
+                                <td><input type="checkbox" name="permisos[]" class="specific-checkbox roles" value="roles.create" data-group="roles"></td>
                             </tr>
                             <tr style="color:white;">
                                 <td>Guardar</td>
-                                <td><input type="checkbox" name="permisos[]" value="usuarios.store"></td>
-                                <td><input type="checkbox" name="permisos[]" value="gerencias.store"></td>
-                                <td><input type="checkbox" name="permisos[]" value="puestos.store"></td>
-                                <td><input type="checkbox" name="permisos[]" value="segmentos.store"></td>
-                                <td><input type="checkbox" name="permisos[]" value="sistemas.store"></td>
-                                <td><input type="checkbox" name="permisos[]" value="problemas.store"></td>
-                                <td><input type="checkbox" name="permisos[]" value="estados.store"></td>
-                                <td><input type="checkbox" name="permisos[]" value="prioridades.store"></td>
-                                <td><input type="checkbox" name="permisos[]" value="proveedores.store"></td>
-                                <td><input type="checkbox" name="permisos[]" value="tecnicos.store"></td>
-                                <td><input type="checkbox" name="permisos[]" value="roles.store"></td>
+                                <td><input type="checkbox" name="permisos[]" class="specific-checkbox" value="usuarios.store" data-group="usuarios"></td>
+                                <td><input type="checkbox" name="permisos[]" class="specific-checkbox gerencias" value="gerencias.store" data-group="gerencias"></td>
+                                <td><input type="checkbox" name="permisos[]" class="specific-checkbox puestos" value="puestos.store" data-group="puestos"></td>
+                                <td><input type="checkbox" name="permisos[]" class="specific-checkbox segmentos" value="segmentos.store" data-group="segmentos"></td>
+                                <td><input type="checkbox" name="permisos[]" class="specific-checkbox sistemas" value="sistemas.store" data-group="sistemas"></td>
+                                <td><input type="checkbox" name="permisos[]" class="specific-checkbox problemas" value="problemas.store" data-group="problemas"></td>
+                                <td><input type="checkbox" name="permisos[]" class="specific-checkbox estados" value="estados.store" data-group="estados"></td>
+                                <td><input type="checkbox" name="permisos[]" class="specific-checkbox prioridades" value="prioridades.store" data-group="prioridades"></td>
+                                <td><input type="checkbox" name="permisos[]" class="specific-checkbox proveedores" value="proveedores.store" data-group="proveedores"></td>
+                                <td><input type="checkbox" name="permisos[]" class="specific-checkbox tecnicos" value="tecnicos.store" data-group="tecnicos"></td>
+                                <td><input type="checkbox" name="permisos[]" class="specific-checkbox roles" value="roles.store" data-group="roles"></td>
                             </tr>
                             <tr style="color:white;">
                                 <td>Editar</td>
-                                <td><input type="checkbox" name="permisos[]" value="usuarios.edit"></td>
-                                <td><input type="checkbox" name="permisos[]" value="gerencias.edit"></td>
-                                <td><input type="checkbox" name="permisos[]" value="puestos.edit"></td>
-                                <td><input type="checkbox" name="permisos[]" value="segmentos.edit"></td>
-                                <td><input type="checkbox" name="permisos[]" value="sistemas.edit"></td>
-                                <td><input type="checkbox" name="permisos[]" value="problemas.edit"></td>
-                                <td><input type="checkbox" name="permisos[]" value="estados.edit"></td>
-                                <td><input type="checkbox" name="permisos[]" value="prioridades.edit"></td>
-                                <td><input type="checkbox" name="permisos[]" value="proveedores.edit"></td>
-                                <td><input type="checkbox" name="permisos[]" value="tecnicos.edit" adif></td>
-                                <td><input type="checkbox" name="permisos[]" value="roles.edit"></td>
+                                <td><input type="checkbox" name="permisos[]" class="specific-checkbox" value="usuarios.edit" data-group="usuarios"></td>
+                                <td><input type="checkbox" name="permisos[]" class="specific-checkbox gerencias" value="gerencias.edit" data-group="gerencias"></td>
+                                <td><input type="checkbox" name="permisos[]" class="specific-checkbox puestos" value="puestos.edit" data-group="puestos"></td>
+                                <td><input type="checkbox" name="permisos[]" class="specific-checkbox segmentos" value="segmentos.edit" data-group="segmentos"></td>
+                                <td><input type="checkbox" name="permisos[]" class="specific-checkbox sistemas" value="sistemas.edit" data-group="sistemas"></td>
+                                <td><input type="checkbox" name="permisos[]" class="specific-checkbox problemas" value="problemas.edit" data-group="problemas"></td>
+                                <td><input type="checkbox" name="permisos[]" class="specific-checkbox estados" value="estados.edit" data-group="estados"></td>
+                                <td><input type="checkbox" name="permisos[]" class="specific-checkbox prioridades" value="prioridades.edit" data-group="prioridades"></td>
+                                <td><input type="checkbox" name="permisos[]" class="specific-checkbox proveedores" value="proveedores.edit" data-group="proveedores"></td>
+                                <td><input type="checkbox" name="permisos[]" class="specific-checkbox tecnicos" value="tecnicos.edit" data-group="tecnicos"></td>
+                                <td><input type="checkbox" name="permisos[]" class="specific-checkbox roles" value="roles.edit" data-group="roles"></td>
                             </tr>
                             <tr style="color:white;">
                                 <td>Update</td>
-                                <td><input type="checkbox" name="permisos[]" value="usuarios.update"></td>
-                                <td><input type="checkbox" name="permisos[]" value="gerencias.update"></td>
-                                <td><input type="checkbox" name="permisos[]" value="puestos.update"></td>
-                                <td><input type="checkbox" name="permisos[]" value="segmentos.update"></td>
-                                <td><input type="checkbox" name="permisos[]" value="sistemas.update"></td>
-                                <td><input type="checkbox" name="permisos[]" value="problemas.update"></td>
-                                <td><input type="checkbox" name="permisos[]" value="estados.update"></td>
-                                <td><input type="checkbox" name="permisos[]" value="prioridades.update"></td>
-                                <td><input type="checkbox" name="permisos[]" value="proveedores.update"></td>
-                                <td><input type="checkbox" name="permisos[]" value="tecnicos.update"></td>
-                                <td><input type="checkbox" name="permisos[]" value="roles.update"></td>
+                                <td><input type="checkbox" name="permisos[]" class="specific-checkbox" value="usuarios.update" data-group="usuarios"></td>
+                                <td><input type="checkbox" name="permisos[]" class="specific-checkbox gerencias" value="gerencias.update" data-group="gerencias"></td>
+                                <td><input type="checkbox" name="permisos[]" class="specific-checkbox puestos" value="puestos.update" data-group="puestos"></td>
+                                <td><input type="checkbox" name="permisos[]" class="specific-checkbox segmentos" value="segmentos.update" data-group="segmentos"></td>
+                                <td><input type="checkbox" name="permisos[]" class="specific-checkbox sistemas" value="sistemas.update" data-group="sistemas"></td>
+                                <td><input type="checkbox" name="permisos[]" class="specific-checkbox problemas" value="problemas.update" data-group="problemas"></td>
+                                <td><input type="checkbox" name="permisos[]" class="specific-checkbox estados" value="estados.update" data-group="estados"></td>
+                                <td><input type="checkbox" name="permisos[]" class="specific-checkbox prioridades" value="prioridades.update" data-group="prioridades"></td>
+                                <td><input type="checkbox" name="permisos[]" class="specific-checkbox proveedores" value="proveedores.update" data-group="proveedores"></td>
+                                <td><input type="checkbox" name="permisos[]" class="specific-checkbox tecnicos" value="tecnicos.update" data-group="tecnicos"></td>
+                                <td><input type="checkbox" name="permisos[]" class="specific-checkbox roles" value="roles.update" data-group="roles"></td>
                             </tr>
                             <tr style="color:white;">
                                 <td>Delete</td>
                                 <td> - </td>
-                                <td><input type="checkbox" name="permisos[]" value="gerencias.delete"></td>
-                                <td><input type="checkbox" name="permisos[]" value="puestos.delete"></td>
-                                <td><input type="checkbox" name="permisos[]" value="segmentos.delete"></td>
-                                <td><input type="checkbox" name="permisos[]" value="sistemas.delete"></td>
-                                <td><input type="checkbox" name="permisos[]" value="problemas.delete"></td>
-                                <td><input type="checkbox" name="permisos[]" value="estados.delete"></td>
-                                <td><input type="checkbox" name="permisos[]" value="prioridades.delete"></td>
-                                <td><input type="checkbox" name="permisos[]" value="proveedores.delete"></td>
-                                <td><input type="checkbox" name="permisos[]" value="tecnicos.delete"></td>
-                                <td><input type="checkbox" name="permisos[]" value="roles.delete"></td>
+                                <td><input type="checkbox" name="permisos[]" class="specific-checkbox gerencias" value="gerencias.delete" data-group="gerencias"></td>
+                                <td><input type="checkbox" name="permisos[]" class="specific-checkbox puestos" value="puestos.delete" data-group="puestos"></td>
+                                <td><input type="checkbox" name="permisos[]" class="specific-checkbox segmentos" value="segmentos.delete" data-group="segmentos"></td>
+                                <td><input type="checkbox" name="permisos[]" class="specific-checkbox sistemas" value="sistemas.delete" data-group="sistemas"></td>
+                                <td><input type="checkbox" name="permisos[]" class="specific-checkbox problemas" value="problemas.delete" data-group="problemas"></td>
+                                <td><input type="checkbox" name="permisos[]" class="specific-checkbox estados" value="estados.delete" data-group="estados"></td>
+                                <td><input type="checkbox" name="permisos[]" class="specific-checkbox prioridades" value="prioridades.delete" data-group="prioridades"></td>
+                                <td><input type="checkbox" name="permisos[]" class="specific-checkbox proveedores" value="proveedores.delete" data-group="proveedores"></td>
+                                <td><input type="checkbox" name="permisos[]" class="specific-checkbox tecnicos" value="tecnicos.delete" data-group="tecnicos"></td>
+                                <td><input type="checkbox" name="permisos[]" class="specific-checkbox roles" value="roles.delete" data-group="roles"></td>
                             </tr>
                             <!-- Continuar con las filas para las demás acciones -->
                         </tbody>
                     </table>
+                </div>
             </div>
-        </div>
 
-        <div class="text-center">
-            <button type="submit" class="btn btn-primary" style="width:100px;">Crear</button>
-            <a href="{{ route('parametros') }}" class="btn btn-primary" style="width:100px; margin-left: 10px;">Volver</a>
-        </div>
-            </form>
-        </div>
+            <div class="text-center">
+                <button type="submit" class="btn btn-primary" style="width:100px;">Crear</button>
+                <a href="{{ route('parametros') }}" class="btn btn-primary" style="width:100px; margin-left: 10px;">Volver</a>
+            </div>
+        </form>
     </div>
+</div>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<script> 
+<script>
     $(document).ready(function() {
-    // Agregar evento de clic a todos los botones de expandir
-    $('.expandir').click(function() {
-        // Buscar el elemento padre (div.elemento) del botón clicado
-        var elemento = $(this).closest('.elemento');
-        // Alternar la visibilidad de los detalles dentro del elemento padre
-        elemento.find('.detalles').slideToggle();
-    });
-    
-    // Evento change para los checkboxes generales
-    $('.general-checkbox').change(function() {
-        // Buscar el grupo de permisos correspondiente
-        var grupo = $(this).closest('.elemento');
-        
-        // Obtener todos los checkboxes específicos en el grupo
-        var specificCheckboxes = grupo.find('.specific-checkbox');
-        
-        // Si el checkbox general está seleccionado
-        if ($(this).is(':checked')) {
-            // Seleccionar todos los checkboxes específicos
-            specificCheckboxes.prop('checked', true);
-        } else {
-            // Des-seleccionar todos los checkboxes específicos
-            specificCheckboxes.prop('checked', false);
-        }
-    });
-});
+        // Evento change para los checkboxes generales
+        $('.general-checkbox').change(function() {
+            // Obtener el nombre del grupo correspondiente
+            var groupName = $(this).attr('data-group');
+            console.log("Checkbox general seleccionado. Grupo:", groupName);
 
+            // Obtener todos los checkboxes específicos en el mismo grupo
+            var specificCheckboxes = $('input[data-group="' + groupName + '"].specific-checkbox');
+            console.log("Checkboxes específicos en el grupo:", specificCheckboxes.length);
+
+            // Si el checkbox general está seleccionado
+            if ($(this).is(':checked')) {
+                // Seleccionar solo los checkboxes específicos en el mismo grupo
+                specificCheckboxes.prop('checked', true);
+                console.log("Checkboxes específicos seleccionados.");
+            } else {
+                // Des-seleccionar solo los checkboxes específicos en el mismo grupo
+                specificCheckboxes.prop('checked', false);
+                console.log("Checkboxes específicos des-seleccionados.");
+            }
+        });
+    });
 </script>
+
 @endsection

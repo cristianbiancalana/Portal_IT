@@ -169,6 +169,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/roles/create', [RoleController::class, 'create'])->name('envio.roles');
     Route::post('/roles/store', [RoleController::class, 'store'])->name('store.roles');
     Route::post('/tabla-roles', [RoleController::class, 'mostrarTablaRoles'])->name('mostrarTablaRoles');
+    Route::get('/tabla-roles', [RoleController::class, 'mostrarTablaRoles'])->name('mostrarTablaRoles');
     Route::get('/roles/{role}/view', [RoleController::class, 'show'])->name('roles.view');
     Route::delete('/roles/{role}', [RoleController::class, 'destroy'])->name('roles.destroy');
 
