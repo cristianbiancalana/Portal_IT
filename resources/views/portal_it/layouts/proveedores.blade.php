@@ -99,6 +99,9 @@
                         @endforeach
                     </tbody>
                 </table>
+                <div style="display: flex; justify-content: center; margin-top:5px; ">
+                    {{$proveedores->links()}}
+                </div>
             </div>
         </div>
         <div class="col-4 mt-4">

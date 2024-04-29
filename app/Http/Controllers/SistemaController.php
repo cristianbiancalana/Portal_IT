@@ -107,7 +107,7 @@ class SistemaController extends Controller
         if (!Auth::user()->hasPermissionTo('sistemas.index')) {
             return redirect()->route('homeportal')->with('error', 'No tienes permisos para acceder a este sitio');
         }
-        $sistemas = Sistema::all();
+        $sistemas = Sistema::paginate(5);
         return view('portal_it.layouts.sistemas',compact('sistemas'));
     }
 }

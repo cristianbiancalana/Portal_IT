@@ -107,7 +107,7 @@ class SegmentoController extends Controller
         if (!Auth::user()->hasPermissionTo('segmentos.index')) {
             return redirect()->route('homeportal')->with('error', 'No tienes permisos para acceder a este sitio');
         }
-        $segmentos = Segmento::all();
+        $segmentos = Segmento::paginate(5);
         return view('portal_it.layouts.segmentos',compact('segmentos'));
     }
 }

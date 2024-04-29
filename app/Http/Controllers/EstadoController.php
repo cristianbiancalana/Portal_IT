@@ -113,7 +113,7 @@ class EstadoController extends Controller
     }
     public function mostrarTablaEstados(Request $request)
     {
-        $estados = Estado::all();
+        $estados = Estado::paginate(5);
 
                     // Retornas la tabla construida
         return view('portal_it.layouts.estados',compact('estados'));

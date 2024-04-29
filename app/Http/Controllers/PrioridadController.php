@@ -115,7 +115,7 @@ class PrioridadController extends Controller
         if (!Auth::user()->hasPermissionTo('prioridades.index')) {
             return redirect()->route('homeportal')->with('error', 'No tienes permisos para acceder a este sitio');
         }
-        $prioridades = Prioridad::all(); 
+        $prioridades = Prioridad::paginate(5); 
         return view('portal_it.layouts.prioridades',compact('prioridades'));
     }
 }

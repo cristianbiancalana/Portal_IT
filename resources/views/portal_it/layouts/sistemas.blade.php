@@ -90,6 +90,9 @@
                         @endforeach
                     </tbody>
                 </table>
+                <div style="display: flex; justify-content: center; margin-top:5px; ">
+                    {{$sistemas->links()}}
+                </div>
             </div>
         </div>
         <div class="col-6 mt-4">

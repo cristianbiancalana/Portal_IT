@@ -121,7 +121,7 @@ class GerenciaController extends Controller
         if (!Auth::user()->hasPermissionTo('gerencias.index')) {
             return redirect()->route('homeportal')->with('error', 'No tienes permisos para acceder a este sitio');
         }
-        $gerencias = Gerencia::all();
+        $gerencias = Gerencia::paginate(5);
    
 
                     // Retornas la tabla construida

@@ -14,26 +14,26 @@ class RoleController extends Controller
 
     public function index()
     {
-        //     if (!Auth::user()->hasPermissionTo('roles.index')) {
-        //         return redirect()->route('homeportal')->with('error', 'No tienes permisos para acceder a este sitio');
-        //     }
+            if (!Auth::user()->hasPermissionTo('roles.index')) {
+                return redirect()->route('homeportal')->with('error', 'No tienes permisos para acceder a este sitio');
+            }
         $roles = Role::paginate(3);
         return view('portal_it.layouts.rolesview', ['roles' => $roles]);
     }
     public function indextabla()
     {
-        // if (!Auth::user()->hasPermissionTo('roles.index')) {
-        //     return redirect()->route('homeportal')->with('error', 'No tienes permisos para acceder a este sitio');
-        // }
+        if (!Auth::user()->hasPermissionTo('roles.index')) {
+            return redirect()->route('homeportal')->with('error', 'No tienes permisos para acceder a este sitio');
+        }
         $roles = Role::paginate(3);
         return view('portal_it.layouts.rolesview', array('roles' => $roles));
     }
 
     public function create()
     {
-        // if (!Auth::user()->hasPermissionTo('roles.create')) {
-        //     return redirect()->route('homeportal')->with('error', 'No tienes permisos para acceder a este sitio');
-        // }
+        if (!Auth::user()->hasPermissionTo('roles.create')) {
+            return redirect()->route('homeportal')->with('error', 'No tienes permisos para acceder a este sitio');
+        }
         return view('portal_it.layouts.rolesview');
     }
 
@@ -42,9 +42,9 @@ class RoleController extends Controller
      */
     public function store(Request $request)
     {
-        // if (!Auth::user()->hasPermissionTo('roles.store')) {
-        //     return redirect()->route('homeportal')->with('error', 'No tienes permisos para acceder a este sitio');
-        // }
+        if (!Auth::user()->hasPermissionTo('roles.store')) {
+            return redirect()->route('homeportal')->with('error', 'No tienes permisos para acceder a este sitio');
+        }
 
 
         $request->validate([
@@ -77,9 +77,9 @@ class RoleController extends Controller
      */
     public function show(Role $role)
     {
-        // if (!Auth::user()->hasPermissionTo('roles.show')) {
-        //     return redirect()->route('homeportal')->with('error', 'No tienes permisos para acceder a este sitio');
-        // }
+        if (!Auth::user()->hasPermissionTo('roles.show')) {
+            return redirect()->route('homeportal')->with('error', 'No tienes permisos para acceder a este sitio');
+        }
         return view('portal_it.layouts.visualizar', ['role' => $role]);
     }
 
@@ -88,9 +88,9 @@ class RoleController extends Controller
      */
     public function edit(Role $role)
     {
-        // if (!Auth::user()->hasPermissionTo('roles.edit')) {
-        //     return redirect()->route('homeportal')->with('error', 'No tienes permisos para acceder a este sitio');
-        // }
+        if (!Auth::user()->hasPermissionTo('roles.edit')) {
+            return redirect()->route('homeportal')->with('error', 'No tienes permisos para acceder a este sitio');
+        }
 
         // Crear un array con los permisos que deseas verificar
         $permisos_a_verificar = [
@@ -243,9 +243,9 @@ class RoleController extends Controller
      */
     public function update(Request $request, Role $role)
     {
-        // if (!Auth::user()->hasPermissionTo('roles.update')) {
-        //     return redirect()->route('homeportal')->with('error', 'No tienes permisos para acceder a este sitio');
-        // }
+        if (!Auth::user()->hasPermissionTo('roles.update')) {
+            return redirect()->route('homeportal')->with('error', 'No tienes permisos para acceder a este sitio');
+        }
 
         $validated = $request->validate([
             'name' => ['nullable', 'min:3'],
@@ -270,9 +270,9 @@ class RoleController extends Controller
      */
     public function destroy(Role $role)
     {
-        // if (!Auth::user()->hasPermissionTo('roles.delete')) {
-        //     return redirect()->route('homeportal')->with('error', 'No tienes permisos para acceder a este sitio');
-        // }
+        if (!Auth::user()->hasPermissionTo('roles.delete')) {
+            return redirect()->route('homeportal')->with('error', 'No tienes permisos para acceder a este sitio');
+        }
         $role->delete();
 
         // Redireccionar con un mensaje de éxito
@@ -280,9 +280,9 @@ class RoleController extends Controller
     }
     public function mostrarTablaRoles(Request $request)
     {
-        // if (!Auth::user()->hasPermissionTo('roles.index')) {
-        //     return redirect()->route('homeportal')->with('error', 'No tienes permisos para acceder a este sitio');
-        // }
+        if (!Auth::user()->hasPermissionTo('roles.index')) {
+            return redirect()->route('homeportal')->with('error', 'No tienes permisos para acceder a este sitio');
+        }
         $roles = Role::paginate(3);
         return view('portal_it.layouts.rolesview', compact('roles'));
     }
