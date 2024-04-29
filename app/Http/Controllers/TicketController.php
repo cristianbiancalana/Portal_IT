@@ -25,7 +25,7 @@ use Spatie\Permission\Models\Permission;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\ProblemasController;
 use App\Http\Controllers\ProveedorController;
-
+use OpenAdmin\Admin\Grid\Filter\Where;
 
 class TicketController extends Controller
 {
@@ -49,6 +49,28 @@ class TicketController extends Controller
         }
         $tickets = Ticket::where('estado', 'Registrado')
             ->orWhere('estado', 'En Curso')
+            ->paginate(5);
+        return view('portal_it.layouts.index_tickets_pendientes', array('tickets' => $tickets));
+    }
+    public function indexallgerencia()
+    {
+        if (!Auth::user()->hasPermissionTo('tickets.index.gerencia')) {
+            return redirect()->route('homeportal')->with('error', 'No tienes permisos para acceder a este sitio');
+        }
+        $tickets = Ticket::where('gerencia', Auth::user()->gerencia_id)
+                            ->paginate(5);
+        return view('portal_it.layouts.index_tickets', array('tickets' => $tickets));
+    }
+
+    public function indexgerenciapendientes()
+    {
+        if (!Auth::user()->hasPermissionTo('tickets.index.gerencia.pendientes')) {
+            return redirect()->route('homeportal')->with('error', 'No tienes permisos para acceder a este sitio');
+        }
+        $tickets = Ticket::where('gerencia', Auth::user()->gerencia_id)
+                        ->where(function($query) {
+                            $query->where('estado', 'Registrado')
+                            ->orWhere('estado', 'En Curso');})
             ->paginate(5);
         return view('portal_it.layouts.index_tickets_pendientes', array('tickets' => $tickets));
     }

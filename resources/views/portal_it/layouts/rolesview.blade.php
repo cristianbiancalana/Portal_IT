@@ -97,6 +97,7 @@
                                 <th>Proveedores</th>
                                 <th>Técnicos</th>
                                 <th>Roles</th>
+                                <th>Tickets</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -113,6 +114,7 @@
                                 <td><input type="checkbox" class="general-checkbox proveedores" name="proveedores_all" value="proveedores_all" data-group="proveedores"></td>
                                 <td><input type="checkbox" class="general-checkbox tecnicos" name="tecnicos_all" value="tecnicos_all" data-group="tecnicos"></td>
                                 <td><input type="checkbox" class="general-checkbox roles" name="roles_all" value="roles_all" data-group="roles"></td>
+                                <td><input type="checkbox" class="general-checkbox roles" name="tickets_all" value="tickets_all" data-group="tickets"></td>
                             </tr>
                             <tr style="color:white; ">
                                 <td>Index</td>
@@ -127,6 +129,7 @@
                                 <td><input type="checkbox" name="permisos[]" class="specific-checkbox proveedores" value="proveedores.index" data-group="proveedores"></td>
                                 <td><input type="checkbox" name="permisos[]" class="specific-checkbox tecnicos" value="tecnicos.index" data-group="tecnicos"></td>
                                 <td><input type="checkbox" name="permisos[]" class="specific-checkbox roles" value="roles.index" data-group="roles"></td>
+                                <td><input type="checkbox" name="permisos[]" class="specific-checkbox tickets" value="tickets.index" data-group="tickets"></td>
                             </tr>
                             <tr style="color:white;">
                                 <td>Ver</td>
@@ -139,6 +142,7 @@
                                 <td> - </td>
                                 <td> - </td>
                                 <td><input type="checkbox" name="permisos[]" class="specific-checkbox proveedores" value="proveedores.show" data-group="proveedores"></td>
+                                <td> - </td>
                                 <td> - </td>
                                 <td> - </td>
                             </tr>
@@ -155,6 +159,7 @@
                                 <td><input type="checkbox" name="permisos[]" class="specific-checkbox proveedores" value="proveedores.create" data-group="proveedores"></td>
                                 <td><input type="checkbox" name="permisos[]" class="specific-checkbox tecnicos" value="tecnicos.create" data-group="tecnicos"></td>
                                 <td><input type="checkbox" name="permisos[]" class="specific-checkbox roles" value="roles.create" data-group="roles"></td>
+                                <td><input type="checkbox" name="permisos[]" class="specific-checkbox tickets" value="tickets.create" data-group="tickets"></td>
                             </tr>
                             <tr style="color:white;">
                                 <td>Guardar</td>
@@ -169,6 +174,7 @@
                                 <td><input type="checkbox" name="permisos[]" class="specific-checkbox proveedores" value="proveedores.store" data-group="proveedores"></td>
                                 <td><input type="checkbox" name="permisos[]" class="specific-checkbox tecnicos" value="tecnicos.store" data-group="tecnicos"></td>
                                 <td><input type="checkbox" name="permisos[]" class="specific-checkbox roles" value="roles.store" data-group="roles"></td>
+                                <td><input type="checkbox" name="permisos[]" class="specific-checkbox tickets" value="tickets.store" data-group="tickets"></td>
                             </tr>
                             <tr style="color:white;">
                                 <td>Editar</td>
@@ -183,6 +189,7 @@
                                 <td><input type="checkbox" name="permisos[]" class="specific-checkbox proveedores" value="proveedores.edit" data-group="proveedores"></td>
                                 <td><input type="checkbox" name="permisos[]" class="specific-checkbox tecnicos" value="tecnicos.edit" data-group="tecnicos"></td>
                                 <td><input type="checkbox" name="permisos[]" class="specific-checkbox roles" value="roles.edit" data-group="roles"></td>
+                                <td><input type="checkbox" name="permisos[]" class="specific-checkbox tickets" value="tickets.edit" data-group="tickets"></td>
                             </tr>
                             <tr style="color:white;">
                                 <td>Update</td>
@@ -197,6 +204,7 @@
                                 <td><input type="checkbox" name="permisos[]" class="specific-checkbox proveedores" value="proveedores.update" data-group="proveedores"></td>
                                 <td><input type="checkbox" name="permisos[]" class="specific-checkbox tecnicos" value="tecnicos.update" data-group="tecnicos"></td>
                                 <td><input type="checkbox" name="permisos[]" class="specific-checkbox roles" value="roles.update" data-group="roles"></td>
+                                <td><input type="checkbox" name="permisos[]" class="specific-checkbox tickets" value="tickets.update" data-group="tickets"></td>
                             </tr>
                             <tr style="color:white;">
                                 <td>Delete</td>
@@ -211,6 +219,52 @@
                                 <td><input type="checkbox" name="permisos[]" class="specific-checkbox proveedores" value="proveedores.delete" data-group="proveedores"></td>
                                 <td><input type="checkbox" name="permisos[]" class="specific-checkbox tecnicos" value="tecnicos.delete" data-group="tecnicos"></td>
                                 <td><input type="checkbox" name="permisos[]" class="specific-checkbox roles" value="roles.delete" data-group="roles"></td>
+                                <td> - </td>
+                            </tr>
+                            <tr style="color:white;">
+                                <td>Tickets Pendientes</td>
+                                <td> - </td>
+                                <td> - </td>                                
+                                <td> - </td>                                
+                                <td> - </td>                                
+                                <td> - </td>                                
+                                <td> - </td>                               
+                                <td> - </td>                                
+                                <td> - </td>                                
+                                <td> - </td>                                
+                                <td> - </td>
+                                <td> - </td>
+                                <td><input type="checkbox" name="permisos[]" class="specific-checkbox tickets" value="tickets.index.pendiente" data-group="tickets"></td>
+                            </tr>
+                            <tr style="color:white;">
+                                <td>Tickets por Gerencia</td>
+                                <td> - </td>
+                                <td> - </td>                                
+                                <td> - </td>                                
+                                <td> - </td>                                
+                                <td> - </td>                                
+                                <td> - </td>                               
+                                <td> - </td>                                
+                                <td> - </td>                                
+                                <td> - </td>                                
+                                <td> - </td>
+                                <td> - </td>
+                                <td><input type="checkbox" name="permisos[]" class="specific-checkbox roles" value="tickets.index.gerencia" data-group="tickets"></td>
+                            </tr>
+                            <tr style="color:white;">
+                                <td>Tickets Por Gerencia Pendientes</td>
+                                <td> - </td>
+                                <td> - </td>
+                                <td> - </td>
+                                <td> - </td>
+                                <td> - </td>
+                                <td> - </td>
+                                <td> - </td>
+                                <td> - </td>
+                                <td> - </td>
+                                <td> - </td>
+                                <td> - </td>
+                                <td><input type="checkbox" name="permisos[]" class="specific-checkbox roles" value="tickets.index.gerencia.pendientes" data-group="tickets"></td>
                             </tr>
                             <!-- Continuar con las filas para las demás acciones -->
                         </tbody>

@@ -55,6 +55,7 @@
                                 <th>Proveedores</th>
                                 <th>Técnicos</th>
                                 <th>Roles</th>
+                                <th>Tickets</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -71,6 +72,7 @@
                                 <td><input type="checkbox" class="general-checkbox" data-section="proveedores" data-group="proveedores" @if($proveedores_all_checked) checked @endif></td>
                                 <td><input type="checkbox" class="general-checkbox" data-section="tecnicos" data-group="tecnicos" @if($tecnicos_all_checked) checked @endif></td>
                                 <td><input type="checkbox" class="general-checkbox" data-section="roles" data-group="roles" @if($roles_all_checked) checked @endif></td>
+                                <td><input type="checkbox" class="general-checkbox" data-section="tickets" data-group="tickets" @if($tickets_all_checked) checked @endif></td>
                             </tr>
                             <tr style="color:white; ">
                                 <td>Index</td>
@@ -85,6 +87,7 @@
                                 <td><input type="checkbox" name="permisos[]" value="proveedores.index" data-group="proveedores" class="specific-checkbox" @if($permisos_asignados['proveedores.index']) checked @endif></td>
                                 <td><input type="checkbox" name="permisos[]" value="tecnicos.index" data-group="tecnicos" class="specific-checkbox" @if($permisos_asignados['tecnicos.index']) checked @endif></td>
                                 <td><input type="checkbox" name="permisos[]" value="roles.index" data-group="roles" class="specific-checkbox" @if($permisos_asignados['roles.index']) checked @endif></td>
+                                <td><input type="checkbox" name="permisos[]" value="tickets.index" data-group="tickets" class="specific-checkbox" @if($permisos_asignados['tickets.index']) checked @endif></td>
                             </tr>
                             <tr style="color:white;">
                                 <td>Ver</td>
@@ -97,6 +100,7 @@
                                 <td> - </td>
                                 <td> - </td>
                                 <td><input type="checkbox" name="permisos[]" value="proveedores.show" data-group="proveedores" class="specific-checkbox" @if($permisos_asignados['proveedores.show']) checked @endif></td>
+                                <td> - </td>
                                 <td> - </td>
                                 <td> - </td>
                             </tr>
@@ -113,6 +117,7 @@
                                 <td><input type="checkbox" name="permisos[]" value="proveedores.create" data-group="proveedores" class="specific-checkbox" @if($permisos_asignados['proveedores.create']) checked @endif></td>
                                 <td><input type="checkbox" name="permisos[]" value="tecnicos.create" data-group="tecnicos" class="specific-checkbox" @if($permisos_asignados['tecnicos.create']) checked @endif></td>
                                 <td><input type="checkbox" name="permisos[]" value="roles.create" data-group="roles" class="specific-checkbox" @if($permisos_asignados['roles.create']) checked @endif></td>
+                                <td><input type="checkbox" name="permisos[]" value="tickets.create" data-group="tickets" class="specific-checkbox" @if($permisos_asignados['tickets.create']) checked @endif></td>
                             </tr>
                             <tr style="color:white;">
                                 <td>Guardar</td>
@@ -127,6 +132,7 @@
                                 <td><input type="checkbox" name="permisos[]" value="proveedores.store" data-group="proveedores" class="specific-checkbox" @if($permisos_asignados['proveedores.store']) checked @endif></td>
                                 <td><input type="checkbox" name="permisos[]" value="tecnicos.store" data-group="tecnicos" class="specific-checkbox" @if($permisos_asignados['tecnicos.store']) checked @endif></td>
                                 <td><input type="checkbox" name="permisos[]" value="roles.store" data-group="roles" class="specific-checkbox" @if($permisos_asignados['roles.store']) checked @endif></td>
+                                <td><input type="checkbox" name="permisos[]" value="tickets.store" data-group="tickets" class="specific-checkbox" @if($permisos_asignados['tickets.store']) checked @endif></td>
                             </tr>
                             <tr style="color:white;">
                                 <td>Editar</td>
@@ -141,6 +147,7 @@
                                 <td><input type="checkbox" name="permisos[]" value="proveedores.edit" data-group="proveedores" class="specific-checkbox" @if($permisos_asignados['proveedores.edit']) checked @endif></td>
                                 <td><input type="checkbox" name="permisos[]" value="tecnicos.edit" data-group="tecnicos" class="specific-checkbox" @if($permisos_asignados['tecnicos.edit']) checked @endif></td>
                                 <td><input type="checkbox" name="permisos[]" value="roles.edit" data-group="roles" class="specific-checkbox" @if($permisos_asignados['roles.edit']) checked @endif></td>
+                                <td><input type="checkbox" name="permisos[]" value="tickets.edit" data-group="tickets" class="specific-checkbox" @if($permisos_asignados['tickets.edit']) checked @endif></td>
                             </tr>
                             <tr style="color:white;">
                                 <td>Update</td>
@@ -155,6 +162,7 @@
                                 <td><input type="checkbox" name="permisos[]" value="proveedores.update" data-group="proveedores" class="specific-checkbox" @if($permisos_asignados['proveedores.update']) checked @endif></td>
                                 <td><input type="checkbox" name="permisos[]" value="tecnicos.update" data-group="tecnicos" class="specific-checkbox" @if($permisos_asignados['tecnicos.update']) checked @endif></td>
                                 <td><input type="checkbox" name="permisos[]" value="roles.update" data-group="roles" class="specific-checkbox" @if($permisos_asignados['roles.update']) checked @endif></td>
+                                <td><input type="checkbox" name="permisos[]" value="tickets.update" data-group="tickets" class="specific-checkbox" @if($permisos_asignados['tickets.update']) checked @endif></td>
                             </tr>
                             <tr style="color:white;">
                                 <td>Delete</td>
@@ -169,6 +177,52 @@
                                 <td><input type="checkbox" name="permisos[]" value="proveedores.delete" data-group="proveedores" class="specific-checkbox" @if($permisos_asignados['proveedores.delete']) checked @endif></td>
                                 <td><input type="checkbox" name="permisos[]" value="tecnicos.delete" data-group="tecnicos" class="specific-checkbox" @if($permisos_asignados['tecnicos.delete']) checked @endif></td>
                                 <td><input type="checkbox" name="permisos[]" value="roles.delete" data-group="roles" class="specific-checkbox" @if($permisos_asignados['roles.delete']) checked @endif></td>
+                                <td> - </td>
+                            </tr>
+                            <tr style="color:white;">
+                                <td>Tickets Pendientes</td>
+                                <td> - </td>
+                                <td> - </td>                                
+                                <td> - </td>                                
+                                <td> - </td>                                
+                                <td> - </td>                                
+                                <td> - </td>                               
+                                <td> - </td>                                
+                                <td> - </td>                                
+                                <td> - </td>                                
+                                <td> - </td>
+                                <td> - </td>
+                                <td><input type="checkbox" name="permisos[]" value="tickets.index.pendiente" data-group="tickets" class="specific-checkbox" @if($permisos_asignados['tickets.index.pendiente']) checked @endif></td>
+                            </tr>
+                            <tr style="color:white;">
+                                <td>Tickets por Gerencia</td>
+                                <td> - </td>
+                                <td> - </td>                                
+                                <td> - </td>                                
+                                <td> - </td>                                
+                                <td> - </td>                                
+                                <td> - </td>                               
+                                <td> - </td>                                
+                                <td> - </td>                                
+                                <td> - </td>                                
+                                <td> - </td>
+                                <td> - </td>
+                                <td><input type="checkbox" name="permisos[]" value="tickets.index.gerencia" data-group="tickets" class="specific-checkbox" @if($permisos_asignados['tickets.index.gerencia']) checked @endif></td>
+                            </tr>
+                            <tr style="color:white;">
+                                <td>Tickets Por Gerencia Pendientes</td>
+                                <td> - </td>
+                                <td> - </td>
+                                <td> - </td>
+                                <td> - </td>
+                                <td> - </td>
+                                <td> - </td>
+                                <td> - </td>
+                                <td> - </td>
+                                <td> - </td>
+                                <td> - </td>
+                                <td> - </td>
+                                <td><input type="checkbox" name="permisos[]" value="tickets.index.gerencia.pendientes" data-group="tickets" class="specific-checkbox" @if($permisos_asignados['tickets.index.gerencia.pendientes']) checked @endif></td>
                             </tr>
                             <!-- Continuar con las filas para las demás acciones -->
                         </tbody>
