@@ -200,7 +200,7 @@ class RoleController extends Controller
         $prioridades_all_checked = $this->verificarPermisosGrupales($permisos_asignados, ['prioridades.index', 'prioridades.create', 'prioridades.store', 'prioridades.edit', 'prioridades.update', 'prioridades.delete']);
         $tecnicos_all_checked = $this->verificarPermisosGrupales($permisos_asignados, ['tecnicos.index', 'tecnicos.create', 'tecnicos.store', 'tecnicos.edit', 'tecnicos.update', 'tecnicos.delete']);
         $roles_all_checked = $this->verificarPermisosGrupales($permisos_asignados, ['roles.index', 'roles.create', 'roles.store', 'roles.edit', 'roles.update', 'roles.delete']);
-        $tickets_all_checked = $this->verificarPermisosGrupales($permisos_asignados, ['tickets.index', 'tickets.index.pendiente', 'tickets.index.gerencia', 'tickets.index.gerencia.pendientes', 'tickets.create', 'tickets.store', 'tickets.edit', 'tickets.update', 'tickets.delete']);
+        $tickets_all_checked = $this->verificarPermisosGrupales($permisos_asignados, ['tickets.index', 'tickets.index.pendiente', 'tickets.index.gerencia', 'tickets.index.gerencia.pendientes', 'tickets.create', 'tickets.store', 'tickets.edit', 'tickets.update']);
 
         // Pasar el rol y los permisos asignados a la vista
         return view('portal_it.layouts.edit_roles', [
