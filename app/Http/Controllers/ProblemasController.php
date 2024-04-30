@@ -21,7 +21,7 @@ class ProblemasController extends Controller
         if (!Auth::user()->hasPermissionTo('problemas.index')) {
             return redirect()->route('homeportal')->with('error', 'No tienes permisos para acceder a este sitio');
         }
-        $problemas= Problema::all();
+        $problemas= Problema::paginate(5);
         return view('portal_it.layouts.problemas', array('problemas'=>$problemas));
     }
 

@@ -34,8 +34,8 @@
         </svg>{{ session('status') }}
         </div>
 @endif
-    <div class="text-center" style="padding: 5px;">
-        <div style="display: flex; justify-content: center;">
+    <div class="text-center" style="margin-top: 50px;">
+        <div style="display: grid; grid-template-columns:1fr 1fr 1fr 1fr 1fr; justify-self:center; grid-gap: 45px;">
             <div class="text-center mt-2" style="margin-right: 10px;">
                 <form id="form-gerencias" action="{{ route('mostrarTablaGerencias') }}" method="post">
                     @csrf

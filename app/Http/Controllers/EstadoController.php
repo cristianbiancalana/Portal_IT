@@ -22,7 +22,7 @@ class EstadoController extends Controller
         if (!Auth::user()->hasPermissionTo('estados.index')) {
             return redirect()->route('homeportal')->with('error', 'No tienes permisos para acceder a este sitio');
         }
-        $estados= Estado::all();
+        $estados= Estado::paginate(5);
         return view('portal_it.layouts.estados', array('estados'=>$estados));
     }
 

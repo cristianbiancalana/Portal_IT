@@ -23,7 +23,7 @@ class ProveedorController extends Controller
         if (!Auth::user()->hasPermissionTo('proveedores.index')) {
             return redirect()->route('homeportal')->with('error', 'No tienes permisos para acceder a este sitio');
         }
-        $proveedores= Proveedor::all();
+        $proveedores= Proveedor::paginate(5);
         return view('portal_it.layouts.proveedores', array('proveedores'=>$proveedores));
     }
 

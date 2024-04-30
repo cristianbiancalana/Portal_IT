@@ -278,7 +278,7 @@ class RoleController extends Controller
         $role->delete();
 
         // Redireccionar con un mensaje de éxito
-        return redirect()->route('rolesview')->with('warning', 'Rol eliminado');
+        return redirect()->route('roles')->with('warning', 'Rol eliminado');
     }
     public function mostrarTablaRoles(Request $request)
     {

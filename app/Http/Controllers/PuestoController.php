@@ -22,7 +22,7 @@ class PuestoController extends Controller
         if (!Auth::user()->hasPermissionTo('puestos.index')) {
             return redirect()->route('homeportal')->with('error', 'No tienes permisos para acceder a este sitio');
         }
-        $puestos= Puesto::all();
+        $puestos= Puesto::paginate(5);
         return view('portal_it.layouts.puestos', array('puestos'=>$puestos));
     }
 

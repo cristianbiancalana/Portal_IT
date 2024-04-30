@@ -22,7 +22,7 @@ class TecnicosController extends Controller
         if (!Auth::user()->hasPermissionTo('tecnicos.index')) {
             return redirect()->route('homeportal')->with('error', 'No tienes permisos para acceder a este sitio');
         }
-        $tecnicos= Tecnico::all();
+        $tecnicos= Tecnico::paginate(5);
         return view('portal_it.layouts.tecnicos', array('tecnicos'=>$tecnicos));
     }
 
