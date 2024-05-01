@@ -186,9 +186,9 @@ Route::middleware('auth')->group(function () {
 
     //Solapa tickets
     Route::get('/tickets', [TicketController::class, 'indexall'])->name('totaltickets');
-    Route::get('/tickets/pendientes', [TicketController::class, 'indexpendientes'])->name('ticketspendientes'); //inicio del apartado ticket
+    Route::get('/tickets/pendientes', [TicketController::class, 'indexpendientes'])->name('ticketspendientes'); 
     Route::get('/tickets/new_ticket', [TicketController::class, 'create'])->name('nuevoticket');
-    Route::post('/tickets/new_ticket', [TicketController::class, 'store'])->name('nuevo_ticket'); //crear ticket post
+    Route::post('/tickets/new_ticket', [TicketController::class, 'store'])->name('nuevo_ticket');
     Route::get('/tickets/{ticket}/edit', [TicketController::class, 'edit'])->name('tickets.edit');
     Route::get('/tickets/{ticket}/view', [TicketController::class, 'show'])->name('viewticket');
     Route::put('/tickets/{ticket}', [TicketController::class, 'update'])->name('tickets.update');

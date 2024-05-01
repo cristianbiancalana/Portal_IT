@@ -144,7 +144,9 @@ class userController extends Controller
                     'gerencia'=>['nullable','string','min:3'],
                     'puesto'=>['nullable','string','min:3'],
                     'role_id'=>['required']
-                ]);}
+                ]);
+                
+                $user->update($validated);}
         }
 
         // Obtener el usuario de la base de datos
@@ -158,10 +160,7 @@ class userController extends Controller
 
         // Asignar el nuevo rol al usuario
         $user->assignRole($role);
-
-        // Actualizar los datos del usuario en la base de datos
-        $user->update($validated);
-        
+      
         return redirect()->route('usuarios')->with('status', 'Usuario actualizado correctamente');
     }
 

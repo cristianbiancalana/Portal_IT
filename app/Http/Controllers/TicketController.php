@@ -35,17 +35,31 @@ class TicketController extends Controller
 
     public function indexall()
     {
-        if (!Auth::user()->hasPermissionTo('tickets.index')) {
+        if (!Auth::user()->hasPermissionTo('tickets.index') && !Auth::user()->hasPermissionTo('tickets.index.gerencia')) {
             return redirect()->route('homeportal')->with('error', 'No tienes permisos para acceder a este sitio');
         }
-        $tickets = Ticket::paginate(5);
+        if (Auth::user()->hasPermissionTo('tickets.index.gerencia')) {
+            $tickets = Ticket::where('gerencia', Auth::user()->gerencia_id)->paginate(5);
+        } else {
+
+            $tickets = Ticket::paginate(5);
+        }
+
         return view('portal_it.layouts.index_tickets', array('tickets' => $tickets));
     }
 
     public function indexpendientes()
     {
-        if (!Auth::user()->hasPermissionTo('tickets.index.pendiente')) {
+        if (!Auth::user()->hasPermissionTo('tickets.index.pendiente') && !Auth::user()->hasPermissionTo('tickets.index.gerencia.pendientes')) {
             return redirect()->route('homeportal')->with('error', 'No tienes permisos para acceder a este sitio');
+        }
+        if (Auth::user()->hasPermissionTo('tickets.index.gerencia.pendientes')) {
+            $tickets = Ticket::where('gerencia', Auth::user()->gerencia_id)
+                ->where(function ($query) {
+                    $query->where('estado', 'Registrado')
+                        ->orWhere('estado', 'En Curso');
+                })
+                ->paginate(5);
         }
         $tickets = Ticket::where('estado', 'Registrado')
             ->orWhere('estado', 'En Curso')
@@ -54,25 +68,20 @@ class TicketController extends Controller
     }
     public function indexallgerencia()
     {
-        if (!Auth::user()->hasPermissionTo('tickets.index.gerencia')) {
-            return redirect()->route('homeportal')->with('error', 'No tienes permisos para acceder a este sitio');
-        }
-        $tickets = Ticket::where('gerencia', Auth::user()->gerencia_id)
-                            ->paginate(5);
-        return view('portal_it.layouts.index_tickets', array('tickets' => $tickets));
+        // if () {
+        //     return redirect()->route('homeportal')->with('error', 'No tienes permisos para acceder a este sitio');
+        // }
+
+        // return view('portal_it.layouts.index_tickets', array('tickets' => $tickets));
     }
 
     public function indexgerenciapendientes()
     {
-        if (!Auth::user()->hasPermissionTo('tickets.index.gerencia.pendientes')) {
-            return redirect()->route('homeportal')->with('error', 'No tienes permisos para acceder a este sitio');
-        }
-        $tickets = Ticket::where('gerencia', Auth::user()->gerencia_id)
-                        ->where(function($query) {
-                            $query->where('estado', 'Registrado')
-                            ->orWhere('estado', 'En Curso');})
-            ->paginate(5);
-        return view('portal_it.layouts.index_tickets_pendientes', array('tickets' => $tickets));
+        // if () {
+        //     return redirect()->route('homeportal')->with('error', 'No tienes permisos para acceder a este sitio');
+        // }
+
+        // return view('portal_it.layouts.index_tickets_pendientes', array('tickets' => $tickets));
     }
 
     /**
