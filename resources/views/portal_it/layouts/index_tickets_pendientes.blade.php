@@ -24,7 +24,6 @@
                             <th>ID Ticket</th>
                             <th>Prioridad</th>
                             <th>Asunto</th>
-                            <th>Comentario</th>
                             <th>Fecha</th>
                             <th>Solicitante</th>
                             <th>Estado</th>
@@ -33,11 +32,10 @@
                     </thead>
                     <tbody>
                         @foreach($tickets as $ticket)
-                        <tr>
+                        <tr  style="overflow: hidden; white-space: nowrap; text-overflow: ellipsis;">
                             <th scope="row">{{$ticket->id}}</th>
                             <td>{{ $ticket->prioridad }}</td>
                             <td>{{ Illuminate\Support\Str::limit($ticket->asunto_ticket, 30) }}</td>
-                            <td>{{ $ticket->comentario_ticket }}</td>
                             <td>{{$ticket->created_at->format('j/m/Y') }}</td>
                             <td>{{$ticket->user->name}}</td>
                             <td>{{$ticket->estado}}</td>

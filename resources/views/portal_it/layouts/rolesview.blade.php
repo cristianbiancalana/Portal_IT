@@ -142,7 +142,7 @@
                                 <td> - </td>
                                 <td> - </td>
                                 <td><input type="checkbox" name="permisos[]" class="specific-checkbox proveedores" value="proveedores.show" data-group="proveedores"></td>
-                                <td> - </td>
+                                <td><input type="checkbox" name="permisos[]" class="specific-checkbox tecnicos" value="tecnicos.show" data-group="tecnicos"></td>
                                 <td> - </td>
                                 <td> - </td>
                             </tr>
@@ -224,14 +224,14 @@
                             <tr style="color:white;">
                                 <td>Tickets Pendientes</td>
                                 <td> - </td>
-                                <td> - </td>                                
-                                <td> - </td>                                
-                                <td> - </td>                                
-                                <td> - </td>                                
-                                <td> - </td>                               
-                                <td> - </td>                                
-                                <td> - </td>                                
-                                <td> - </td>                                
+                                <td> - </td>
+                                <td> - </td>
+                                <td> - </td>
+                                <td> - </td>
+                                <td> - </td>
+                                <td> - </td>
+                                <td> - </td>
+                                <td> - </td>
                                 <td> - </td>
                                 <td> - </td>
                                 <td><input type="checkbox" name="permisos[]" class="specific-checkbox tickets" value="tickets.index.pendiente" data-group="tickets"></td>
@@ -239,14 +239,14 @@
                             <tr style="color:white;">
                                 <td>Tickets por Gerencia</td>
                                 <td> - </td>
-                                <td> - </td>                                
-                                <td> - </td>                                
-                                <td> - </td>                                
-                                <td> - </td>                                
-                                <td> - </td>                               
-                                <td> - </td>                                
-                                <td> - </td>                                
-                                <td> - </td>                                
+                                <td> - </td>
+                                <td> - </td>
+                                <td> - </td>
+                                <td> - </td>
+                                <td> - </td>
+                                <td> - </td>
+                                <td> - </td>
+                                <td> - </td>
                                 <td> - </td>
                                 <td> - </td>
                                 <td><input type="checkbox" name="permisos[]" class="specific-checkbox roles" value="tickets.index.gerencia" data-group="tickets"></td>

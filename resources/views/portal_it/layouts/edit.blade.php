@@ -6,6 +6,7 @@
     <div class="col-12">
         <div>
             <h2>Editar Ticket Nro: {{$ticket->id}}</h2>
+            <div> Tecnico Asignado </div>
         </div>
         
     </div>

@@ -103,6 +103,7 @@ class RoleSeeder extends Seeder
         Permission::create(['name' => 'tecnicos.store']);
         Permission::create(['name' => 'tecnicos.index']);
         Permission::create(['name' => 'tecnicos.delete']);
+        Permission::create(['name' => 'tecnicos.show']);
         //
         Permission::create(['name' => 'roles.edit']);
         Permission::create(['name' => 'roles.update']);
@@ -176,6 +177,7 @@ class RoleSeeder extends Seeder
         $role1->givePermissionTo('tecnicos.create');
         $role1->givePermissionTo('tecnicos.store');
         $role1->givePermissionTo('tecnicos.index');
+        $role1->givePermissionTo('tecnicos.show');
         //
         $role1->givePermissionTo('roles.edit');
         $role1->givePermissionTo('roles.update');
