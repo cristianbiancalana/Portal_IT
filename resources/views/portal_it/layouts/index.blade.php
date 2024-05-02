@@ -183,14 +183,14 @@
             <div class="form_control">
             <select id="gerencia" name="gerencia" class="input">
                 @foreach ($gerencias as $gerencia)
-                    <option value="{{ $gerencia->id }}">{{ $gerencia->nombre_gerencia }}</option>
+                    <option value="{{ $gerencia->nombre_gerencia }}">{{ $gerencia->nombre_gerencia }}</option>
                 @endforeach
             </select>
             </div>
             <div class="form_control">
                 <select id="puesto" name="puesto" class="input" id="puesto">
                     @foreach ($puestos as $puesto)
-                        <option value="{{ $puesto->id }}">{{ $puesto->name_puesto }}</option>
+                        <option value="{{ $puesto->name_puesto }}">{{ $puesto->name_puesto }}</option>
                     @endforeach
                 </select>
             </div>

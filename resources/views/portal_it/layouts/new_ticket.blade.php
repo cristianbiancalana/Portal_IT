@@ -48,7 +48,7 @@
             <div class="col-xs-6 col-sm-6 col-md-3 mt-2">
                 <div class="form-group">
                     <strong>Gerencia</strong>
-                    <input type="text" name="gerencia" class="form-control" id="gerencia" value="{{$user = auth()->user()->gerencia;}}">
+                    <input type="text" name="gerencia" class="form-control" id="gerencia" value="{{$user = auth()->user()->gerencia->nombre_gerencia;}}">
                 </div>
             </div>
             <div class="col-xs-6 col-sm-6 col-md-3 mt-2">
