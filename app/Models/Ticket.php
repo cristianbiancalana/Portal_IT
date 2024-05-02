@@ -28,6 +28,7 @@ class Ticket extends Model
             'ruta_adjunto',
             'adjunto_final',
             'ruta_resolucion',
+            'tecnico'
 
     ];
     public function user(): BelongsTo

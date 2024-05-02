@@ -30,6 +30,7 @@ return new class extends Migration
             $table->string ('ruta_adjunto')->nullable();
             $table->string ('adjunto_final')->nullable();
             $table->string ('ruta_resolucion')->nullable();
+            $table->string ('tecnico')->nullable();
             $table->timestamps();
         });
     }

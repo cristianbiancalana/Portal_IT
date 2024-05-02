@@ -4,10 +4,22 @@
 @section('content')
 <div class="row">
     <div class="col-12">
-        <div>
-            <h2>Editar Ticket Nro: {{$ticket->id}}</h2>
-            <div> Tecnico Asignado </div>
-        </div>
+        <div style="display: flex;">
+            <h3>Editar Ticket Nro: {{$ticket->id}}</h3>
+            <div style=" margin-left:190px; padding:5px 0; height:40px; width: 150px; text-align:left;"> 
+                <svg style="width: 22px; height: 20px;" data-slot="icon" fill="none" stroke-width="1.5" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M15 9h3.75M15 12h3.75M15 15h3.75M4.5 19.5h15a2.25 2.25 0 0 0 2.25-2.25V6.75A2.25 2.25 0 0 0 19.5 4.5h-15a2.25 2.25 0 0 0-2.25 2.25v10.5A2.25 2.25 0 0 0 4.5 19.5Zm6-10.125a1.875 1.875 0 1 1-3.75 0 1.875 1.875 0 0 1 3.75 0Zm1.294 6.336a6.721 6.721 0 0 1-3.17.789 6.721 6.721 0 0 1-3.168-.789 3.376 3.376 0 0 1 6.338 0Z"></path>
+                </svg> 
+                <div id="tooltip-tecnico" style="display:none; position:absolute; background-color:#f9f9f9; border:1px solid #ccc; border-radius:5px; padding:10px;"></div>
+            </div>
+            <div class="form-group">
+                    <strong>Técnico Asignado</strong>
+                    <select name="tecnico" class="form-select" id="tecnico">
+                        @foreach ($tecnicos as $tecnico)
+                            <option value="{{$tecnico->name_tecnicos}}">{{ $tecnico->name_tecnicos}}</option>
+                        @endforeach
+                    </select>
+            </div>
         
     </div>
 
@@ -148,12 +160,12 @@
             <div class="col-xs-12 col-sm-12 col-md-12 mt-2">
                 <div class="form-group">
                     <strong>Comentario</strong>
-                    <strong style="margin-left:480px;">Resolución</strong>
-                    <textarea class="form-control" style="height:150px; width: 550px;" name="comentario_ticket" id="comentario_ticket" placeholder="Comentario...">{{ $ticket->comentario_ticket }}</textarea>
+                    <strong style="margin-left:470px;">Resolución</strong>
+                    <textarea class="form-control" style="height:140px; width: 550px;" name="comentario_ticket" id="comentario_ticket" placeholder="Comentario...">{{ $ticket->comentario_ticket }}</textarea>
                 </div>
                 <div class="form-group">
                     
-                    <textarea class="form-control" style="margin-left:560px; margin-top:-150px; height:150px; width: 550px;" name="resolucion_ticket" id="resolucion_ticket" placeholder="Resolución...">{{ $ticket->resolucion_ticket }}</textarea>
+                    <textarea class="form-control" style="margin-left:560px; margin-top:-140px; height:140px; width: 550px;" name="resolucion_ticket" id="resolucion_ticket" placeholder="Resolución...">{{ $ticket->resolucion_ticket }}</textarea>
                 </div>
             </div>
             
@@ -164,4 +176,32 @@
         </div>
     </form>
 </div>
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        const tooltipTecnico = document.getElementById('tooltip-tecnico');
+        const tecnicoAsignadoDiv = document.querySelector('.tecnico-asignado');
+
+        // Función para mostrar los datos del técnico en el tooltip
+        function mostrarDatosTecnico(event) {
+            const tecnicoData = JSON.parse(tecnicoAsignadoDiv.dataset.tecnico);
+            tooltipTecnico.innerHTML = `
+                <strong>Nombre:</strong> ${$tecnicos.name_tecnicos} <br>
+                <strong>Email:</strong> ${$tecnicos.email_tecnicos} <br>
+                <strong>Departamento:</strong> ${$tecnicos.tel_tecnicos}
+            `;
+            tooltipTecnico.style.left = event.pageX + 'px';
+            tooltipTecnico.style.top = event.pageY + 'px';
+            tooltipTecnico.style.display = 'block';
+        }
+
+        // Función para ocultar el tooltip
+        function ocultarTooltip() {
+            tooltipTecnico.style.display = 'none';
+        }
+
+        // Asignar eventos al div del técnico asignado
+        tecnicoAsignadoDiv.addEventListener('mouseover', mostrarDatosTecnico);
+        tecnicoAsignadoDiv.addEventListener('mouseout', ocultarTooltip);
+    });
+</script>
 @endsection

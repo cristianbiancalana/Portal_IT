@@ -65,24 +65,7 @@ class TicketController extends Controller
             ->paginate(5);
         return view('portal_it.layouts.index_tickets_pendientes', array('tickets' => $tickets));
     }
-    public function indexallgerencia()
-    {
-        // if () {
-        //     return redirect()->route('homeportal')->with('error', 'No tienes permisos para acceder a este sitio');
-        // }
-
-        // return view('portal_it.layouts.index_tickets', array('tickets' => $tickets));
-    }
-
-    public function indexgerenciapendientes()
-    {
-        // if () {
-        //     return redirect()->route('homeportal')->with('error', 'No tienes permisos para acceder a este sitio');
-        // }
-
-        // return view('portal_it.layouts.index_tickets_pendientes', array('tickets' => $tickets));
-    }
-
+    
     /**
      * Show the form for creating a new resource.
      */
@@ -96,6 +79,7 @@ class TicketController extends Controller
         $segmentos = Segmento::all();
         $problemas = Problema::all();
         $prioridades = Prioridad::all();
+        $tecnicos = Tecnico::all();
         return view('portal_it.layouts.new_ticket')->with([
             'problemas' => $problemas,
             'segmentos' => $segmentos,
@@ -141,7 +125,8 @@ class TicketController extends Controller
             'archivo_adjunto' => ['nullable'],
             'ruta_adjunto' => ['nullable', 'file'],
             'adjunto_final' => ['nullable'],
-            'ruta_resolucion' => ['nullable']
+            'ruta_resolucion' => ['nullable'],
+            'tecnico'=> ['nullable']
         ]);
         $attributes = $request->all();
 
@@ -179,6 +164,7 @@ class TicketController extends Controller
         $prioridades = Prioridad::all();
         $estados = Estado::all();
         $gerencias = Gerencia::all();
+        $tecnicos = Tecnico::all();
         return view('portal_it.layouts.edit', ['ticket' => $ticket])->with([
             'problemas' => $problemas,
             'segmentos' => $segmentos,
@@ -186,7 +172,8 @@ class TicketController extends Controller
             'proveedores' => $proveedores,
             'prioridades' => $prioridades,
             'estados' => $estados,
-            'gerencias' => $gerencias
+            'gerencias' => $gerencias,
+            'tecnicos' => $tecnicos
         ]);
     }
 
@@ -224,7 +211,9 @@ class TicketController extends Controller
             'archivo_adjunto' => ['nullable', 'file'],
             'ruta_adjunto' => ['nullable'],
             'adjunto_final' => ['nullable'],
-            'ruta_resolucion' => ['nullable', 'file']
+            'ruta_resolucion' => ['nullable', 'file'],
+            'tecnico' => ['nullable']
+
         ]);
 
 
