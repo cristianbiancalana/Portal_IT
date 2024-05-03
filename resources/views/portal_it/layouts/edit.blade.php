@@ -6,21 +6,6 @@
     <div class="col-12">
         <div style="display: flex;">
             <h3>Editar Ticket Nro: {{$ticket->id}}</h3>
-            <div style=" margin-left:190px; padding:5px 0; height:40px; width: 150px; text-align:left;"> 
-                <svg style="width: 22px; height: 20px;" data-slot="icon" fill="none" stroke-width="1.5" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M15 9h3.75M15 12h3.75M15 15h3.75M4.5 19.5h15a2.25 2.25 0 0 0 2.25-2.25V6.75A2.25 2.25 0 0 0 19.5 4.5h-15a2.25 2.25 0 0 0-2.25 2.25v10.5A2.25 2.25 0 0 0 4.5 19.5Zm6-10.125a1.875 1.875 0 1 1-3.75 0 1.875 1.875 0 0 1 3.75 0Zm1.294 6.336a6.721 6.721 0 0 1-3.17.789 6.721 6.721 0 0 1-3.168-.789 3.376 3.376 0 0 1 6.338 0Z"></path>
-                </svg> 
-                <div id="tooltip-tecnico" style="display:none; position:absolute; background-color:#f9f9f9; border:1px solid #ccc; border-radius:5px; padding:10px;"></div>
-            </div>
-            <div class="form-group">
-                    <strong>Técnico Asignado</strong>
-                    <select name="tecnico" class="form-select" id="tecnico">
-                        @foreach ($tecnicos as $tecnico)
-                            <option value="{{$tecnico->name_tecnicos}}">{{ $tecnico->name_tecnicos}}</option>
-                        @endforeach
-                    </select>
-            </div>
-        
     </div>
 
     @if ($errors->any())
@@ -40,8 +25,18 @@
     <form  method="POST" action="{{route('tickets.update',$ticket)}}" enctype="multipart/form-data">
         @method('PUT')
         @csrf 
+        <div class="col-2" style=" height:40px; width: 500px; margin-top:-10px; display:flex;">
+            <div style=" height:40px; width: 400px; margin-left: 300px; margin-top:-30px; display:flex;"> 
+                    <strong style="width:400px; text-align:center;height:40px;padding:5px;">Técnico Asignado</strong>
+                    <select name="tecnico" class="form-select" id="tecnico" style="margin-left: 5px">
+                        @foreach ($tecnicos as $tecnico)
+                            <option value="{{$tecnico->name_tecnicos}}" {{$tecnico->name_tecnicos === $ticket->tecnico ? 'selected' : ''}}>{{$tecnico->name_tecnicos}}</option>
+                        @endforeach
+                    </select>
+            </div>
+        </div>
         
-        <div class="row">
+        <div class="row" style="margin-top:-35px;">
         <div class="col-xs-6 col-sm-6 col-md-3 mt-2">
                 <div class="form-group">
                     <strong>Solicitante</strong>

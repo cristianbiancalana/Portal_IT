@@ -53,16 +53,21 @@ class TicketController extends Controller
             return redirect()->route('homeportal')->with('error', 'No tienes permisos para acceder a este sitio');
         }
         if (Auth::user()->hasPermissionTo('tickets.index.gerencia.pendientes')) {
-            $tickets = Ticket::where('gerencia', Auth::user()->gerencia_id)
+            echo 'acaaaaaaaaaaaaaaaaaaaaaaaaaaaaa';
+            $tickets = Ticket::where('gerencia', Auth::user()->gerencia)
                 ->where(function ($query) {
                     $query->where('estado', 'Registrado')
                         ->orWhere('estado', 'En Curso');
                 })
                 ->paginate(5);
-        }
-        $tickets = Ticket::where('estado', 'Registrado')
+                
+        }else{
+            echo 'acaaaaaaaaaaaaaaaaaaaaaaaaaaaaa2';
+            $tickets = Ticket::where('estado', 'Registrado')
             ->orWhere('estado', 'En Curso')
             ->paginate(5);
+        }
+        
         return view('portal_it.layouts.index_tickets_pendientes', array('tickets' => $tickets));
     }
     

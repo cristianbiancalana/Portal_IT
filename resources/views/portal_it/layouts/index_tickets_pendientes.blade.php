@@ -27,6 +27,7 @@
                             <th>Fecha</th>
                             <th>Solicitante</th>
                             <th>Estado</th>
+                            <th>Técnico Asignado</th>
                             <th>Acción</th>
                         </tr>
                     </thead>
@@ -39,6 +40,7 @@
                             <td>{{$ticket->created_at->format('j/m/Y') }}</td>
                             <td>{{$ticket->user->name}}</td>
                             <td>{{$ticket->estado}}</td>
+                            <td>{{$ticket->tecnico}}</td>
                             <td style="width:100px; height: 20px; ">
                                 <a href="{{route('tickets.edit',$ticket)}}" style="color:azure;">
                                 <svg style="width: 22px; height: 20px; margin-left:10px;" data-slot="icon" fill="none" stroke-width="1.5" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
