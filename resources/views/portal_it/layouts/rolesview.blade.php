@@ -144,7 +144,7 @@
                                 <td><input type="checkbox" name="permisos[]" class="specific-checkbox proveedores" value="proveedores.show" data-group="proveedores"></td>
                                 <td><input type="checkbox" name="permisos[]" class="specific-checkbox tecnicos" value="tecnicos.show" data-group="tecnicos"></td>
                                 <td> - </td>
-                                <td> - </td>
+                                <td><input type="checkbox" name="permisos[]" class="specific-checkbox tickets" value="tickets.show" data-group="tickets"></td>
                             </tr>
                             <tr style="color:white;">
                                 <td>Crear</td>

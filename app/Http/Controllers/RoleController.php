@@ -14,9 +14,9 @@ class RoleController extends Controller
 
     public function index()
     {
-            if (!Auth::user()->hasPermissionTo('roles.index')) {
-                return redirect()->route('homeportal')->with('error', 'No tienes permisos para acceder a este sitio');
-            }
+        if (!Auth::user()->hasPermissionTo('roles.index')) {
+            return redirect()->route('homeportal')->with('error', 'No tienes permisos para acceder a este sitio');
+        }
         $roles = Role::paginate(3);
         return view('portal_it.layouts.rolesview', ['roles' => $roles]);
     }
@@ -107,6 +107,7 @@ class RoleController extends Controller
             'tickets.create',
             'tickets.store',
             'tickets.index',
+            'tickets.show',
             'tickets.index.pendiente',
             'tickets.index.gerencia',
             'tickets.index.gerencia.pendientes',
@@ -201,7 +202,7 @@ class RoleController extends Controller
         $prioridades_all_checked = $this->verificarPermisosGrupales($permisos_asignados, ['prioridades.index', 'prioridades.create', 'prioridades.store', 'prioridades.edit', 'prioridades.update', 'prioridades.delete']);
         $tecnicos_all_checked = $this->verificarPermisosGrupales($permisos_asignados, ['tecnicos.index', 'tecnicos.show', 'tecnicos.create', 'tecnicos.store', 'tecnicos.edit', 'tecnicos.update', 'tecnicos.delete']);
         $roles_all_checked = $this->verificarPermisosGrupales($permisos_asignados, ['roles.index', 'roles.create', 'roles.store', 'roles.edit', 'roles.update', 'roles.delete']);
-        $tickets_all_checked = $this->verificarPermisosGrupales($permisos_asignados, ['tickets.index', 'tickets.index.pendiente', 'tickets.index.gerencia', 'tickets.index.gerencia.pendientes', 'tickets.create', 'tickets.store', 'tickets.edit', 'tickets.update']);
+        $tickets_all_checked = $this->verificarPermisosGrupales($permisos_asignados, ['tickets.index', 'tickets.index.pendiente', 'tickets.show', 'tickets.index.gerencia', 'tickets.index.gerencia.pendientes', 'tickets.create', 'tickets.store', 'tickets.edit', 'tickets.update']);
 
         // Pasar el rol y los permisos asignados a la vista
         return view('portal_it.layouts.edit_roles', [

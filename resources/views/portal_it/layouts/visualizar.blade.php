@@ -2,6 +2,24 @@
 @extends('portal_it.layouts.base')
 
 @section('content')
+<style>
+    /* Estilos para el tooltip */
+    .info_tecnicos_visto {
+        position: absolute;
+        background-color: #fff;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        padding: 10px;
+        box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+        z-index: 9999;
+        color: black;
+    }
+
+    /* Estilos para el icono */
+    #icono-tecnico {
+        cursor: pointer;
+    }
+</style>
 <div class="row">
     <div class="col-12">
         <div>
@@ -24,11 +42,26 @@
         </div>
     @endif
 
-    <form  method="POST" action="{{route('tickets.update',$ticket)}}" enctype="multipart/form-data">
-        @method('PUT')
-        @csrf 
-        
-        <div class="row">
+        <div id="tooltip-tecnico" class="info_tecnicos_visto" style=" height:90px; width: 320px; margin-top:-35px; margin-left:320px; display: none;">
+            @foreach ($tecnicos as $tecnico)
+                @if ($tecnico->name_tecnicos === $ticket->tecnico)
+                    <strong>Nombre: </strong> <label for="">{{$tecnico->name_tecnicos}}</label><br>
+                    <strong>Email: </strong> <label for="">{{$tecnico->email_tecnicos}}</label><br>
+                    <strong>Celular: </strong> <label for="">{{$tecnico->tel_tecnicos}}</label><br>
+                @endif
+            @endforeach
+        </div>
+        <div class="col-2" style=" height:40px; width: 500px; margin-top:-10px; display:flex;">
+            <div style="height:40px; width: 400px; margin-left: 300px; margin-top:-30px; display:flex;" id="icono-tecnico"> 
+                    <strong style="width:400px; text-align:center;height:50px;padding:5px;"> 
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" style="fill: rgba(255, 255, 255, 1);transform: ;msFilter:;"><path d="M6 22h13a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h1zm6-17.001c1.647 0 3 1.351 3 3C15 9.647 13.647 11 12 11S9 9.647 9 7.999c0-1.649 1.353-3 3-3zM6 17.25c0-2.219 2.705-4.5 6-4.5s6 2.281 6 4.5V18H6v-.75z">
+                    </path></svg>
+                    Técnico Asignado</strong>
+                    <input name="tecnico" class="form-control" id="tecnico" style="margin-left: 5px" value="{{$ticket->tecnico}}">
+            </div>
+            
+        </div>
+        <div class="row" style="margin-top:-37px;">
         <div class="col-xs-6 col-sm-6 col-md-3 mt-2">
                 <div class="form-group">
                     <strong>Solicitante</strong>
@@ -39,11 +72,7 @@
             <div class="col-xs-6 col-sm-6 col-md-3 mt-2">
                 <div class="form-group">
                     <strong>Estado</strong>
-                    <select name="estado" class="form-select" id="estado">
-                        <option value="Registrado" @selected('Registrado' === $ticket->estado)>Registrado</option>
-                        <option value="En Curso" @selected('En Curso' === $ticket->estado)>En Curso</option>
-                        <option value="Resuelto" @selected('Resuelto' === $ticket->estado)>Resuelto</option>
-                    </select>
+                    <input type="text" name="estado" id="estado"  class="form-control" value="{{ $ticket->estado }}">
                 </div> 
             </div>
             <div class="col-xs-6 col-sm-6 col-md-3 mt-2">
@@ -55,75 +84,37 @@
             <div class="col-xs-6 col-sm-6 col-md-3 mt-2">
                 <div class="form-group">
                     <strong>Prioridad</strong>
-                    <select name="prioridad" class="form-select" id="prioridad">
-                        <option value="Baja" @selected('Baja' === $ticket->prioridad)>Baja  </option>
-                        <option value="Media"@selected('Media' === $ticket->prioridad)> Media </option>
-                        <option value="Alta" @selected('Alta' === $ticket->prioridad)> Alta  </option>
-                        <option value="Crítica" @selected('Crítica' === $ticket->prioridad)> Crítica</option>
-                    </select>
+                    <input type="text" name="prioridad" class="form-control" id="prioridad" value="{{ $ticket->prioridad}}">
                 </div>
             </div>
             <div class="col-xs-6 col-sm-6 col-md-3 mt-2">
                 <div class="form-group">
                     <strong>Gerencia</strong>
-                    <select name="gerencia" class="form-select" id="gerencia" >
-                        <option value="Administración" @selected('Administración' === $ticket->gerencia)>Administración</option>
-                        <option value="Almacenamiento" @selected('Almacenamiento' === $ticket->gerencia)>Almacenamiento</option>
-                        <option value="Comercial" @selected('Comercial' === $ticket->gerencia)>Comercial</option>
-                        <option value="Distribución" @selected('Distribución' === $ticket->gerencia)>Distribución</option>
-                        <option value="Proyectos Estratégicos" @selected('Proyectos Estratégicos' === $ticket->gerencia)>Proyectos Estratégicos</option>
-                    </select>
+                    <input type="text" name="gerencia" class="form-control" id="gerencia" value="{{ $ticket->gerencia}}">
                 </div>
             </div>
             <div class="col-xs-6 col-sm-6 col-md-3 mt-2">
                 <div class="form-group">
                     <strong>Tipo de problema</strong>
-                    <select name="tipoproblema" class="form-select" id="tipoproblema">
-                        <option value="Conectividad" @selected('Conectividad' === $ticket->tipoproblema)>Conectividad</option>
-                        <option value="Equipamiento" @selected('Equipamiento' === $ticket->tipoproblema)>Equipamiento</option>
-                        <option value="Información" @selected('Información' === $ticket->tipoproblema)>Información</option>
-                        <option value="Infraestructura" @selected('Infraestructura' === $ticket->tipoproblema)>Infraestructura</option>
-                        <option value="Insumos" @selected('Insumos' === $ticket->tipoproblema)>Insumos</option>
-                        <option value="Mantenimiento" @selected('Mantenimiento' === $ticket->tipoproblema)>Mantenimiento</option>
-                        <option value="Soporte" @selected('Soporte' === $ticket->tipoproblema)>Soporte</option>
-                    </select>
+                    <input type="text" name="tipoproblema" class="form-control" id="tipoproblema" value="{{ $ticket->tipoproblema}}">
                 </div>
             </div>
             <div class="col-xs-6 col-sm-6 col-md-3 mt-2">
                 <div class="form-group">
                     <strong>Segmento</strong>
-                    <select name="segmento" class="form-select" id="segmento">
-                        <option value="Estabilización" @selected('Estabilización' === $ticket->segmento)>Estabilización</option>
-                        <option value="Soporte" @selected('Soporte' === $ticket->segmento)>Soporte</option>
-                        <option value="Mejoras" @selected('Mejoras' === $ticket->segmento)>Mejoras</option>
-                    </select>
+                    <input type="text" name="segmento" class="form-control" id="segmento" value="{{ $ticket->segmento}}">
                 </div>
             </div>
             <div class="col-xs-6 col-sm-6 col-md-3 mt-2">
                 <div class="form-group">
                     <strong>Sistema</strong>
-                    <select name="sistema" class="form-select" id="sistema">
-                        <option value="SAP B1" @selected('SAP B1' === $ticket->sistema)>SAP B1</option>
-                        <option value="SAP B1" @selected('Produmex' === $ticket->sistema)>Produmex</option>
-                        <option value="SAP B1" @selected('SalesForce' === $ticket->sistema)>SalesForce</option>
-                        <option value="SAP B1" @selected('Otros' === $ticket->sistema)>Otros</option>
-                    </select>
+                    <input type="text" name="sistema" class="form-control" id="sistema" value="{{ $ticket->sistema}}">
                 </div>
             </div>
             <div class="col-xs-6 col-sm-6 col-md-3 mt-2">
                 <div class="form-group">
                     <strong>Proveedor</strong>
-                    <select name="proveedor" class="form-select" id="proveedor">
-                        <option value="IT Cedisur" @selected('IT Cedisur' === $ticket->proveedor)>IT Cedisur</option>
-                        <option value="Pragmatica" @selected('Pragmatica' === $ticket->proveedor)>Pragmatica</option>
-                        <option value="Cambalache" @selected('Cambalache' === $ticket->proveedor)>Cambalache</option>
-                        <option value="Seidor" @selected('Seidor' === $ticket->proveedor)>Seidor</option>
-                        <option value="Interconexión" @selected('Interconexión' === $ticket->proveedor)>Interconexión</option>
-                        <option value="Teknos Group" @selected('Teknos Group' === $ticket->proveedor)>Teknos Group</option>
-                        <option value="Vuritec" @selected('IT Vuritec' === $ticket->proveedor)>Vuritec</option>
-                        <option value="Biancalana Omar" @selected('Biancalana Omar' === $ticket->proveedor)>Biancalana Omar</option>
-                        <option value="Otros" @selected('Otros' === $ticket->proveedor)>Otros</option>
-                    </select>
+                    <input type="text" name="proveedor" class="form-control" id="proveedor" value="{{ $ticket->proveedor}}">
                 </div>
             </div>
             <div class="col-xs-6 col-sm-6 col-md-3 mt-2" >
@@ -165,7 +156,6 @@
                     <textarea class="form-control" style="height:150px; width: 550px;" name="comentario_ticket" id="comentario_ticket" placeholder="Comentario...">{{ $ticket->comentario_ticket }}</textarea>
                 </div>
                 <div class="form-group">
-                    
                     <textarea class="form-control" style="margin-left:560px; margin-top:-150px; height:150px; width: 550px;" name="resolucion_ticket" id="resolucion_ticket" placeholder="Resolución...">{{ $ticket->resolucion_ticket }}</textarea>
                 </div>
             </div>
@@ -174,6 +164,25 @@
                 <a href="{{route('totaltickets')}}" class="btn btn-primary" style="width:100px;">Volver</a>
             </div>
         </div>
-    </form>
 </div>
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        const iconoTecnico = document.getElementById('icono-tecnico');
+        const tooltipTecnico = document.getElementById('tooltip-tecnico');
+
+        // Función para mostrar el tooltip del técnico
+        function mostrarTooltipTecnico(event) {
+            tooltipTecnico.style.display = 'block';
+        }
+
+        // Función para ocultar el tooltip del técnico
+        function ocultarTooltipTecnico(event) {
+            tooltipTecnico.style.display = 'none';
+        }
+
+        // Asignar eventos de mouse al icono
+        iconoTecnico.addEventListener('mouseover', mostrarTooltipTecnico);
+        iconoTecnico.addEventListener('mouseout', ocultarTooltipTecnico);
+    });
+</script>
 @endsection

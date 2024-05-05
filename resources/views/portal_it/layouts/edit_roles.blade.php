@@ -102,7 +102,7 @@
                             <td><input type="checkbox" name="permisos[]" value="proveedores.show" data-group="proveedores" class="specific-checkbox" @if($permisos_asignados['proveedores.show']) checked @endif></td>
                             <td><input type="checkbox" name="permisos[]" value="tecnicos.show" data-group="tecnicos" class="specific-checkbox" @if($permisos_asignados['tecnicos.show']) checked @endif></td>
                             <td> - </td>
-                            <td> - </td>
+                            <td><input type="checkbox" name="permisos[]" value="tickets.show" data-group="tickets" class="specific-checkbox" @if($permisos_asignados['tickets.show']) checked @endif></td>
                         </tr>
                         <tr style="color:white;">
                             <td>Crear</td>

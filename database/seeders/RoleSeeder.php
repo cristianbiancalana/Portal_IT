@@ -35,6 +35,7 @@ class RoleSeeder extends Seeder
         Permission::create(['name' => 'tickets.create']);
         Permission::create(['name' => 'tickets.store']);
         Permission::create(['name' => 'tickets.index']);
+        Permission::create(['name' => 'tickets.show']);
         Permission::create(['name' => 'tickets.index.pendiente']);
         Permission::create(['name' => 'tickets.index.gerencia']);
         Permission::create(['name' => 'tickets.index.gerencia.pendientes']);
@@ -120,6 +121,7 @@ class RoleSeeder extends Seeder
         $role1->givePermissionTo('tickets.create');
         $role1->givePermissionTo('tickets.store');
         $role1->givePermissionTo('tickets.index');
+        $role1->givePermissionTo('tickets.show');
         $role1->givePermissionTo('tickets.index.pendiente');
         $role1->givePermissionTo('tickets.index.gerencia');
         $role1->givePermissionTo('tickets.index.gerencia.pendientes');

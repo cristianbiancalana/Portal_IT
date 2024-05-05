@@ -53,7 +53,6 @@ class TicketController extends Controller
             return redirect()->route('homeportal')->with('error', 'No tienes permisos para acceder a este sitio');
         }
         if (Auth::user()->hasPermissionTo('tickets.index.gerencia.pendientes')) {
-            echo 'acaaaaaaaaaaaaaaaaaaaaaaaaaaaaa';
             $tickets = Ticket::where('gerencia', Auth::user()->gerencia)
                 ->where(function ($query) {
                     $query->where('estado', 'Registrado')
@@ -62,7 +61,6 @@ class TicketController extends Controller
                 ->paginate(5);
                 
         }else{
-            echo 'acaaaaaaaaaaaaaaaaaaaaaaaaaaaaa2';
             $tickets = Ticket::where('estado', 'Registrado')
             ->orWhere('estado', 'En Curso')
             ->paginate(5);
@@ -151,7 +149,10 @@ class TicketController extends Controller
         if (!Auth::user()->hasPermissionTo('tickets.show')) {
             return redirect()->route('homeportal')->with('error', 'No tienes permisos para acceder a este sitio');
         }
-        return view('portal_it.layouts.visualizar', ['ticket' => $ticket]);
+        $tecnicos = Tecnico::all();
+        return view('portal_it.layouts.visualizar', ['ticket' => $ticket])->with([
+            'tecnicos' => $tecnicos
+        ]);
     }
 
     /**

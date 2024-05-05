@@ -2,6 +2,24 @@
 @extends('portal_it.layouts.base')
 
 @section('content')
+<style>
+    /* Estilos para el tooltip */
+    .info_tecnicos_visto {
+        position: absolute;
+        background-color: #fff;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        padding: 10px;
+        box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+        z-index: 9999;
+        color: black;
+    }
+
+    /* Estilos para el icono */
+    #icono-tecnico {
+        cursor: pointer;
+    }
+</style>
 <div class="row">
     <div class="col-12">
         <div style="display: flex;">
@@ -21,19 +39,32 @@
             </ul>
         </div>
     @endif
-
+    <div id="tooltip-tecnico" class="info_tecnicos_visto" style=" height:90px; width: 320px; margin-top:-35px; margin-left:320px; display: none;">
+        @foreach ($tecnicos as $tecnico)
+            @if ($tecnico->name_tecnicos === $ticket->tecnico)
+                <strong>Nombre: </strong> <label for="">{{$tecnico->name_tecnicos}}</label><br>
+                <strong>Email: </strong> <label for="">{{$tecnico->email_tecnicos}}</label><br>
+                <strong>Celular: </strong> <label for="">{{$tecnico->tel_tecnicos}}</label><br>
+            @endif
+        @endforeach
+    </div>
     <form  method="POST" action="{{route('tickets.update',$ticket)}}" enctype="multipart/form-data">
         @method('PUT')
         @csrf 
+        
         <div class="col-2" style=" height:40px; width: 500px; margin-top:-10px; display:flex;">
-            <div style=" height:40px; width: 400px; margin-left: 300px; margin-top:-30px; display:flex;"> 
-                    <strong style="width:400px; text-align:center;height:40px;padding:5px;">Técnico Asignado</strong>
+            <div style="height:40px; width: 400px; margin-left: 300px; margin-top:-30px; display:flex;" id="icono-tecnico"> 
+                    <strong style="width:400px; text-align:center;height:50px;padding:5px;"> 
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" style="fill: rgba(255, 255, 255, 1);transform: ;msFilter:;"><path d="M6 22h13a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h1zm6-17.001c1.647 0 3 1.351 3 3C15 9.647 13.647 11 12 11S9 9.647 9 7.999c0-1.649 1.353-3 3-3zM6 17.25c0-2.219 2.705-4.5 6-4.5s6 2.281 6 4.5V18H6v-.75z">
+                    </path></svg>
+                    Técnico Asignado</strong>
                     <select name="tecnico" class="form-select" id="tecnico" style="margin-left: 5px">
                         @foreach ($tecnicos as $tecnico)
                             <option value="{{$tecnico->name_tecnicos}}" {{$tecnico->name_tecnicos === $ticket->tecnico ? 'selected' : ''}}>{{$tecnico->name_tecnicos}}</option>
                         @endforeach
                     </select>
             </div>
+            
         </div>
         
         <div class="row" style="margin-top:-35px;">
@@ -173,30 +204,22 @@
 </div>
 <script>
     document.addEventListener("DOMContentLoaded", function() {
+        const iconoTecnico = document.getElementById('icono-tecnico');
         const tooltipTecnico = document.getElementById('tooltip-tecnico');
-        const tecnicoAsignadoDiv = document.querySelector('.tecnico-asignado');
 
-        // Función para mostrar los datos del técnico en el tooltip
-        function mostrarDatosTecnico(event) {
-            const tecnicoData = JSON.parse(tecnicoAsignadoDiv.dataset.tecnico);
-            tooltipTecnico.innerHTML = `
-                <strong>Nombre:</strong> ${$tecnicos.name_tecnicos} <br>
-                <strong>Email:</strong> ${$tecnicos.email_tecnicos} <br>
-                <strong>Departamento:</strong> ${$tecnicos.tel_tecnicos}
-            `;
-            tooltipTecnico.style.left = event.pageX + 'px';
-            tooltipTecnico.style.top = event.pageY + 'px';
+        // Función para mostrar el tooltip del técnico
+        function mostrarTooltipTecnico(event) {
             tooltipTecnico.style.display = 'block';
         }
 
-        // Función para ocultar el tooltip
-        function ocultarTooltip() {
+        // Función para ocultar el tooltip del técnico
+        function ocultarTooltipTecnico(event) {
             tooltipTecnico.style.display = 'none';
         }
 
-        // Asignar eventos al div del técnico asignado
-        tecnicoAsignadoDiv.addEventListener('mouseover', mostrarDatosTecnico);
-        tecnicoAsignadoDiv.addEventListener('mouseout', ocultarTooltip);
+        // Asignar eventos de mouse al icono
+        iconoTecnico.addEventListener('mouseover', mostrarTooltipTecnico);
+        iconoTecnico.addEventListener('mouseout', ocultarTooltipTecnico);
     });
 </script>
 @endsection
