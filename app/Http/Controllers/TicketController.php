@@ -33,19 +33,54 @@ class TicketController extends Controller
     {
     }
 
-    public function indexall()
-    {
-        if (!Auth::user()->hasPermissionTo('tickets.index') && !Auth::user()->hasPermissionTo('tickets.index.gerencia')) {
-            return redirect()->route('homeportal')->with('error', 'No tienes permisos para acceder a este sitio');
-        }
-        if (Auth::user()->hasPermissionTo('tickets.index.gerencia')) {
-            $tickets = Ticket::where('gerencia', Auth::user()->gerencia)->paginate(5);
-        } else {
-            $tickets = Ticket::paginate(5);
-        }
-
-        return view('portal_it.layouts.index_tickets', array('tickets' => $tickets));
+    public function indexall(Request $request)
+{
+    if (!Auth::user()->hasPermissionTo('tickets.index') && !Auth::user()->hasPermissionTo('tickets.index.gerencia')) {
+        return redirect()->route('homeportal')->with('error', 'No tienes permisos para acceder a este sitio');
     }
+
+    $query = Ticket::query();
+
+    // Aplicar búsqueda
+    if ($request->has('search')) {
+        $search = $request->input('search');
+        $query->where('asunto_ticket', 'like', "%$search%");
+    }
+
+    $order = $request->input('order', 'id_asc');
+
+    switch ($order) {
+        case 'id_asc':
+            $query->orderBy('id', 'asc');
+            break;
+        case 'id_desc':
+            $query->orderBy('id', 'desc');
+            break;
+        case 'priority_asc':
+            $query->orderByRaw("FIELD(prioridad, 'Baja', 'Media', 'Alta', 'Crítica')");
+            break;
+        case 'priority_desc':
+            $query->orderByRaw("FIELD(prioridad, 'Crítica', 'Alta', 'Media', 'Baja')");
+            break;
+        default:
+            // Default sorting by ID ascending
+            $query->orderBy('id', 'asc');
+            break;
+    }
+
+    // Obtener los resultados paginados
+    if (Auth::user()->hasPermissionTo('tickets.index.gerencia')) {
+        $tickets = $query->where('gerencia', Auth::user()->gerencia)->paginate(5);
+    } else {
+        $tickets = $query->paginate(3);
+    }
+
+    // Pasar los parámetros de búsqueda y ordenamiento a la vista
+    $search = $request->input('search');
+
+    return view('portal_it.layouts.index_tickets',  compact('tickets', 'search', 'order'));
+}
+
 
     public function indexpendientes()
     {
