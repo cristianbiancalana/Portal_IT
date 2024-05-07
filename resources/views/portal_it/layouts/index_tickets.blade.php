@@ -41,10 +41,11 @@
             </svg>{{ session('status') }}
             </div>
         @endif
+        
         <div  style="display: flex; flex-direction:row;">
             <form method="GET" action="{{ route('totaltickets') }}">
                 <input type="text" name="search" value="{{ $search }}" placeholder="Buscar..." class="form-control" style="width:200px; height:30px;">
-                <button type="submit" class="btn btn-primary" style="width:95px; height:30px; margin-left:210px; margin-top:-59px;">Buscar</button>
+                <button type="submit" class="btn btn-primary" style="width:95px; height:30px; margin-left:210px; margin-top:-59px; padding:2px;">Buscar</button>
             </form>
         </div>
 

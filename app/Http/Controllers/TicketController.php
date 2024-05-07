@@ -82,10 +82,38 @@ class TicketController extends Controller
     }
 
 
-    public function indexpendientes()
+    public function indexpendientes(Request $request)
     {
         if (!Auth::user()->hasPermissionTo('tickets.index.pendiente') && !Auth::user()->hasPermissionTo('tickets.index.gerencia.pendientes')) {
             return redirect()->route('homeportal')->with('error', 'No tienes permisos para acceder a este sitio');
+        }
+        $query = Ticket::query();
+
+        // Aplicar búsqueda
+        if ($request->has('search')) {
+            $search = $request->input('search');
+            $query->where('asunto_ticket', 'like', "%$search%");
+        }
+
+        $order = $request->input('order', 'id_asc');
+
+        switch ($order) {
+            case 'id_asc':
+                $query->orderBy('id', 'asc');
+                break;
+            case 'id_desc':
+                $query->orderBy('id', 'desc');
+                break;
+            case 'priority_asc':
+                $query->orderByRaw("FIELD(prioridad, 'Baja', 'Media', 'Alta', 'Crítica')");
+                break;
+            case 'priority_desc':
+                $query->orderByRaw("FIELD(prioridad, 'Crítica', 'Alta', 'Media', 'Baja')");
+                break;
+            default:
+                // Default sorting by ID ascending
+                $query->orderBy('id', 'asc');
+                break;
         }
         if (Auth::user()->hasPermissionTo('tickets.index.gerencia.pendientes')) {
             $tickets = Ticket::where('gerencia', Auth::user()->gerencia)
@@ -93,15 +121,19 @@ class TicketController extends Controller
                     $query->where('estado', 'Registrado')
                         ->orWhere('estado', 'En Curso');
                 })
-                ->paginate(5);
+                ->paginate(3);
                 
         }else{
             $tickets = Ticket::where('estado', 'Registrado')
             ->orWhere('estado', 'En Curso')
-            ->paginate(5);
+            ->paginate(3);
         }
+
         
-        return view('portal_it.layouts.index_tickets_pendientes', array('tickets' => $tickets));
+        // Pasar los parámetros de búsqueda y ordenamiento a la vista
+        $search = $request->input('search');
+        
+        return view('portal_it.layouts.index_tickets_pendientes', compact('tickets', 'search', 'order'));
     }
     
     /**

@@ -16,13 +16,44 @@
             </svg>{{ session('status') }}
             </div>
         @endif
+
+        <div  style="display: flex; flex-direction:row;">
+            <form method="GET" action="{{ route('totaltickets') }}">
+                <input type="text" name="search" value="{{ $search }}" placeholder="Buscar..." class="form-control" style="width:200px; height:30px;">
+                <button type="submit" class="btn btn-primary" style="width:95px; height:30px; margin-left:210px; margin-top:-59px;padding:2px;">Buscar</button>
+            </form>
+        </div>
+
+
         <div class="col-12 mt-4">
-        <div style="max-width: 1500px; margin: 0 0 20px 0; ">
-            <table class="table table-sm table-dark table-hover" style="text-align:center; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
+            <div style="max-width: 1500px; margin: 0 0 20px 0; ">
+                <table class="table table-sm table-dark table-hover" style="text-align:center; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
                     <thead>
                         <tr>
-                            <th>ID Ticket</th>
-                            <th>Prioridad</th>
+                        <th>ID Ticket | 
+                                <a href="{{ route('totaltickets', ['search' => request('search'), 'order' => 'id_asc']) }}">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="22" height="20" viewBox="0 0 24 24" style="fill: rgba(255, 255, 255, 1);">
+                                        <path d="m12 6.879-7.061 7.06 2.122 2.122L12 11.121l4.939 4.94 2.122-2.122z"></path>
+                                    </svg>
+                                </a>
+                                <a href="{{ route('totaltickets', ['search' => request('search'), 'order' => 'id_desc']) }}">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="22" height="20" viewBox="0 0 24 24" style="fill: rgba(255, 255, 255, 1);">
+                                        <path d="M16.939 7.939 12 12.879l-4.939-4.94-2.122 2.122L12 17.121l7.061-7.06z"></path>
+                                    </svg>
+                                </a>
+                            </th>
+                            <th>Prioridad | 
+                                <a href="{{ route('totaltickets', ['search' => request('search'),  'order' => 'priority_asc']) }}">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="22" height="20" viewBox="0 0 24 24" style="fill: rgba(255, 255, 255, 1);">
+                                        <path d="m12 6.879-7.061 7.06 2.122 2.122L12 11.121l4.939 4.94 2.122-2.122z"></path>
+                                    </svg>
+                                </a>
+                                <a href="{{ route('totaltickets', ['search' => request('search'),  'order' => 'priority_desc']) }}">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="22" height="20" viewBox="0 0 24 24" style="fill: rgba(255, 255, 255, 1);">
+                                        <path d="M16.939 7.939 12 12.879l-4.939-4.94-2.122 2.122L12 17.121l7.061-7.06z"></path>
+                                    </svg>
+                                </a>
+                            </th>
                             <th>Asunto</th>
                             <th>Fecha</th>
                             <th>Solicitante</th>
