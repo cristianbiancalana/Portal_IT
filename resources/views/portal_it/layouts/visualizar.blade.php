@@ -42,7 +42,7 @@
         </div>
     @endif
 
-        <div id="tooltip-tecnico" class="info_tecnicos_visto" style=" height:90px; width: 320px; margin-top:-35px; margin-left:320px; display: none;">
+        <div id="tooltip-tecnico" class="info_tecnicos_visto" class="text-slate-500 font-medium" style=" height:90px; width: 320px; margin-top:-35px; margin-left:320px; display: none;">
             @foreach ($tecnicos as $tecnico)
                 @if ($tecnico->name_tecnicos === $ticket->tecnico)
                     <strong>Nombre: </strong> <label for="">{{$tecnico->name_tecnicos}}</label><br>
@@ -52,7 +52,7 @@
             @endforeach
         </div>
         <div class="col-2" style=" height:40px; width: 500px; margin-top:-10px; display:flex;">
-            <div style="height:40px; width: 400px; margin-left: 300px; margin-top:-30px; display:flex;" id="icono-tecnico"> 
+            <div style="height:37px; width: 400px; margin-left: 300px; margin-top:-30px; display:flex;" id="icono-tecnico"> 
                     <strong style="width:400px; text-align:center;height:50px;padding:5px;"> 
                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" style="fill: rgba(255, 255, 255, 1);"><path d="M6 22h13a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h1zm6-17.001c1.647 0 3 1.351 3 3C15 9.647 13.647 11 12 11S9 9.647 9 7.999c0-1.649 1.353-3 3-3zM6 17.25c0-2.219 2.705-4.5 6-4.5s6 2.281 6 4.5V18H6v-.75z">
                     </path></svg>

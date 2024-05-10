@@ -273,7 +273,7 @@
             </div>
 
             <div class="text-center">
-                <button type="submit" class="btn btn-primary" style="width:100px;">Crear</button>
+                <button type="submit" class="btn btn-outline-primary btn-sm" style="width:100px;">Crear</button>
                 <a href="{{ route('parametros') }}" class="btn btn-primary" style="width:100px; margin-left: 10px;">Volver</a>
             </div>
         </form>
