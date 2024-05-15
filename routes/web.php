@@ -1,9 +1,9 @@
 <?php
 
-use App\Http\Controllers\EstadoController;
-use App\Http\Controllers\ProfileController;
+use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Database\Query\IndexHint;
 use Illuminate\Support\Facades\Route;
+//Modelos
 use App\Models\Ticket;
 use App\Models\Gerencia;
 use App\Models\Puesto;
@@ -14,21 +14,25 @@ use App\Models\Sistema;
 use App\Models\Estado;
 use App\Models\Prioridad;
 use App\Models\Tecnico;
+use App\Model\User;
+use Spatie\Permission\Traits\HasRoles;
+use Spatie\Permission\Models\Role;
+//Controladores
 use App\Http\Controllers\GerenciaController;
 use App\Http\Controllers\PrioridadController;
 use App\Http\Controllers\PuestoController;
 use App\Http\Controllers\TicketController;
 use App\Http\Controllers\userController;
-use Illuminate\Foundation\Auth\User as Authenticatable;
-use Spatie\Permission\Traits\HasRoles;
-use App\Model\User;
+use App\Http\Controllers\EditProfileController;
+use App\Http\Controllers\EstadoController;
+use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\SegmentoController;
 use App\Http\Controllers\SistemaController;
 use App\Http\Controllers\ProblemasController;
 use App\Http\Controllers\ProveedorController;
 use App\Http\Controllers\TecnicosController;
-use Spatie\Permission\Models\Role;
+
 
 
 /*
@@ -58,9 +62,15 @@ Route::middleware('auth')->group(function () {
 
     Route::view('/home', 'portal_it.layouts.home')->name('homeportal');
 
-    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
-    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
-    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+    //opciones de usuario - cuando inicia
+    Route::get('/profile', [EditProfileController::class, 'showUser'])->name('profile.edit');
+    Route::patch('/profileupdate', [EditProfileController::class, 'updateProfile'])->name('profile.update');
+    Route::post('/profile/change-password', [EditProfileController::class, 'changePassword'])->name('profile.changePassword');
+
+
+    // Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+    // Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
+    // Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
     Route::get('/archivos/{archivo}', 'ArchivoController@show')->middleware('auth');
     //Solapa parametros
     Route::get('/parametros', function () {
