@@ -86,52 +86,54 @@
     <div class="container">
         @yield('content')
     </div>
+    <form method="POST" action="{{ route('logout') }}">
+    @csrf
+    
+    </form>
     <script>
-        // Tiempo de vida de la sesión en minutos
-        var sessionLifetime = {{ config('session.lifetime') }};
-        // Tiempo de advertencia antes de que expire la sesión en minutos
-        var warningTime = 1; // Ajusta este valor según sea necesario
-        // Tiempo de espera antes de cerrar la sesión automáticamente en milisegundos
-        var autoLogoutTime = 15000; // 15 segundos
+        var isAuthenticated = {{ Auth::check() ? 'true' : 'false' }};
+        var warningTime = 2 * 60 * 1000; // 2 minutos de inactividad
+        var autoLogoutTime = 15000; // 15 segundos después de la advertencia
+        var warningTimeout;
+        var logoutTimeout;
 
-        // Función para mostrar el aviso de cierre de sesión
         function showSessionTimeoutWarning() {
-            var shouldStayLoggedIn = confirm("Tu sesión está a punto de expirar. ¿Quieres continuar?");
-            if (shouldStayLoggedIn) {
-                // Realizar una solicitud a una ruta para mantener la sesión activa
-                fetch('{{ route('keep-alive') }}').then(response => {
-                    if (response.ok) {
-                        // Reiniciar el temporizador
-                        startSessionTimer();
-                    }
-                });
-            } else {
-                // Redirigir a la página principal
-                window.location.href = '{{ route('home') }}';
-            }
+            return confirm("Tu sesión está a punto de expirar. ¿Quieres continuar?");
         }
 
-        // Función para cerrar la sesión automáticamente
-        function autoLogout() {
-            // Redirigir a la página de cierre de sesión
-            window.location.href = '{{ route('logout') }}';
+        function logoutUser() {
+            document.getElementById('logout-form').submit();
         }
 
-        // Función para iniciar el temporizador de sesión
-        function startSessionTimer() {
-            // Mostrar la advertencia de tiempo de sesión
-            setTimeout(showSessionTimeoutWarning, (sessionLifetime - warningTime) * 60 * 1000);
-
-            // Cerrar sesión automáticamente después de 15 segundos si no se toma ninguna acción
-            setTimeout(autoLogout, (sessionLifetime - warningTime) * 60 * 1000 + autoLogoutTime);
+        function startWarningTimer() {
+            warningTimeout = setTimeout(function() {
+                var userWantsToStay = showSessionTimeoutWarning();
+                if (userWantsToStay) {
+                    fetch('/keep-alive')
+                        .then(response => {
+                            if (!response.ok) {
+                                logoutUser();
+                            } else {
+                                startWarningTimer();
+                            }
+                        });
+                } else {
+                    logoutUser();
+                }
+            }, warningTime);
         }
 
-        // Iniciar el temporizador al cargar la página
-        document.addEventListener('DOMContentLoaded', function() {
-            if (isAuthenticated) {
-                startSessionTimer();
-            }
-        });
+        function resetInactivityTimer() {
+            clearTimeout(warningTimeout);
+            clearTimeout(logoutTimeout);
+            startWarningTimer();
+        }
+
+        if (isAuthenticated) {
+            window.onload = resetInactivityTimer;
+            document.onmousemove = resetInactivityTimer;
+            document.onkeypress = resetInactivityTimer;
+        }
     </script>
 </body>
 </html>

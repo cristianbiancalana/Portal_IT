@@ -32,6 +32,7 @@ use App\Http\Controllers\SistemaController;
 use App\Http\Controllers\ProblemasController;
 use App\Http\Controllers\ProveedorController;
 use App\Http\Controllers\TecnicosController;
+use App\Http\Controllers\LoginController;
 
 
 
@@ -57,12 +58,9 @@ Route::get('/', function () {
     return view('portal_it.layouts.index', compact('gerencias', 'puestos'));
 })->name('indexportal');
 
-Route::middleware('auth')->group(function () {
 
-    Route::get('/keep-alive', function() {
-        return response()->json(['status' => 'ok']);
-    })->name('keep-alive');
-    
+Route::middleware('auth')->group(function () {
+ 
     Route::view('/home', 'portal_it.layouts.home')->name('homeportal');
 
     //opciones de usuario - cuando inicia
@@ -215,6 +213,9 @@ Route::middleware('auth')->group(function () {
             abort(404);
         }
     })->where('archivo', '.*');
+    Route::get('/keep-alive', function () {
+        return response()->json(['status' => 'alive']);
+    })->name('keep-alive');
     Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
 });
 
