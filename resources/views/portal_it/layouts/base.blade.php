@@ -86,8 +86,52 @@
     <div class="container">
         @yield('content')
     </div>
+    <script>
+        // Tiempo de vida de la sesión en minutos
+        var sessionLifetime = {{ config('session.lifetime') }};
+        // Tiempo de advertencia antes de que expire la sesión en minutos
+        var warningTime = 1; // Ajusta este valor según sea necesario
+        // Tiempo de espera antes de cerrar la sesión automáticamente en milisegundos
+        var autoLogoutTime = 15000; // 15 segundos
 
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.1.3/js/bootstrap.bundle.min.js"></script>
+        // Función para mostrar el aviso de cierre de sesión
+        function showSessionTimeoutWarning() {
+            var shouldStayLoggedIn = confirm("Tu sesión está a punto de expirar. ¿Quieres continuar?");
+            if (shouldStayLoggedIn) {
+                // Realizar una solicitud a una ruta para mantener la sesión activa
+                fetch('{{ route('keep-alive') }}').then(response => {
+                    if (response.ok) {
+                        // Reiniciar el temporizador
+                        startSessionTimer();
+                    }
+                });
+            } else {
+                // Redirigir a la página principal
+                window.location.href = '{{ route('home') }}';
+            }
+        }
 
+        // Función para cerrar la sesión automáticamente
+        function autoLogout() {
+            // Redirigir a la página de cierre de sesión
+            window.location.href = '{{ route('logout') }}';
+        }
+
+        // Función para iniciar el temporizador de sesión
+        function startSessionTimer() {
+            // Mostrar la advertencia de tiempo de sesión
+            setTimeout(showSessionTimeoutWarning, (sessionLifetime - warningTime) * 60 * 1000);
+
+            // Cerrar sesión automáticamente después de 15 segundos si no se toma ninguna acción
+            setTimeout(autoLogout, (sessionLifetime - warningTime) * 60 * 1000 + autoLogoutTime);
+        }
+
+        // Iniciar el temporizador al cargar la página
+        document.addEventListener('DOMContentLoaded', function() {
+            if (isAuthenticated) {
+                startSessionTimer();
+            }
+        });
+    </script>
 </body>
 </html>

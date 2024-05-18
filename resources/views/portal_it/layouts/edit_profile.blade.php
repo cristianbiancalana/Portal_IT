@@ -8,35 +8,35 @@
         </div>
 
         @if ($errors->any())
-            <div class="col-12">
-                <div class="alert alert-warning alert-dismissible fade show" role="alert">
-                    <strong>Error al editar el perfil, verificar:</strong>
-                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                    <ul>
-                        @foreach ($errors->all() as $error)
-                            <li>{{ $error }}</li>
-                        @endforeach
-                    </ul>
-                </div>
+        <div class="col-12">
+            <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                <strong>Error al editar el perfil, verificar:</strong>
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                <ul>
+                    @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
             </div>
+        </div>
         @endif
 
         @if (session('error'))
-            <div class="col-12">
-                <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                    <strong>Error: {{ session('error') }}</strong>
-                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                </div>
+        <div class="col-12">
+            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                <strong>Error: {{ session('error') }}</strong>
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
             </div>
+        </div>
         @endif
 
         @if (session('success'))
-            <div class="col-12">
-                <div class="alert alert-success alert-dismissible fade show" role="alert" >
-                    <strong>{{ session('success') }}</strong>
-                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                </div>
+        <div class="col-12">
+            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                <strong>{{ session('success') }}</strong>
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
             </div>
+        </div>
         @endif
 
         <div class="col-xs-12 col-sm-12 col-md-4">
@@ -58,9 +58,9 @@
                     <label for="gerencia" class="form-label">Gerencia</label>
                     <select name="gerencia" class="form-select" id="gerencia">
                         @foreach($gerencias as $gerencia)
-                            <option value="{{ $gerencia->nombre_gerencia }}" {{ $gerencia->nombre_gerencia === $user->gerencia ? 'selected' : '' }}>
-                                {{ $gerencia->nombre_gerencia }}
-                            </option>
+                        <option value="{{ $gerencia->nombre_gerencia }}" {{ $gerencia->nombre_gerencia === $user->gerencia ? 'selected' : '' }}>
+                            {{ $gerencia->nombre_gerencia }}
+                        </option>
                         @endforeach
                     </select>
                 </div>
@@ -69,9 +69,9 @@
                     <label for="puesto" class="form-label">Puesto</label>
                     <select name="puesto" class="form-select" id="puesto">
                         @foreach($puestos as $puesto)
-                            <option value="{{ $puesto->name_puesto }}" {{ $puesto->name_puesto === $user->puesto ? 'selected' : '' }}>
-                                {{ $puesto->name_puesto }}
-                            </option>
+                        <option value="{{ $puesto->name_puesto }}" {{ $puesto->name_puesto === $user->puesto ? 'selected' : '' }}>
+                            {{ $puesto->name_puesto }}
+                        </option>
                         @endforeach
                     </select>
                 </div>

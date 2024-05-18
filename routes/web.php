@@ -48,7 +48,7 @@ use App\Http\Controllers\TecnicosController;
 
 Route::get('/dashboard', function () { //inicio del portal
     return view('portal_it.layouts.home');
-});
+})->name('home');
 
 
 Route::get('/', function () {
@@ -59,7 +59,10 @@ Route::get('/', function () {
 
 Route::middleware('auth')->group(function () {
 
-
+    Route::get('/keep-alive', function() {
+        return response()->json(['status' => 'ok']);
+    })->name('keep-alive');
+    
     Route::view('/home', 'portal_it.layouts.home')->name('homeportal');
 
     //opciones de usuario - cuando inicia
@@ -212,6 +215,7 @@ Route::middleware('auth')->group(function () {
             abort(404);
         }
     })->where('archivo', '.*');
+    Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
 });
 
 require __DIR__ . '/auth.php';
