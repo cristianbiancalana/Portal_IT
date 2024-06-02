@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\TypeResourceController;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Database\Query\IndexHint;
 use Illuminate\Support\Facades\Route;
@@ -33,7 +34,7 @@ use App\Http\Controllers\ProblemasController;
 use App\Http\Controllers\ProveedorController;
 use App\Http\Controllers\TecnicosController;
 use App\Http\Controllers\LoginController;
-
+use App\Http\Controllers\RecursoController;
 
 
 /*
@@ -194,6 +195,18 @@ Route::middleware('auth')->group(function () {
     Route::get('/roles/{role}/view', [RoleController::class, 'show'])->name('roles.view');
     Route::delete('/roles/{role}', [RoleController::class, 'destroy'])->name('roles.destroy');
 
+    //Parametrizaciones del portal- Tipo de Recursos
+    Route::get('/typeresource', [TypeResourceController::class, 'index'])->name('typeresource');
+    Route::get('/vista-typeresource', [TypeResourceController::class, 'indextabla'])->name('vistatyperesource');
+    Route::get('/typeresource/create', [TypeResourceController::class, 'create'])->name('envio.typeresource');
+    Route::post('/typeresource/store', [TypeResourceController::class, 'store'])->name('store.typeresource');
+    Route::post('/tabla-typeresource', [TypeResourceController::class, 'mostrarTablaTypeResource'])->name('mostrarTablaTypeResource');
+    Route::get('/tabla-typeresource', [TypeResourceController::class, 'mostrarTablaTypeResource'])->name('mostrarTablaTypeResource');
+    Route::get('/typeresource/{tiposderecurso}/view', [TypeResourceController::class, 'show'])->name('typeresource.view');
+    Route::get('/typeresource/{tiposderecurso}/edit', [TypeResourceController::class, 'edit'])->name('typeresource.edit');
+    Route::put('/typeresource/{tiposderecurso}', [TypeResourceController::class, 'update'])->name('typeresource.update');
+    Route::delete('/typeresource/{tiposderecurso}', [TypeResourceController::class, 'destroy'])->name('typeresource.destroy');
+
 
     //Solapa tickets
     Route::get('/tickets', [TicketController::class, 'indexall'])->name('totaltickets');
@@ -217,6 +230,14 @@ Route::middleware('auth')->group(function () {
         return response()->json(['status' => 'alive']);
     })->name('keep-alive');
     Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
+
+    //Sección Inventario
+    Route::get('/recurso/create', [RecursoController::class, 'create'])->name('recurso.create');
+    Route::post('/recurso/store', [RecursoController::class, 'store'])->name('recurso.store');
+
+
+
+
 });
 
 require __DIR__ . '/auth.php';

@@ -56,7 +56,7 @@
           Inventario
         </a>
         <div class="dropdown-menu bg-dark" aria-labelledby="navbarDropdownMenuLink" style="border-color: white;">
-          <a class="dropdown-item text-white" href="#">Nuevo Insumo</a>
+          <a class="dropdown-item text-white" href="{{route('recurso.create')}}">Nuevo Insumo</a>
           <a class="dropdown-item text-white" href="#">Editar Insumo</a>
           <a class="dropdown-item text-white" href="#">Parque Total de Insumos</a>
         </div>

@@ -96,6 +96,13 @@
                     <button id="eleccion" name="eleccion" type="submit" class="btn btn-primary" style="width: 110px; margin-right: 10px;">Roles</button>
                 </form>
             </div>
+            <div class="text-center mt-2" style="margin-right: 10px;">
+                <form id="form-roles" action="{{ route('mostrarTablaTypeResource') }}" method="post">
+                    @csrf
+                    <button id="eleccion" name="eleccion" type="submit" class="btn btn-primary" style="width: 110px; margin-right: 10px;">Tipos de Recursos</button>
+                </form>
+            </div>
+
         </div>
     </div>
     <div id="tabla-container" style="margin-top: 20px;"></div>
