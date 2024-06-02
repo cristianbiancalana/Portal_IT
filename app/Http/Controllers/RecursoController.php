@@ -10,24 +10,33 @@ class RecursoController extends Controller
 {
     public function create()
     {
-        $tiposderecursos = ['Notebook', 'Impresora', 'Celular', 'Tablet', 'PC de Escritorio', 'Perifericos', 'Monitor', 'Servidor', 'Cámara de Seguridad', 'NVR', 'Access Point', 'Accesorios', 'Dispositivos', 'Herramientas', 'Televisores', 'Insumos'];
+        $tiposderecursos = TypeResource::all();
         return view('portal_it.layouts.newresource', compact('tiposderecursos'));
     }
 
     public function store(Request $request)
     {
+
         $request->validate([
-            'tipo_recurso' => 'required|string',
-            'detalles' => 'required|array',
+            'tipo_recurso' => 'required',
+            'fecha_alta' => 'required|date',
+            'details' => 'required|json',
             'comentario' => 'nullable|string',
         ]);
 
-        Recurso::create([
+        // Decodificar los detalles
+        $details = json_decode($request->details, true);
+
+        // Crear el recurso
+        $recurso = new Recurso([
             'tipo_recurso' => $request->tipo_recurso,
-            'detalles' => $request->detalles,
-            'comentario' => $request->comentario,
+            'fecha_alta' => $request->fecha_alta,
+            'details' => $details,
+            'comentario' => $request->comentario_ticket,
         ]);
 
-        return redirect()->back()->with('status', 'Recurso creado exitosamente');
+        $recurso->save();
+
+        return redirect()->route('recurso.create')->with('status', 'Recurso creado exitosamente');
     }
 }

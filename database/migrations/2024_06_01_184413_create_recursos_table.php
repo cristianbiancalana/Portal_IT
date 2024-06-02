@@ -11,7 +11,7 @@ return new class extends Migration
         Schema::create('recursos', function (Blueprint $table) {
             $table->id();
             $table->string('tipo_recurso');
-            $table->json('detalles');
+            $table->json('details');
             $table->text('comentario')->nullable();
             $table->timestamps();
         });

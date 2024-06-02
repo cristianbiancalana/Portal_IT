@@ -56,13 +56,13 @@
         @endif
     </div>
 </div>
-<form method="POST" action="{{route('nuevo_ticket')}}" enctype="multipart/form-data" id="form">  
+<form method="POST" action="{{route('recurso.store')}}" enctype="multipart/form-data" id="form">  
     @csrf    
     <div class="row">
         <div class="col-xs-12 col-sm-6 col-md-4 mt-2">
             <div class="form-group">
                 <strong>Tipo de Recurso</strong>
-                <select name="name_tiposderecursos" id="name_tiposderecursos" class="form-select" id="prioridad">
+                <select name="tipo_recurso" id="tipo_recurso" class="form-select">
                     <option>Seleccione una Opción</option>
                     @foreach($tiposderecursos as $tiposderecurso)
                         <option value="{{ $tiposderecurso->name_tiposderecursos}}">{{ $tiposderecurso->name_tiposderecursos}}</option>
@@ -84,7 +84,7 @@
         <div class="col-12 mt-2">
             <div class="form-group">
                 <strong>Comentario</strong>
-                <textarea class="form-control" style="height:150px" name="comentario_ticket" id="comentario_ticket" placeholder="Comentario..."></textarea>
+                <textarea class="form-control" style="height:150px" name="comentario" id="comentario" placeholder="Comentario..."></textarea>
             </div>
         </div>
         <div class="col-12 text-center mt-2">
@@ -95,98 +95,99 @@
 </form>
 <script>
     document.addEventListener('DOMContentLoaded', function () {
-        const selectElement = document.getElementById('name_tiposderecursos');
-        const dynamicContent = document.getElementById('dynamic-content');
-        const hiddenInput = document.createElement('input');
-        hiddenInput.type = 'hidden';
-        hiddenInput.name = 'details';
-        hiddenInput.id = 'details';
-        document.forms[0].appendChild(hiddenInput);
+    const selectElement = document.getElementById('tipo_recurso');
+    const dynamicContent = document.getElementById('dynamic-content');
+    const hiddenInput = document.createElement('input');
+    hiddenInput.type = 'hidden';
+    hiddenInput.name = 'details';
+    hiddenInput.id = 'details';
+    document.forms[0].appendChild(hiddenInput);
 
-        selectElement.addEventListener('change', function () {
-            const selectedValue = selectElement.value;
-            dynamicContent.innerHTML = '';
+    selectElement.addEventListener('change', function () {
+        const selectedValue = selectElement.value;
+        dynamicContent.innerHTML = '';
 
-            if (selectedValue === 'Notebook') {
-                dynamicContent.innerHTML = `
-                    <div class="form-group">
-                        <strong>Marca</strong>
-                        <input type="text" name="marca" class="form-control">
-                    </div>
-                    <div class="form-group">
-                        <strong>Modelo</strong>
-                        <input type="text" name="modelo" class="form-control">
-                    </div>
-                    <div class="form-group">
-                        <strong>Serie</strong>
-                        <input type="text" name="serie" class="form-control">
-                    </div>
-                    <div class="form-group">
-                        <strong>Microprocesador</strong>
-                        <input type="text" name="micro" class="form-control">
-                    </div>
-                    <div class="form-group">
-                        <strong>Memoria RAM</strong>
-                        <input type="text" name="ram" class="form-control">
-                    </div>
-                    <div class="form-group">
-                        <strong>Disco</strong>
-                        <input type="text" name="disco" class="form-control">
-                    </div>
-                `;
-            } else if (selectedValue === 'Impresora') {
-                dynamicContent.innerHTML = `
-                    <div class="form-group">
-                        <strong>Marca</strong>
-                        <input type="text" name="marca" class="form-control">
-                    </div>
-                    <div class="form-group">
-                        <strong>Modelo</strong>
-                        <input type="text" name="modelo" class="form-control">
-                    </div>
-                    <div class="form-group">
-                        <strong>Serie</strong>
-                        <input type="text" name="serie" class="form-control">
-                    </div>
-                `;
-            } else if (selectedValue === 'Celular') {
-                dynamicContent.innerHTML = `
-                    <div class="form-group">
-                        <strong>Marca</strong>
-                        <input type="text" name="marca" class="form-control">
-                    </div>
-                    <div class="form-group">
-                        <strong>Modelo</strong>
-                        <input type="text" name="modelo" class="form-control">
-                    </div>
-                    <div class="form-group">
-                        <strong>Serie</strong>
-                        <input type="text" name="serie" class="form-control">
-                    </div>
-                    <div class="form-group">
-                        <strong>IMEI</strong>
-                        <input type="text" name="imei" class="form-control">
-                    </div>
-                `;
-            } // Continúa con las demás opciones...
+        if (selectedValue === 'Notebook') {
+            dynamicContent.innerHTML = `
+                <div class="form-group">
+                    <strong>Marca</strong>
+                    <input type="text" name="marca" class="form-control">
+                </div>
+                <div class="form-group">
+                    <strong>Modelo</strong>
+                    <input type="text" name="modelo" class="form-control">
+                </div>
+                <div class="form-group">
+                    <strong>Serie</strong>
+                    <input type="text" name="serie" class="form-control">
+                </div>
+                <div class="form-group">
+                    <strong>Microprocesador</strong>
+                    <input type="text" name="micro" class="form-control">
+                </div>
+                <div class="form-group">
+                    <strong>Memoria RAM</strong>
+                    <input type="text" name="ram" class="form-control">
+                </div>
+                <div class="form-group">
+                    <strong>Disco</strong>
+                    <input type="text" name="disco" class="form-control">
+                </div>
+            `;
+        } else if (selectedValue === 'Impresora') {
+            dynamicContent.innerHTML = `
+                <div class="form-group">
+                    <strong>Marca</strong>
+                    <input type="text" name="marca" class="form-control">
+                </div>
+                <div class="form-group">
+                    <strong>Modelo</strong>
+                    <input type="text" name="modelo" class="form-control">
+                </div>
+                <div class="form-group">
+                    <strong>Serie</strong>
+                    <input type="text" name="serie" class="form-control">
+                </div>
+            `;
+        } else if (selectedValue === 'Celular') {
+            dynamicContent.innerHTML = `
+                <div class="form-group">
+                    <strong>Marca</strong>
+                    <input type="text" name="marca" class="form-control">
+                </div>
+                <div class="form-group">
+                    <strong>Modelo</strong>
+                    <input type="text" name="modelo" class="form-control">
+                </div>
+                <div class="form-group">
+                    <strong>Serie</strong>
+                    <input type="text" name="serie" class="form-control">
+                </div>
+                <div class="form-group">
+                    <strong>IMEI</strong>
+                    <input type="text" name="imei" class="form-control">
+                </div>
+            `;
+        } // Continúa con las demás opciones...
 
-            // Actualizar el campo oculto con los valores actuales
-            updateHiddenInput();
-        });
-
-        dynamicContent.addEventListener('input', function () {
-            updateHiddenInput();
-        });
-
-        function updateHiddenInput() {
-            const inputs = dynamicContent.querySelectorAll('input');
-            const details = {};
-            inputs.forEach(input => {
-                details[input.name] = input.value;
-            });
-            hiddenInput.value = JSON.stringify(details);
-        }
+        // Actualizar el campo oculto con los valores actuales
+        updateHiddenInput();
     });
+
+    dynamicContent.addEventListener('input', function () {
+        updateHiddenInput();
+    });
+
+    function updateHiddenInput() {
+        const inputs = dynamicContent.querySelectorAll('input');
+        const details = {};
+        inputs.forEach(input => {
+            details[input.name] = input.value;
+        });
+        hiddenInput.value = JSON.stringify(details);
+    }
+});
+
 </script>
 
 @endsection
