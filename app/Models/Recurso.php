@@ -12,6 +12,7 @@ class Recurso extends Model
 
     protected $fillable = [
         'tipo_recurso',
+        'tag',
         'fecha_alta',
         'marca',
         'modelo',

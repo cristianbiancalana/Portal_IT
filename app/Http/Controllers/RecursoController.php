@@ -21,6 +21,7 @@ class RecursoController extends Controller
     // Validación de los datos del request
     $validatedData = $request->validate([
         'tipo_recurso' => 'required|string|max:255',
+        'tag'=> 'required|max:100',
         'fecha_alta' => 'required|date',
         'marca'=> 'required|max:100',
         'modelo' => 'required|max:100',
@@ -40,6 +41,7 @@ class RecursoController extends Controller
     // Crear un nuevo recurso
     $recurso = new Recurso();
     $recurso->tipo_recurso = $validatedData['tipo_recurso'];
+    $recurso->tag = $validatedData['tag'];
     $recurso->fecha_alta = $validatedData['fecha_alta'];
     $recurso->marca = $validatedData['marca'];
     $recurso->modelo = $validatedData['modelo'];

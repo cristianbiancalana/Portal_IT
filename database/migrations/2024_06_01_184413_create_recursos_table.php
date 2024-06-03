@@ -11,6 +11,7 @@ return new class extends Migration
         Schema::create('recursos', function (Blueprint $table) {
             $table->id();
             $table->string('tipo_recurso');
+            $table->string('tag');
             $table->date('fecha_alta');
             $table->string('marca');
             $table->string('modelo');

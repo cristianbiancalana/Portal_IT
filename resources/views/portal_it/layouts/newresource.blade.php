@@ -78,6 +78,12 @@
         </div>
         <div class="col-xs-12 col-sm-6 col-md-4 mt-2">
             <div class="form-group">
+                <strong>Nombre del recurso</strong>
+                <input type="text" name="tag" class="form-control" id="tag">
+            </div>
+        </div>
+        <div class="col-xs-12 col-sm-6 col-md-4 mt-2">
+            <div class="form-group">
                 <strong>Fecha de Alta</strong>
                 <input type="date" name="fecha_alta" class="form-control" id="fecha_alta" value="{{ date('Y-m-d') }}">
             </div>
@@ -163,6 +169,21 @@
                     <div class="form-group">
                         <strong>IMEI</strong>
                         <input type="text" name="imei" class="form-control">
+                    </div>
+                `;
+            } else if (selectedValue === 'Servidor') {
+                dynamicContent.innerHTML = `
+                    <div class="form-group">
+                        <strong>Microprocesador</strong>
+                        <input type="text" name="micro" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <strong>Memoria RAM</strong>
+                        <input type="text" name="ram" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <strong>Disco</strong>
+                        <input type="text" name="disco" class="form-control">
                     </div>
                 `;
             }
