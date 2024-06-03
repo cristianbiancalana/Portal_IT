@@ -11,6 +11,10 @@ return new class extends Migration
         Schema::create('recursos', function (Blueprint $table) {
             $table->id();
             $table->string('tipo_recurso');
+            $table->date('fecha_alta');
+            $table->string('marca');
+            $table->string('modelo');
+            $table->string('serie');
             $table->json('details');
             $table->text('comentario')->nullable();
             $table->timestamps();

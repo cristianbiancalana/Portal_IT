@@ -13,30 +13,44 @@ class RecursoController extends Controller
         $tiposderecursos = TypeResource::all();
         return view('portal_it.layouts.newresource', compact('tiposderecursos'));
     }
-
     public function store(Request $request)
-    {
+{
+    // Mostrar los datos recibidos para depuración
+    // dd($request->all());
 
-        $request->validate([
-            'tipo_recurso' => 'required',
-            'fecha_alta' => 'required|date',
-            'details' => 'required|json',
-            'comentario' => 'nullable|string',
-        ]);
+    // Validación de los datos del request
+    $validatedData = $request->validate([
+        'tipo_recurso' => 'required|string|max:255',
+        'fecha_alta' => 'required|date',
+        'marca'=> 'required|max:100',
+        'modelo' => 'required|max:100',
+        'serie'=> 'required|max:30',
+        'details' => 'nullable|string', // Validamos como string ya que es JSON
+        'comentario' => 'nullable|string',
+    ]);
 
-        // Decodificar los detalles
-        $details = json_decode($request->details, true);
+    // Decodificar los detalles en un array
+    $details = json_decode($request->input('details'), true);
 
-        // Crear el recurso
-        $recurso = new Recurso([
-            'tipo_recurso' => $request->tipo_recurso,
-            'fecha_alta' => $request->fecha_alta,
-            'details' => $details,
-            'comentario' => $request->comentario_ticket,
-        ]);
-
-        $recurso->save();
-
-        return redirect()->route('recurso.create')->with('status', 'Recurso creado exitosamente');
+    // Verificar si hay errores en la decodificación del JSON
+    if (json_last_error() !== JSON_ERROR_NONE) {
+        return redirect()->back()->withErrors(['details' => 'Invalid JSON in details field'])->withInput();
     }
+
+    // Crear un nuevo recurso
+    $recurso = new Recurso();
+    $recurso->tipo_recurso = $validatedData['tipo_recurso'];
+    $recurso->fecha_alta = $validatedData['fecha_alta'];
+    $recurso->marca = $validatedData['marca'];
+    $recurso->modelo = $validatedData['modelo'];
+    $recurso->serie = $validatedData['serie'];
+    $recurso->details = $details; // Guardar el array decodificado
+    $recurso->comentario = $validatedData['comentario'] ?? '';
+
+    $recurso->save();
+
+    return redirect()->route('recurso.create')->with('status', 'Recurso creado exitosamente');
+}
+
+
 }

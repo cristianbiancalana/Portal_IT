@@ -12,11 +12,15 @@ class Recurso extends Model
 
     protected $fillable = [
         'tipo_recurso',
-        'detalles',
+        'fecha_alta',
+        'marca',
+        'modelo',
+        'serie',
+        'details',
         'comentario',
     ];
 
     protected $casts = [
-        'detalles' => 'array',
+        'details' => 'array',
     ];
 }
