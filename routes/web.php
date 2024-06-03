@@ -232,6 +232,7 @@ Route::middleware('auth')->group(function () {
     Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
 
     //Sección Inventario
+    Route::get('/recursos', [RecursoController::class, 'index'])->name('recurso.index');
     Route::get('/recurso/create', [RecursoController::class, 'create'])->name('recurso.create');
     Route::post('/recurso/store', [RecursoController::class, 'store'])->name('recurso.store');
 

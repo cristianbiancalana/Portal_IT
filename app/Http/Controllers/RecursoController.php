@@ -8,6 +8,14 @@ use App\Models\Recurso;
 
 class RecursoController extends Controller
 {
+    public function index()
+    {
+        // if (!Auth::user()->hasPermissionTo('problemas.index')) {
+        //     return redirect()->route('homeportal')->with('error', 'No tienes permisos para acceder a este sitio');
+        // }
+        $recursos= Recurso::all();
+        return view('portal_it.layouts.index_resource', array('recursos'=>$recursos));
+    }
     public function create()
     {
         $tiposderecursos = TypeResource::all();
