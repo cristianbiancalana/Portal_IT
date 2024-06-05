@@ -29,7 +29,6 @@ async function getHardwareInfo() {
                 model: system.model,
                 marca: system.manufacturer,
             }
-            
         };
         console.log(JSON.stringify(hardwareInfo, null, 2));
     } catch (e) {

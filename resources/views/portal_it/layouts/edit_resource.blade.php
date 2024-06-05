@@ -63,4 +63,62 @@
     </div>
 </div>
 
+<form  method="POST" action="{{route('recurso.update',$recurso)}}" enctype="multipart/form-data">
+        @method('PUT')
+        @csrf 
+        <div class="row">
+        <div class="col-xs-12 col-sm-6 col-md-4 mt-2">
+            <div class="form-group">
+                <strong>Tipo de Recurso</strong>
+                <select name="tipo_recurso" id="tipo_recurso" class="form-select">
+                    <option>Seleccione una Opción</option>
+                    @foreach($tiposderecursos as $tiposderecurso)
+                        <option value="{{ $tiposderecurso->name_tiposderecursos}}">{{ $tiposderecurso->name_tiposderecursos}}</option>
+                    @endforeach
+                </select>
+            </div>
+        </div>
+        <div class="col-xs-12 col-sm-6 col-md-4 mt-2">
+            <div class="form-group">
+                <strong>Nombre del recurso</strong>
+                <input type="text" name="tag" class="form-control" id="tag" value="{{ $recurso->tag }}">
+            </div>
+        </div>
+        <div class="col-xs-12 col-sm-6 col-md-4 mt-2">
+            <div class="form-group">
+                <strong>Fecha de Alta</strong>
+                <input type="date" name="fecha_alta" class="form-control" id="fecha_alta" value="{{ $recurso->fecha_alta }}">
+            </div>
+        </div>
+        <div class="col-xs-12 col-sm-6 col-md-4 mt-2">
+            <div class="form-group">
+                <strong>Marca</strong>
+                <input type="text" name="marca" class="form-control" id="marca" value="{{ $recurso->marca}}">
+            </div>
+        </div>
+        <div class="col-xs-12 col-sm-6 col-md-4 mt-2">
+            <div class="form-group">
+                <strong>Modelo</strong>
+                <input type="text" name="modelo" class="form-control" id="modelo" value="{{ $recurso->modelo }}">
+            </div>
+        </div>
+        <div class="col-xs-12 col-sm-6 col-md-4 mt-2">
+            <div class="form-group">
+                <strong>Número de Serie</strong>
+                <input type="text" name="serie" class="form-control" id="serie" value="{{ $recurso->serie }}">
+            </div>
+        </div>
+        <div class="col-12 mt-2">
+            <div class="form-group">
+                <div id="dynamic-content" style="display:grid; grid-template-columns: repeat(3, 1fr); gap: 1rem;"></div>
+            </div>
+        </div>
+        <div class="col-12 mt-2">
+            <div class="form-group">
+                <strong>Comentario</strong>
+                <textarea class="form-control" style="height:150px" name="comentario" id="comentario" placeholder="Comentario..." value="{{ $recurso->comentario }}"></textarea>
+            </div>
+        </div>
+</form>
+
 @endsection
