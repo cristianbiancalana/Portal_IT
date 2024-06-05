@@ -113,6 +113,35 @@
                     </tbody>
                 </table>
             </div>
+            <button class="btn btn-primary" onclick="registerHardware()">Registrar Notebook</button>
         </div>
+        <script>
+            function registerHardware() {
+                fetch('/register-hardware', {
+                    method: 'GET',
+                    headers: {
+                        'Accept': 'application/json',
+                        'Content-Type': 'application/json'
+                    }
+                })
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Network response was not ok ' + response.statusText);
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    if (data.status === 'success') {
+                        alert('Hardware registrado exitosamente');
+                    } else {
+                        alert('Error: ' + data.message);
+                    }
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    alert('Ocurrió un error: ' + error.message);
+                });
+            }
+        </script>
 
 @endsection
