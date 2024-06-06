@@ -13,6 +13,12 @@ use Illuminate\Pagination\Paginator;
 
 class RecursoController extends Controller
 {
+    public function checkSerial(Request $request)
+    {
+        $serial = $request->input('serial');
+        $exists = Recurso::where('serial_number', $serial)->exists();
+        return response()->json(['exists' => $exists]);
+    }
     public function index()
     {
         // if (!Auth::user()->hasPermissionTo('problemas.index')) {

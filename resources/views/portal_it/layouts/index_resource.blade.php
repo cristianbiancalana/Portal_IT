@@ -83,55 +83,54 @@
         </div>
         <script>
             function registerHardware() {
-    fetch('/register-hardware', {
-        method: 'GET',
-        headers: {
-            'Accept': 'application/json',
-            'Content-Type': 'application/json'
-        }
-    })
-    .then(response => {
-        if (!response.ok) {
-            return response.text().then(text => {
-                try {
-                    // Intentar convertir el texto en JSON
-                    const json = JSON.parse(text);
-                    return Promise.reject(new Error(json.message || 'Unknown error'));
-                } catch (e) {
-                    // Si la respuesta no es JSON, lanzar un error con el texto original
-                    return Promise.reject(new Error('Network response was not ok: ' + response.statusText + ' - ' + text));
+                fetch('/register-hardware', {
+                    method: 'GET',
+                    headers: {
+                        'Accept': 'application/json',
+                        'Content-Type': 'application/json'
+                    }
+                })
+                .then(response => {
+                    if (!response.ok) {
+                        return response.text().then(text => {
+                            try {
+                                // Intentar convertir el texto en JSON
+                                const json = JSON.parse(text);
+                                return Promise.reject(new Error(json.message || 'Unknown error'));
+                            } catch (e) {
+                                // Si la respuesta no es JSON, lanzar un error con el texto original
+                                return Promise.reject(new Error('Network response was not ok: ' + response.statusText + ' - ' + text));
+                            }
+                        });
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    if (data.status === 'success') {
+                        showMessage('success', 'Hardware registrado exitosamente');
+                    } else {
+                        showMessage('error', 'Error: ' + data.message);
+                    }
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    showMessage('error', 'Ocurrió un error: ' + error.message);
+                    console.log("aca llego");
+                });
+            }
+
+            function showMessage(type, message) {
+                const messageContainer = document.getElementById('messageContainer');
+                if (messageContainer) {
+                    messageContainer.innerHTML = `
+                        <div class="alert alert-${type === 'success' ? 'success' : 'danger'}">
+                            <strong>${type === 'success' ? 'Éxito' : 'Error'}:</strong> ${message}
+                        </div>
+                    `;
+                } else {
+                    console.error('messageContainer element not found');
                 }
-            });
-        }
-        return response.json();
-    })
-    .then(data => {
-        if (data.status === 'success') {
-            showMessage('success', 'Hardware registrado exitosamente');
-        } else {
-            showMessage('error', 'Error: ' + data.message);
-        }
-    })
-    .catch(error => {
-        console.error('Error:', error);
-        showMessage('error', 'Ocurrió un error: ' + error.message);
-        console.log("aca llego");
-    });
-}
-
-function showMessage(type, message) {
-    const messageContainer = document.getElementById('messageContainer');
-    if (messageContainer) {
-        messageContainer.innerHTML = `
-            <div class="alert alert-${type === 'success' ? 'success' : 'danger'}">
-                <strong>${type === 'success' ? 'Éxito' : 'Error'}:</strong> ${message}
-            </div>
-        `;
-    } else {
-        console.error('messageContainer element not found');
-    }
-}
-
-        </script>
+            }
+</script>
 
 @endsection

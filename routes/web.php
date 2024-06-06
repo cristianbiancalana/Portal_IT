@@ -238,6 +238,11 @@ Route::middleware('auth')->group(function () {
     Route::get('/register-hardware', [RecursoController::class, 'registerHardwareAutomatically']);
     Route::get('/recurso/{recurso}/edit', [RecursoController::class, 'edit'])->name('recurso.edit');
     Route::put('/recurso/{recurso}', [RecursoController::class, 'update'])->name('recurso.update');
+    // routes/web.php
+    Route::post('/check-serial', [RecursoController::class, 'checkSerial'])->name('check.serial');
+    Route::post('/register-hardware2', [RecursoController::class, 'registerHardwareAutomatically'])->name('register.hardware');
+
+
 
 
 
