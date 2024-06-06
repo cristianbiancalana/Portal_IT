@@ -9,6 +9,7 @@ use Symfony\Component\Process\Process;
 use Symfony\Component\Process\Exception\ProcessFailedException;
 use Illuminate\Support\Facades\Log;
 use App\Http\Controllers\Exception;
+use Illuminate\Pagination\Paginator;
 
 class RecursoController extends Controller
 {
@@ -17,7 +18,7 @@ class RecursoController extends Controller
         // if (!Auth::user()->hasPermissionTo('problemas.index')) {
         //     return redirect()->route('homeportal')->with('error', 'No tienes permisos para acceder a este sitio');
         // }
-        $recursos= Recurso::all();
+        $recursos= Recurso::paginate(10);
         return view('portal_it.layouts.index_resource', array('recursos'=>$recursos));
     }
     public function create()
@@ -37,7 +38,7 @@ class RecursoController extends Controller
         'fecha_alta' => 'required|date',
         'marca'=> 'required|max:100',
         'modelo' => 'required|max:100',
-        'serie'=> 'required|max:30',
+        'serie'=> 'unique:recursos,serie|required|max:30',
         'details' => 'nullable|string', // Validamos como string ya que es JSON
         'comentario' => 'nullable|string',
     ]);
@@ -49,6 +50,8 @@ class RecursoController extends Controller
     if (json_last_error() !== JSON_ERROR_NONE) {
         return redirect()->back()->withErrors(['details' => 'Invalid JSON in details field'])->withInput();
     }
+
+
 
     // Crear un nuevo recurso
     $recurso = new Recurso();
@@ -79,6 +82,11 @@ public function registerHardwareAutomatically()
                 'system' => $hardwareInfo['system'],
             ];
 
+            // Verificar si el número de serie ya existe
+            if (Recurso::where('serie', $hardwareInfo['system']['serial'])->exists()) {
+                return response()->json(['status' => 'error', 'message' => 'El número de serie ya existe'], 400);
+            }
+
             // Almacenar la información en la base de datos
             $recurso = new Recurso();
             $recurso->tipo_recurso = 'Notebook'; // Puedes ajustar esto según sea necesario
@@ -97,11 +105,10 @@ public function registerHardwareAutomatically()
 
             $recurso->save();
 
-            return response()->json(['status' => 'success', 'data' => $recurso]);
-        } catch (\Exception $e) {
-            Log::error('Error registering hardware automatically: ' . $e->getMessage());
-            return response()->json(['status' => 'error', 'message' => $e->getMessage()], 500);
-        }
+            return response()->json(['status' => 'success', 'message' => 'Hardware registrado exitosamente']);
+            } catch (\Exception $e) {
+                return response()->json(['status' => 'error', 'message' => $e->getMessage()], 500);
+            }
     }
 
     private function getHardwareInfo()
