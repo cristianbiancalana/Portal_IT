@@ -4,121 +4,54 @@
 <div class="container">
     <div class="row">
         <div class="col-12">
-            <div>
-                <h2 class="text-white">Nuevo Recurso</h2>
-            </div>
+            <h2 class="text-white">Editar Recurso</h2>
         </div>
-        @if ($errors->any())
-        <div class="alert alert-danger">
-            <strong>
-                <svg style="width: 22px; height: 20px;" data-slot="icon" fill="none" stroke-width="1.5" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m0 3.75h.008v.008H12v-.008Zm9-.75a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"></path>
-                </svg>
-            </strong>
-            Error al editar el prioridades<br><br>
-            <ul>
-                @foreach ($errors->all() as $error)
-                    <li>{{ $error }}</li>
-                @endforeach
-            </ul>
-        </div>
-        @endif
-        @if (session('error'))
-        <div class="alert alert-danger">
-            <strong>
-                <svg style="width: 22px; height: 20px;" data-slot="icon" fill="none" stroke-width="1.5" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m0 3.75h.008v.008H12v-.008Zm9-.75a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"></path>
-                </svg>
-            </strong>
-            Error: {{ session('error') }}<br><br>
-            <ul>
-                @foreach ($errors->all() as $error)
-                    <li>{{ $error }}</li>
-                @endforeach
-            </ul>
-        </div>
-        @endif
-        @if (session('warning'))
-        <div class="alert alert-warning">
-            <strong>
-                <svg style="width: 22px; height: 20px;" data-slot="icon" fill="none" stroke-width="1.5" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m0 3.75h.008v.008H12v-.008Zm9-.75a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"></path>
-                </svg>
-            </strong>
-            Prioridad Eliminada<br><br>
-            <ul>
-                @foreach ($errors->all() as $error)
-                    <li>{{ $error }}</li>
-                @endforeach
-            </ul>
-        </div>
-        @endif
-        @if (session('status'))
-            <div class="alert alert-success">
-            <svg style="width: 22px; height: 20px;" data-slot="icon" fill="none" stroke-width="1.5" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75 11.25 15 15 9.75M21 12c0 1.268-.63 2.39-1.593 3.068a3.745 3.745 0 0 1-1.043 3.296 3.745 3.745 0 0 1-3.296 1.043A3.745 3.745 0 0 1 12 21c-1.268 0-2.39-.63-3.068-1.593a3.746 3.746 0 0 1-3.296-1.043 3.745 3.745 0 0 1-1.043-3.296A3.745 3.745 0 0 1 3 12c0-1.268.63-2.39 1.593-3.068a3.745 3.745 0 0 1 3.296-1.043A3.746 3.746 0 0 1 12 3c1.268 0 2.39.63 3.068 1.593a3.746 3.746 0 0 1 3.296 1.043 1.268 0 2.39-.63 3.068-1.593 3.746 3.746 0 0 1-1.043 3.296 3.745 3.745 0 0 1-3.296 1.043Z"></path>
-            </svg>{{ session('status') }}
-            </div>
-        @endif
     </div>
-</div>
-
-<form  method="POST" action="{{route('recurso.update',$recurso)}}" enctype="multipart/form-data">
+    <form action="{{ route('recurso.update', $recurso) }}" method="POST">
+        @csrf
         @method('PUT')
-        @csrf 
-        <div class="row">
-        <div class="col-xs-12 col-sm-6 col-md-4 mt-2">
-            <div class="form-group">
-                <strong>Tipo de Recurso</strong>
-                <select name="tipo_recurso" id="tipo_recurso" class="form-select">
-                    <option>Seleccione una Opción</option>
+        <div class="form-group">
+            <label for="tipo_recurso">Tipo de Recurso</label>
+            <select name="tipo_recurso" id="tipo_recurso" class="form-select">
+                <option>Seleccione una Opción</option>
                     @foreach($tiposderecursos as $tiposderecurso)
-                        <option value="{{ $tiposderecurso->name_tiposderecursos}}">{{ $tiposderecurso->name_tiposderecursos}}</option>
-                    @endforeach
-                </select>
-            </div>
+                    <option value="{{$tiposderecurso->name_tiposderecursos}}" {{$tiposderecurso->name_tiposderecursos === $recurso->tipo_recurso ? 'selected' : ''}}>{{$tiposderecurso->name_tiposderecursos}}</option>                    
+                @endforeach
+            </select>
         </div>
-        <div class="col-xs-12 col-sm-6 col-md-4 mt-2">
-            <div class="form-group">
-                <strong>Nombre del recurso</strong>
-                <input type="text" name="tag" class="form-control" id="tag" value="{{ $recurso->tag }}">
-            </div>
+        <div class="form-group">
+            <label for="tag">Tag</label>
+            <input type="text" name="tag" value="{{ $recurso->tag }}" class="form-control" required>
         </div>
-        <div class="col-xs-12 col-sm-6 col-md-4 mt-2">
-            <div class="form-group">
-                <strong>Fecha de Alta</strong>
-                <input type="date" name="fecha_alta" class="form-control" id="fecha_alta" value="{{ $recurso->fecha_alta }}">
-            </div>
+        <div class="form-group">
+            <label for="fecha_alta">Fecha de Alta</label>
+            <input type="date" name="fecha_alta" value="{{ $recurso->fecha_alta }}" class="form-control" required>
         </div>
-        <div class="col-xs-12 col-sm-6 col-md-4 mt-2">
-            <div class="form-group">
-                <strong>Marca</strong>
-                <input type="text" name="marca" class="form-control" id="marca" value="{{ $recurso->marca}}">
-            </div>
+        <div class="form-group">
+            <label for="marca">Marca</label>
+            <input type="text" name="marca" value="{{ $recurso->marca }}" class="form-control" required>
         </div>
-        <div class="col-xs-12 col-sm-6 col-md-4 mt-2">
-            <div class="form-group">
-                <strong>Modelo</strong>
-                <input type="text" name="modelo" class="form-control" id="modelo" value="{{ $recurso->modelo }}">
-            </div>
+        <div class="form-group">
+            <label for="modelo">Modelo</label>
+            <input type="text" name="modelo" value="{{ $recurso->modelo }}" class="form-control" required>
         </div>
-        <div class="col-xs-12 col-sm-6 col-md-4 mt-2">
-            <div class="form-group">
-                <strong>Número de Serie</strong>
-                <input type="text" name="serie" class="form-control" id="serie" value="{{ $recurso->serie }}">
-            </div>
+        <div class="form-group">
+            <label for="serie">Serie</label>
+            <input type="text" name="serie" value="{{ $recurso->serie }}" class="form-control" required>
         </div>
-        <div class="col-12 mt-2">
-            <div class="form-group">
-                <div id="dynamic-content" style="display:grid; grid-template-columns: repeat(3, 1fr); gap: 1rem;"></div>
-            </div>
+        <div class="form-group">
+            <label for="comentario">Comentario</label>
+            <textarea name="comentario" class="form-control">{{ $recurso->comentario }}</textarea>
         </div>
-        <div class="col-12 mt-2">
-            <div class="form-group">
-                <strong>Comentario</strong>
-                <textarea class="form-control" style="height:150px" name="comentario" id="comentario" placeholder="Comentario..." value="{{ $recurso->comentario }}"></textarea>
-            </div>
-        </div>
-</form>
-
+        @if(isset($recurso->details))
+            @foreach($recurso->details as $key => $value)
+                <div class="form-group">
+                    <label for="details[{{ $key }}]">{{ ucfirst($key) }}</label>
+                    <input type="text" name="details[{{ $key }}]" value="{{ is_array($value) ? json_encode($value) : $value }}" class="form-control">
+                </div>
+            @endforeach
+        @endif
+        <button type="submit" class="btn btn-primary">Guardar</button>
+    </form>
+</div>
 @endsection

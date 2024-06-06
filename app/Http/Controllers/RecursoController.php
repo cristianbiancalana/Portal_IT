@@ -126,6 +126,39 @@ public function registerHardwareAutomatically()
             throw $e;
         }
     }
+    public function edit(Recurso $recurso)
+    {
+        $tiposderecursos = TypeResource::all();
+        $recursos = Recurso::all();
+        // Verificar si details es una cadena antes de decodificar
+        if (is_string($recurso->details)) {
+            $recurso->details = json_decode($recurso->details, true); // Decodificar los detalles
+        }
+        return view('portal_it.layouts.edit_resource', compact('recurso', 'tiposderecursos', 'recursos'));
+    }
+
+    public function update(Request $request, Recurso $recurso)
+    {
+        
+        $recurso = Recurso::find($recurso->id);
+        $recurso->tipo_recurso = $request->input('tipo_recurso');
+        $recurso->tag = $request->input('tag');
+        $recurso->fecha_alta = $request->input('fecha_alta');
+        $recurso->marca = $request->input('marca');
+        $recurso->modelo = $request->input('modelo');
+        $recurso->serie = $request->input('serie');
+        // Otros campos de recurso
+        
+        // Codificar detalles a JSON
+        $details = $request->input('details');
+        $recurso->details = json_encode($details);
+
+        $recurso->update();
+
+        return redirect()->route('recurso.index')->with('status', 'Recurso actualizado exitosamente');
+    }
+
+
 
 }
 
