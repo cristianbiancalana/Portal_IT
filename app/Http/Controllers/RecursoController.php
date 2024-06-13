@@ -5,27 +5,37 @@ namespace App\Http\Controllers;
 use App\Models\TypeResource;
 use Illuminate\Http\Request;
 use App\Models\Recurso;
+use League\CommonMark\Extension\Attributes\Node\Attributes;
 use Symfony\Component\Process\Process;
 use Symfony\Component\Process\Exception\ProcessFailedException;
 use Illuminate\Support\Facades\Log;
 use App\Http\Controllers\Exception;
+use Attribute;
 use Illuminate\Pagination\Paginator;
+use PhpParser\Node\AttributeGroup;
 
 class RecursoController extends Controller
 {
     public function checkSerial(Request $request)
     {
-        $serial = $request->input('serial');
-        $exists = Recurso::where('serial_number', $serial)->exists();
-        return response()->json(['exists' => $exists]);
+        try {
+            Log::info('Request received');
+            // Aquí podrías realizar la lógica para buscar el número de serie en la base de datos
+            $serial = $request->input('serialNumber'); // Asegúrate de que coincida con el nombre en el body de la solicitud
+
+            $exists = Recurso::where('serie', $serial)->exists();
+
+            return response()->json(['exists' => $exists]);
+        } catch (\Exception $e) {
+            Log::error('Error checking serial number: ' . $e->getMessage());
+            return response()->json(['error' => 'Ocurrió un error al verificar el número de serie'], 500);
+        }
     }
+
     public function index()
-    {
-        // if (!Auth::user()->hasPermissionTo('problemas.index')) {
-        //     return redirect()->route('homeportal')->with('error', 'No tienes permisos para acceder a este sitio');
-        // }
-        $recursos= Recurso::paginate(10);
-        return view('portal_it.layouts.index_resource', array('recursos'=>$recursos));
+    {       
+            $recursos = Recurso::paginate(10);
+            return view('portal_it.layouts.index_resource', compact('recursos'));
     }
     public function create()
     {
