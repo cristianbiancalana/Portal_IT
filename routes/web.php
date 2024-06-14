@@ -236,7 +236,6 @@ Route::middleware('auth')->group(function () {
     Route::get('/recurso/create', [RecursoController::class, 'create'])->name('recurso.create');
     Route::post('/recurso/store', [RecursoController::class, 'store'])->name('recurso.store');
     Route::get('/register-hardware', [RecursoController::class, 'registerHardwareAutomatically']);
-    Route::post('/check-serial', [RecursoController::class, 'checkSerial'])->name('checkSerial');
     Route::get('/recurso/{recurso}/edit', [RecursoController::class, 'edit'])->name('recurso.edit');
     Route::put('/recurso/{recurso}', [RecursoController::class, 'update'])->name('recurso.update');
 });

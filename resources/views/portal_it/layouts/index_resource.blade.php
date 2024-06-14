@@ -78,50 +78,37 @@
         </table>
         {{$recursos->links()}}
     </div>
-    <meta name="csrf-token" content="{{ csrf_token() }}">
-    <button class="btn btn-primary" onclick="registerHardware()" id="registerButton" name="registerButton" style="display: none;">Registrar
-        <svg style="width: 30px; height: 28px; display:flex; flex-direction: column; text-align:center; margin:auto;" data-slot="icon" fill="none" stroke-width="1.5" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M9 17.25v1.007a3 3 0 0 1-.879 2.122L7.5 21h9l-.621-.621A3 3 0 0 1 15 18.257V17.25m6-12V15a2.25 2.25 0 0 1-2.25 2.25H5.25A2.25 2.25 0 0 1 3 15V5.25m18 0A2.25 2.25 0 0 0 18.75 3H5.25A2.25 2.25 0 0 0 3 5.25m18 0V12a2.25 2.25 0 0 1-2.25 2.25H5.25A2.25 2.25 0 0 1 3 12V5.25"></path>
+    <div class="col-xs-16 col-sm-16 col-md-12 text-center mt-2">
+        <button class="btn btn-primary" onclick="registerHardware()" id="registerButton" name="registerButton">Registrar Notebook
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" style="fill: rgba(255, 255, 255, 1);">
+                <path d="M20 17.722c.595-.347 1-.985 1-1.722V5c0-1.103-.897-2-2-2H5c-1.103 0-2 .897-2 2v11c0 .736.405 1.375 1 1.722V18H2v2h20v-2h-2v-.278zM5 16V5h14l.002 11H5z"></path>
         </svg>
-    </button>
+        </button>
+        <button class="btn btn-primary" onclick="registerHardware()" id="registerButton" name="registerButton">Registrar PC de Escritorio
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" style="fill: rgba(255, 255, 255, 1);">
+                <path d="M20 3H4c-1.103 0-2 .897-2 2v11c0 1.103.897 2 2 2h7v2H8v2h8v-2h-3v-2h7c1.103 0 2-.897 2-2V5c0-1.103-.897-2-2-2zM4 14V5h16l.002 9H4z">
+                </path>
+            </svg>
+        </button>
+        <button class="btn btn-primary" onclick="registerHardware()" id="registerButton" name="registerButton">Registrar Celular
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" style="fill: rgba(255, 255, 255, 1);">
+            <path d="M16.75 2h-10c-1.103 0-2 .897-2 2v16c0 1.103.897 2 2 2h10c1.103 0 2-.897 2-2V4c0-1.103-.897-2-2-2zm-10 18V4h10l.002 16H6.75z">
+            </path>
+            <circle cx="11.75" cy="18" r="1">
+            </circle>
+        </svg>
+        </button>
+        <button class="btn btn-primary" onclick="registerHardware()" id="registerButton" name="registerButton">Registrar Tablet
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" style="fill: rgba(255, 255, 255, 1);">
+                <path d="M20 5H4c-1.103 0-2 .897-2 2v10c0 1.103.897 2 2 2h16c1.103 0 2-.897 2-2V7c0-1.103-.897-2-2-2zM7.001 7H19v10H7.001V7z">
+                </path>
+            </svg>
+        </button>
+    </div>
+</div>
    
 </div>
-
-
 <script>
-    // Esta función se llama automáticamente para buscar el número de serie
-    function startSerialCheck() {
-        setInterval(function() {
-            fetch('{{ route('checkSerial') }}', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'X-CSRF-TOKEN': '{{ csrf_token() }}'
-                },
-                body: JSON.stringify({})
-                // No necesitas enviar ningún dato en el body para este caso
-            }) 
-            .then(response => response.json())
-            .then(data => {
-                console.log(data); // Manejar la respuesta del servidor aquí
-
-                // Obtener el botón por su ID (o cualquier selector que uses)
-                const btn = document.getElementById('registerButton'); // Reemplaza 'tu-boton-id' con el ID de tu botón
-
-                // Verificar si el número de serie existe
-                if (data.exists) {
-                    // Si existe, mostrar el botón
-                    btn.style.display = 'block';
-                } else {
-                    // Si no existe, ocultar el botón
-                    btn.style.display = 'none';
-                }
-            })
-            .catch(error => {
-                console.error('Error:', error);
-            });
-        }, 5000); // Ejecutar cada 5 segundos (5000 milisegundos)
-    }
 
     function registerHardware() {
         fetch('/register-hardware', {

@@ -16,22 +16,6 @@ use PhpParser\Node\AttributeGroup;
 
 class RecursoController extends Controller
 {
-    public function checkSerial(Request $request)
-    {
-        try {
-            Log::info('Request received');
-            // Aquí podrías realizar la lógica para buscar el número de serie en la base de datos
-            $serial = $request->input('serialNumber'); // Asegúrate de que coincida con el nombre en el body de la solicitud
-
-            $exists = Recurso::where('serie', $serial)->exists();
-
-            return response()->json(['exists' => $exists]);
-        } catch (\Exception $e) {
-            Log::error('Error checking serial number: ' . $e->getMessage());
-            return response()->json(['error' => 'Ocurrió un error al verificar el número de serie'], 500);
-        }
-    }
-
     public function index()
     {       
             $recursos = Recurso::paginate(10);
