@@ -35,6 +35,7 @@ use App\Http\Controllers\ProveedorController;
 use App\Http\Controllers\TecnicosController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\RecursoController;
+use App\Http\Controllers\ComodatoController;
 
 
 /*
@@ -238,6 +239,9 @@ Route::middleware('auth')->group(function () {
     Route::get('/register-hardware', [RecursoController::class, 'registerHardwareAutomatically']);
     Route::get('/recurso/{recurso}/edit', [RecursoController::class, 'edit'])->name('recurso.edit');
     Route::put('/recurso/{recurso}', [RecursoController::class, 'update'])->name('recurso.update');
+
+    //Sección comodato
+    Route::get('/comodatos', [ComodatoController::class, 'index'])->name('comodato.index');
 });
 
 require __DIR__ . '/auth.php';

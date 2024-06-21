@@ -50,8 +50,7 @@
                     </a>
                     <div class="dropdown-menu bg-dark" aria-labelledby="navbarDropdownComodatos" style="border-color: white;">
                         <a class="dropdown-item text-white" href="#">Nuevo Comodato</a>
-                        <a class="dropdown-item text-white" href="#">Anular Comodato</a>
-                        <a class="dropdown-item text-white" href="#">Total de Comodatos</a>
+                        <a class="dropdown-item text-white" href="{{ route('comodato.index') }}">Total de Comodatos</a>
                     </div>
                 </li>
                 <li class="nav-item dropdown">
