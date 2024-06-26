@@ -20,7 +20,7 @@ return new class extends Migration
             $table->string('marca');
             $table->string('modelo');
             $table->string('serie');
-            $table->string('detalles')->nullable();
+            $table->string('detalles');
             $table->string('observacion')->nullable();
             $table->timestamps();
         });

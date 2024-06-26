@@ -49,7 +49,7 @@
                         Comodatos
                     </a>
                     <div class="dropdown-menu bg-dark" aria-labelledby="navbarDropdownComodatos" style="border-color: white;">
-                        <a class="dropdown-item text-white" href="#">Nuevo Comodato</a>
+                        <a class="dropdown-item text-white" href="{{ route('comodato.create') }}">Nuevo Comodato</a>
                         <a class="dropdown-item text-white" href="{{ route('comodato.index') }}">Total de Comodatos</a>
                     </div>
                 </li>

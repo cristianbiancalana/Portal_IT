@@ -242,6 +242,9 @@ Route::middleware('auth')->group(function () {
 
     //Sección comodato
     Route::get('/comodatos', [ComodatoController::class, 'index'])->name('comodato.index');
+    Route::get('/create-comodatos', [ComodatoController::class, 'create'])->name('comodato.create');
+    Route::get('/search-resource', [ComodatoController::class, 'searchResource']);
+    Route::post('/save-comodatos', [ComodatoController::class, 'store'])->name('comodato.store');
 });
 
 require __DIR__ . '/auth.php';
