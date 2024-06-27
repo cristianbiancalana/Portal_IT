@@ -28,13 +28,24 @@ class ComodatoController extends Controller
     {
         $query = $request->get('query');
         $resource = Recurso::where('serie', 'like', '%' . $query . '%')->first();
-
+    
         if ($resource) {
-            return response()->json(['success' => true, 'resource' => $resource]);
+            $details = json_decode($resource->details, true); // Decodifica el JSON
+            return response()->json([
+                'success' => true,
+                'resource' => [
+                    'marca' => $resource->marca,
+                    'modelo' => $resource->modelo,
+                    'serie' => $resource->serie,
+                    'tipo_recurso' => $resource->tipo_recurso,
+                    'details' => $details // Incluye los detalles decodificados
+                ]
+            ]);
         } else {
             return response()->json(['success' => false]);
         }
     }
+    
 
     public function store(Request $request){
         $request->validate([

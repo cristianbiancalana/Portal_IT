@@ -26,7 +26,7 @@
         <div class="alert alert-danger">
                 <strong><svg style="width: 22px; height: 20px;" data-slot="icon" fill="none" stroke-width="1.5" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
                     <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m9-.75a9 9 0 1 1-18 0 9 9 0 0 1 18 0Zm-9 3.75h.008v.008H12v-.008Z"></path>
-                    </svg>
+                </svg>
                 </strong>Error: {{ session('error') }}<br><br>
                 <ul>
                     @foreach ($errors->all() as $error)
@@ -42,160 +42,156 @@
             </svg>{{ session('status') }}
             </div>
         @endif
-<div class="col-xs-12 col-sm-6 col-md-4 mt-2">
-            <div class="form-group">
-                    <div class="form-group">
-                        <strong for="searchResource">Recurso</strong>
-                        <input type="text" id="searchResource" name="searchResource" class="form-control" placeholder="Ingrese ID o nombre del recurso">
-                    </div>
-                    <button style="margin-left:325px; margin-top:-66px;" type="submit" class="btn btn-primary" id="btnBuscar">
-                        <svg style="width: 22px; height: 20px;" data-slot="icon" fill="none" stroke-width="1.5" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z">
-                            </path>
-                        </svg>
-                    </button>
-            </div>
-    </div>
-<form method="POST" action="{{route('comodato.store')}}" enctype="multipart/form-data">  
-    @csrf    
-    <div class="row">
         <div class="col-xs-12 col-sm-6 col-md-4 mt-2">
             <div class="form-group">
-                <strong>Nombre del usuario</strong>
-                <select name="user" id="user" class="form-select">
-                    <option>Seleccione usuario asignado</option>
-                    @foreach($users as $user)
-                            <option value="{{ $user->name}}">{{ $user->name}}</option>
-                    @endforeach
-                </select>
+                <div class="form-group">
+                    <strong for="searchResource">Recurso</strong>
+                    <input type="text" id="searchResource" name="searchResource" class="form-control" placeholder="Ingrese ID o nombre del recurso">
+                </div>
+                <button style="margin-left:300px; margin-top:-66px;" type="submit" class="btn btn-primary" id="btnBuscar">
+                    <svg style="width: 22px; height: 20px;" data-slot="icon" fill="none" stroke-width="1.5" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z">
+                        </path>
+                    </svg>
+                </button>
             </div>
-        </div>
-        <div class="col-xs-12 col-sm-6 col-md-4 mt-2">
-            <div class="form-group">
-                <strong>Puesto a cubrir</strong>
-                <select name="puesto" id="puesto" class="form-select">
-                    <option>Seleccione usuario asignado</option>
-                    @foreach($puestos as $puesto)
-                            <option value="{{ $puesto->name_puesto}}">{{ $puesto->name_puesto}}</option>
-                    @endforeach
-                </select>
-            </div>
-        </div>
-        <div class="col-xs-12 col-sm-6 col-md-4 mt-2">
-            <div class="form-group">
-                <strong>Tipo de Recurso</strong>
-                <input type="text" name="tipo_recurso" id="tipo_recurso" class="form-control" value="">
-            </div>
-        </div>
-        <div class="col-xs-12 col-sm-6 col-md-4 mt-2">
-            <div class="form-group">
-                <strong>Fecha de Alta</strong>
-                <input type="date" name="fecha_alta" class="form-control" id="fecha_alta" value="{{ date('Y-m-d') }}">
-            </div>
-        </div>
-        
-        <div class="col-xs-12 col-sm-6 col-md-4 mt-2">
-            <div class="form-group">
-                <strong>Marca</strong>
-                <input type="text" name="marca" class="form-control" id="marca" value="">
-            </div>
-        </div>
-        <div class="col-xs-12 col-sm-6 col-md-4 mt-2">
-            <div class="form-group">
-                <strong>Modelo</strong>
-                <input type="text" name="modelo" class="form-control" id="modelo" value="">
-            </div>
-        </div>
-        <div class="col-xs-12 col-sm-6 col-md-4 mt-2">
-            <div class="form-group">
-                <strong>Número de Serie</strong>
-                <input type="text" name="serie" class="form-control" id="serie" value="">
-            </div>
-        </div>
-        <div class="col-12 mt-2">
-            <div class="form-group">
-                <div id="dynamic-content" style="display:grid; grid-template-columns: repeat(3, 1fr); gap: 1rem;"></div>
-            </div>
-        </div>
-        <input type="hidden" name="details" id="details">
-        <div class="col-12 mt-2">
-            <div class="form-group">
-                <strong>Observacón</strong>
-                <textarea class="form-control" style="height:150px" name="comentario" id="comentario" placeholder="Comentario..."></textarea>
-            </div>
-        </div>
-        <div class="col-12 text-center mt-2">
-            <button type="submit" class="btn btn-primary" style="width:100px;">Crear</button>
-            <a href="" class="btn btn-primary" style="width:100px;">Volver</a>
         </div>
     </div>
-</form>
-<script>
-    document.getElementById('btnBuscar').addEventListener('click', function(event) {
-        event.preventDefault();
-        const searchValue = document.getElementById('searchResource').value;
+    <script>
+        document.getElementById('btnBuscar').addEventListener('click', function(event) {
+            event.preventDefault();
+            const searchValue = document.getElementById('searchResource').value;
 
-        fetch(`/search-resource?query=${searchValue}`)
-            .then(response => response.json())
-            .then(data => {
-                if (data.success) {
-                    document.getElementById('marca').value = data.resource.marca;
-                    document.getElementById('modelo').value = data.resource.modelo;
-                    document.getElementById('serie').value = data.resource.serie;
-                    document.getElementById('tipo_recurso').value = data.resource.tipo_recurso
-                } else {
-                    alert('Recurso no encontrado');
-                }
-            })
-            .catch(error => {
-                console.error('Error:', error);
-            });
-    });
-</script>
+            fetch(`/search-resource?query=${searchValue}`)
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        document.getElementById('marca').value = data.resource.marca;
+                        document.getElementById('modelo').value = data.resource.modelo;
+                        document.getElementById('serie').value = data.resource.serie;
+                        document.getElementById('tipo_recurso').value = data.resource.tipo_recurso;
 
-<script>
-    document.addEventListener('DOMContentLoaded', function () {
-        const selectElement = document.getElementById('tipo_recurso');
-        const dynamicContent = document.getElementById('dynamic-content');
-        const hiddenInput = document.getElementById('details');
+                        if (data.resource.tipo_recurso === 'Celular') {
+                            document.getElementById('imei-group').style.display = 'block';
+                            if (data.resource.details && data.resource.details.imei) {
+                                document.getElementById('imei').value = data.resource.details.imei;
+                            } else {
+                                document.getElementById('imei').value = '';
+                            }
+                        } else {
+                            document.getElementById('imei-group').style.display = 'none';
+                        }
+                    } else {
+                        alert('Recurso no encontrado');
+                    }
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                });
+        });
+    </script>
 
-        selectElement.addEventListener('change', function () {
-            const selectedValue = selectElement.value;
-            dynamicContent.innerHTML = '';
+    <form id="comodatoForm" method="POST" action="{{route('comodato.store')}}" enctype="multipart/form-data">  
+        @csrf    
+        <div class="row">
+            <div class="col-xs-12 col-sm-6 col-md-4 mt-2">
+                <div class="form-group">
+                    <strong>Nombre del usuario</strong>
+                    <select name="user" id="user" class="form-select">
+                        <option>Seleccione usuario asignado</option>
+                        @foreach($users as $user)
+                                <option value="{{ $user->name}}">{{ $user->name}}</option>
+                        @endforeach
+                    </select>
+                </div>
+            </div>
+            <div class="col-xs-12 col-sm-6 col-md-4 mt-2">
+                <div class="form-group">
+                    <strong>Puesto a cubrir</strong>
+                    <select name="puesto" id="puesto" class="form-select">
+                        <option>Seleccione usuario asignado</option>
+                        @foreach($puestos as $puesto)
+                                <option value="{{ $puesto->name_puesto}}">{{ $puesto->name_puesto}}</option>
+                        @endforeach
+                    </select>
+                </div>
+            </div>
+            <div class="col-xs-12 col-sm-6 col-md-4 mt-2">
+                <div class="form-group">
+                    <strong>Tipo de Recurso</strong>
+                    <input type="text" name="tipo_recurso" id="tipo_recurso" class="form-control" value="">
+                </div>
+            </div>
+            <div class="col-xs-12 col-sm-6 col-md-4 mt-2">
+                <div class="form-group">
+                    <strong>Fecha de Alta</strong>
+                    <input type="date" name="fecha_alta" class="form-control" id="fecha_alta" value="{{ date('Y-m-d') }}">
+                </div>
+            </div>
+            <div class="col-xs-12 col-sm-6 col-md-4 mt-2">
+                <div class="form-group">
+                    <strong>Marca</strong>
+                    <input type="text" name="marca" class="form-control" id="marca" value="">
+                </div>
+            </div>
+            <div class="col-xs-12 col-sm-6 col-md-4 mt-2">
+                <div class="form-group">
+                    <strong>Modelo</strong>
+                    <input type="text" name="modelo" class="form-control" id="modelo" value="">
+                </div>
+            </div>
+            <div class="col-xs-12 col-sm-6 col-md-4 mt-2">
+                <div class="form-group">
+                    <strong>Número de Serie</strong>
+                    <input type="text" name="serie" class="form-control" id="serie" value="">
+                </div>
+            </div>
+            <div class="col-xs-12 col-sm-6 col-md-4 mt-2" id="imei-group" style="display:none;">
+                <div class="form-group">
+                    <strong>IMEI</strong>
+                    <input type="text" name="imei" class="form-control" id="imei" value="">
+                </div>
+            </div>
+            <input type="hidden" name="details" id="details">
+            <div class="col-12 mt-2">
+                <div class="form-group">
+                    <strong>Observación</strong>
+                    <textarea class="form-control" style="height:150px" name="comentario" id="comentario" placeholder="Comentario..."></textarea>
+                </div>
+            </div>
+            <div class="col-12 text-center mt-2">
+                <button type="submit" class="btn btn-primary" style="width:100px;">Crear</button>
+                <a href="" class="btn btn-primary" style="width:100px;">Volver</a>
+            </div>
+        </div>
+    </form>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const form = document.getElementById('comodatoForm');
+            
+            if (form) {
+                const selectElement = document.getElementById('tipo_recurso');
+                const imeiGroup = document.getElementById('imei-group');
+                const imeiInput = document.getElementById('imei');
+                const detailsInput = document.getElementById('details');
 
-            if (selectedValue === 'Celular') {
-                dynamicContent.innerHTML = `
-                    <div class="form-group">
-                        <strong>IMEI</strong>
-                        <input type="text" name="imei" class="form-control">
-                    </div>
-                `;
+                selectElement.addEventListener('input', function () {
+                    if (selectElement.value === 'Celular') {
+                        imeiGroup.style.display = 'block';
+                    } else {
+                        imeiGroup.style.display = 'none';
+                    }
+                });
+
+                form.addEventListener('submit', function () {
+                    const details = {
+                        imei: imeiInput.value
+                    };
+                    detailsInput.value = JSON.stringify(details);
+                });
+            } else {
+                console.error('Formulario no encontrado: verifica que el ID "comodatoForm" esté presente en el formulario.');
             }
-
-            updateHiddenInput();
         });
-
-        dynamicContent.addEventListener('input', function () {
-            updateHiddenInput();
-        });
-
-        function updateHiddenInput() {
-            const inputs = dynamicContent.querySelectorAll('input');
-            const details = {};
-            inputs.forEach(input => {
-                details[input.name] = input.value;
-            });
-            hiddenInput.value = JSON.stringify(details);
-        }
-
-        document.getElementById('form').addEventListener('submit', function (event) {
-            updateHiddenInput();
-            const detailsValue = hiddenInput.value;
-            if (!detailsValue) {
-                event.preventDefault();
-                alert('No se han completado los detalles del recurso.');
-            }
-        });
-    });
-</script>
+    </script>
 @endsection
